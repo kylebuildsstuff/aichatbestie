@@ -18,3 +18,28 @@ export function onClickOutside(node: any) {
     }
   };
 }
+
+/**
+ * https://svelte.dev/repl/1c7c89b3a80c48708f0f07720fb37a53?version=3.55.1
+ */
+export function resizeTextarea(node) {
+  let contentRect;
+  let entryTarget;
+  const ro = new ResizeObserver((entries, observer) => {
+    for (const entry of entries) {
+      contentRect = entry.contentRect;
+      entryTarget = entry.target;
+    }
+    node.dispatchEvent(
+      new CustomEvent('resize', {
+        detail: { contentRect, entryTarget }
+      })
+    );
+  });
+  ro.observe(node);
+  return {
+    destroy() {
+      ro.disconnect();
+    }
+  };
+}

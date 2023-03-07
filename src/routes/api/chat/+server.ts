@@ -36,6 +36,8 @@ export const POST = async (event: RequestEvent) => {
     messages
   };
 
+  console.log('completionBody: ', completionBody);
+
   /**
    * API call
    */

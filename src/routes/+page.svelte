@@ -18,17 +18,12 @@
   $: hasMessages = messages.length > 0;
   $: textareaRows = (inputMessage.match(/\n/g) || []).length + 1 || 1;
 
-  onMount(async () => {
-    // await handleChatCompletion();
-  });
-
   const handleTextareaResize = (e) => {
     textareaRef = e.target;
   };
 
   const handleChatCompletion = async () => {
     isLoading = true;
-
     const _inputMessage = inputMessage;
     inputMessage = '';
 
@@ -43,17 +38,12 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        isInitializing: messages.length === 0,
         priorMessages: messages,
         message: _inputMessage
       })
     }).then((res) => res.json());
 
-    if (_inputMessage) {
-      messages = messages.concat([userMessage]);
-    }
-
-    messages = messages.concat(response);
+    messages = messages.concat([userMessage]).concat(response);
     isLoading = false;
 
     return response;

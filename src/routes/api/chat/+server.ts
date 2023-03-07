@@ -3,7 +3,7 @@ import { OPENAI_API_SECRET_KEY } from '$env/static/private';
 
 export const POST = async (event: RequestEvent) => {
   const requestBody = await event.request.json();
-  const { priorMessages = [], message, isInitializing = false } = requestBody;
+  const { priorMessages = [], message } = requestBody;
 
   /**
    * Request config
@@ -21,16 +21,14 @@ export const POST = async (event: RequestEvent) => {
     role: 'system',
     content: `You are ChatGPT, a large language model trained by OpenAI. Answer as concisely as possible.`
   };
-  const messages = isInitializing
-    ? [initialMessage]
-    : [
-        initialMessage,
-        ...priorMessages,
-        {
-          role: 'user',
-          content: message
-        }
-      ];
+  const messages = [
+    initialMessage,
+    ...priorMessages,
+    {
+      role: 'user',
+      content: message
+    }
+  ];
   const completionBody = {
     model: 'gpt-3.5-turbo',
     messages

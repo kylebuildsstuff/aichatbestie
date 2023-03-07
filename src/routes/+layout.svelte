@@ -1,5 +1,28 @@
 <script>
-  import "../app.css";
+  import Notifications from 'svelte-notifications';
+  import Modal from 'svelte-simple-modal';
+
+  import Toast from '$lib/modules/toast/toast.svelte';
+
+  import '../app.css';
+
+  let _Toast = Toast;
 </script>
 
-<slot />
+<svelte:head>
+  <title>AI Chat Bestie - UI Wrapper for ChatGPT</title>
+  <meta
+    name="description"
+    content={'Enhance your ChatGPT experience with faster response times, customizable prompts, searchable history, and more.'}
+  />
+</svelte:head>
+
+<Notifications item={_Toast}>
+  <Modal
+    closeButton={true}
+    unstyled={false}
+    styleWindow={{ width: '70%' }}
+  >
+    <slot />
+  </Modal>
+</Notifications>

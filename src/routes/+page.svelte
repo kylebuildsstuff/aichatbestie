@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
   import Hero from '$lib/shared/components/hero.svelte';
   import LoadingButtonSpinnerIcon from '$lib/shared/icons/loading-button-spinner-icon.svelte';
@@ -45,7 +43,7 @@
 <PageContainer>
   <svelte:fragment slot="page-content">
     {#if !hasMessages}
-      <!-- <Hero /> -->
+      <Hero />
     {/if}
 
     <ul class="divide-y divide-gray-200">

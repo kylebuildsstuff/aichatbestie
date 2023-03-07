@@ -51,17 +51,22 @@ export function onClickOutside(node: any) {
 export function resizeTextarea(node) {
   let contentRect;
   let entryTarget;
-  const ro = new ResizeObserver((entries, observer) => {
-    for (const entry of entries) {
-      contentRect = entry.contentRect;
-      entryTarget = entry.target;
+  const ro = new ResizeObserver(
+    (
+      entries
+      // observer
+    ) => {
+      for (const entry of entries) {
+        contentRect = entry.contentRect;
+        entryTarget = entry.target;
+      }
+      node.dispatchEvent(
+        new CustomEvent('resize', {
+          detail: { contentRect, entryTarget }
+        })
+      );
     }
-    node.dispatchEvent(
-      new CustomEvent('resize', {
-        detail: { contentRect, entryTarget }
-      })
-    );
-  });
+  );
   ro.observe(node);
   return {
     destroy() {

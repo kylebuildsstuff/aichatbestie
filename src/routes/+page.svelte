@@ -8,6 +8,8 @@
   let messages = [] as any;
   let inputMessage = '';
 
+  $: hasMessages = messages.length > 0;
+
   onMount(async () => {
     await handleChatCompletion();
   });
@@ -43,7 +45,9 @@
 
 <PageContainer>
   <svelte:fragment slot="page-content">
-    <Hero />
+    {#if !hasMessages}
+      <Hero />
+    {/if}
 
     <ul class="divide-y divide-gray-200">
       {#if messages.length > 0}

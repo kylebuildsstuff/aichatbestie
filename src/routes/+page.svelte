@@ -5,7 +5,7 @@
   import Hero from '$lib/shared/components/hero.svelte';
   import LoadingButtonSpinnerIcon from '$lib/shared/icons/loading-button-spinner-icon.svelte';
   import PaperAirplane from '$lib/shared/icons/paper-airplane.svelte';
-  import { resizeTextarea } from '$lib/shared/shared-utils';
+  import { chatCompletion, resizeTextarea } from '$lib/shared/shared-utils';
 
   import ChatMessage from './chat-message.svelte';
 
@@ -27,21 +27,13 @@
     const _inputMessage = inputMessage;
     inputMessage = '';
 
+    const openAiKey = '';
     const userMessage = {
       role: 'user',
       content: _inputMessage
     };
 
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        priorMessages: messages,
-        message: _inputMessage
-      })
-    }).then((res) => res.json());
+    const response = await chatCompletion(_inputMessage, messages, openAiKey);
 
     messages = messages.concat([userMessage]).concat(response);
     isLoading = false;

@@ -4,9 +4,11 @@
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
   import Hero from '$lib/shared/components/hero.svelte';
   import ChatMessage from './chat-message.svelte';
+  import LoadingButtonSpinnerIcon from '$lib/shared/icons/loading-button-spinner-icon.svelte';
 
   let messages = [] as any;
   let inputMessage = '';
+  let isLoading = false;
 
   $: hasMessages = messages.length > 0;
 
@@ -15,6 +17,8 @@
   });
 
   const handleChatCompletion = async () => {
+    isLoading = true;
+
     const userMessage = {
       role: 'user',
       content: inputMessage
@@ -38,6 +42,7 @@
 
     messages = messages.concat(response);
     inputMessage = '';
+    isLoading = false;
 
     return response;
   };
@@ -59,6 +64,17 @@
         {/each}
       {/if}
     </ul>
+
+    <!-- Loading text -->
+    {#if isLoading}
+      <div class="mt-4 flex justify-start items-center text-center text-gray-500">
+        <div class="inset-y-0 left-0 pl-3">
+          <LoadingButtonSpinnerIcon />
+        </div>
+
+        <div>Bestie is thinking...</div>
+      </div>
+    {/if}
 
     <form class="mt-4">
       <div class="relative mt-1 flex items-center">

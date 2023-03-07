@@ -5,7 +5,7 @@
   import Sidebar from '../sidebar/sidebar.svelte';
 
   /**
-   * This component exists mainly because +layout.svelte does not support named slots.
+   * Workaround to unsupported +layout.svelte named slots.
    *
    * https://github.com/sveltejs/kit/issues/627
    */

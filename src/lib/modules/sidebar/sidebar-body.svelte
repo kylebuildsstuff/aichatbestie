@@ -7,6 +7,7 @@
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
   import { chatList$, chats$ } from '$lib/shared/shared.store';
   import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
+  import ChatBubbleLeftIcon from '$lib/shared/icons/chat-bubble-left-icon.svelte';
 
   export let handleCloseMobileSidebar = () => {};
 
@@ -30,8 +31,8 @@
     }
   };
 
-  const sidebarLinkIconClasses = `text-gray-400 group-hover:text-gray-500 ${'mr-3'} flex-shrink-0 h-6 w-6`;
-  const sidebarLinkTextClasses = `text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-${'base'} font-medium rounded-md`;
+  const sidebarLinkIconClasses = `text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5`;
+  const sidebarLinkTextClasses = `w-full text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-3 text-base font-medium rounded-md`;
 </script>
 
 <div class="flex flex-1 flex-col pt-5 pb-4 overflow-y-auto">
@@ -48,34 +49,23 @@
   <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
     <button
       on:click={handleCreateNewChat}
-      class={sidebarLinkTextClasses}
+      class={`${sidebarLinkTextClasses} mb-3 shadow-sm ring-1 ring-inset ring-gray-300 `}
     >
       <PlusIcon extraClasses={sidebarLinkIconClasses} />
       New chat
     </button>
 
-    <a
-      on:click={handleCloseMobileSidebar}
-      href="/"
-      class={sidebarLinkTextClasses}
-    >
-      <!-- Heroicon name: outline/folder -->
-      <svg
-        class={sidebarLinkIconClasses}
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        aria-hidden="true"
+    {#each $chatList$ as chatListItem}
+      <button
+        on:click={() => {
+          goto(`/chat/${chatListItem?.chatId}`);
+          handleCloseMobileSidebar();
+        }}
+        class={sidebarLinkTextClasses}
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-        />
-      </svg>
-      Templates
-    </a>
+        <ChatBubbleLeftIcon extraClasses={sidebarLinkIconClasses} />
+        {chatListItem.title}
+      </button>
+    {/each}
   </nav>
 </div>

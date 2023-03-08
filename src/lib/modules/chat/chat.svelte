@@ -1,6 +1,5 @@
 <script lang="ts">
   import { nanoid } from 'nanoid';
-  import { browser } from '$app/environment';
 
   import LoadingButtonSpinnerIcon from '$lib/shared/icons/loading-button-spinner-icon.svelte';
   import PaperAirplane from '$lib/shared/icons/paper-airplane.svelte';
@@ -8,6 +7,7 @@
     chatCompletion,
     createNewChat,
     createNewChatListItem,
+    isNotSystemMessage,
     resizeTextarea
   } from '$lib/shared/shared-utils';
   import { chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
@@ -20,7 +20,13 @@
 
   let inputMessage = '';
   let messages =
-    chatId && $chats$?.[chatId] ? $chats$?.[chatId]?.messages : ([] as any);
+    chatId && $chats$?.[chatId]
+      ? $chats$?.[chatId]?.messages?.filter?.(isNotSystemMessage)
+      : ([] as any);
+
+  $: {
+    console.log('messages: ', messages);
+  }
 
   let textareaRef;
   let isLoading = false;

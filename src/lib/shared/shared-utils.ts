@@ -3,7 +3,12 @@ import {
   DEFAULT_SYSTEM_MESSAGE,
   DEFAULT_SYSTEM_MESSAGE_CONTENT
 } from './shared.constant';
-import { MESSAGE_ROLE, type Chat, type ChatListItem } from './shared.type';
+import {
+  MESSAGE_ROLE,
+  type Chat,
+  type ChatListItem,
+  type Message
+} from './shared.type';
 
 export const throwIfHttpError = (response: any) => {
   if (!response.ok) {
@@ -151,4 +156,8 @@ export const createNewChat = (
     systemMessage: config?.systemMessage,
     messages: config?.messages
   };
+};
+
+export const isNotSystemMessage = (message: Message) => {
+  return message?.role !== MESSAGE_ROLE.SYSTEM;
 };

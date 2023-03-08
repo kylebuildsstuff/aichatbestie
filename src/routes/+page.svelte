@@ -4,6 +4,8 @@
   import LoadingButtonSpinnerIcon from '$lib/shared/icons/loading-button-spinner-icon.svelte';
   import PaperAirplane from '$lib/shared/icons/paper-airplane.svelte';
   import { chatCompletion, resizeTextarea } from '$lib/shared/shared-utils';
+  import { openAiApiKey$ } from '$lib/shared/shared.store';
+  import { MESSAGE_ROLE } from '$lib/shared/shared.type';
 
   import ChatMessage from './chat-message.svelte';
 
@@ -25,13 +27,12 @@
     const _inputMessage = inputMessage;
     inputMessage = '';
 
-    const openAiKey = '';
     const userMessage = {
-      role: 'user',
+      role: MESSAGE_ROLE.USER,
       content: _inputMessage
     };
 
-    const response = await chatCompletion(_inputMessage, messages, openAiKey);
+    const response = await chatCompletion(_inputMessage, messages, $openAiApiKey$);
 
     messages = messages.concat([userMessage]).concat(response);
     isLoading = false;

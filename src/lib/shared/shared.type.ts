@@ -3,3 +3,9 @@ export enum LOCAL_STORAGE_KEY {
   CHAT_LIST = 'bChatList',
   CHAT = 'bChat'
 }
+
+export enum MESSAGE_ROLE {
+  SYSTEM = 'system',
+  ASSISTANT = 'assistant',
+  USER = 'user'
+}

@@ -1,5 +1,7 @@
+import { MESSAGE_ROLE } from './shared.type';
+
 export const DEFAULT_SYSTEM_MESSAGE = {
-  role: 'system',
+  role: MESSAGE_ROLE.SYSTEM,
   content: `You are ChatGPT, a large language model trained by OpenAI. Answer as concisely as possible.`
 };
 

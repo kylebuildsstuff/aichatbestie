@@ -1,4 +1,5 @@
 import { CHAT_COMPLETION_ENDPOINT, DEFAULT_SYSTEM_MESSAGE } from './shared.constant';
+import { MESSAGE_ROLE } from './shared.type';
 
 export const throwIfHttpError = (response: any) => {
   if (!response.ok) {
@@ -92,7 +93,7 @@ export const chatCompletion = async (
     DEFAULT_SYSTEM_MESSAGE,
     ...messageHistory,
     {
-      role: 'user',
+      role: MESSAGE_ROLE.USER,
       content: input
     }
   ];

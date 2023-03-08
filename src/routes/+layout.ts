@@ -11,19 +11,24 @@ export const load = async () => {
     const openAiApiKey = localStorage.getItem(LOCAL_STORAGE_KEY.OPEN_AI_API_KEY);
     const chatList = localStorage.getItem(LOCAL_STORAGE_KEY.CHAT_LIST);
 
+    // API key
     if (openAiApiKey) {
       openAiApiKey$.set(openAiApiKey);
     }
 
+    // Chat list
     if (chatList) {
       const parsedChatList = JSON.parse(chatList);
       chatList$.set(parsedChatList);
 
+      // Chats
       if (parsedChatList.length > 0) {
         parsedChatList.forEach((listItem: any) => {
           const chatId = listItem.chatId;
           // chats$ messages should already be present in localStorage
-          const chat = localStorage.getItem(`${LOCAL_STORAGE_KEY.CHAT}-${chatId}`);
+          const chat = localStorage.getItem(
+            `${LOCAL_STORAGE_KEY.CHAT_PREFIX}-${chatId}`
+          );
           if (chat) {
             chats$.set({ [chatId]: JSON.parse(chat) });
           }

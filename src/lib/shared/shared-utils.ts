@@ -1,5 +1,9 @@
-import { CHAT_COMPLETION_ENDPOINT, DEFAULT_SYSTEM_MESSAGE } from './shared.constant';
-import { MESSAGE_ROLE } from './shared.type';
+import {
+  CHAT_COMPLETION_ENDPOINT,
+  DEFAULT_SYSTEM_MESSAGE,
+  DEFAULT_SYSTEM_MESSAGE_CONTENT
+} from './shared.constant';
+import { MESSAGE_ROLE, type Chat, type ChatListItem } from './shared.type';
 
 export const throwIfHttpError = (response: any) => {
   if (!response.ok) {
@@ -123,4 +127,23 @@ export const truncateString = (str: string, cutLength = 3) => {
   const cutStart = str.substring(0, cutLength);
   const cutEnd = str.substring(str.length - cutLength, str.length);
   return `${cutStart}...${cutEnd}`;
+};
+
+export const createNewChatListItem = (
+  chatId: string,
+  description = ''
+): ChatListItem => {
+  return {
+    chatId,
+    title: 'New chat',
+    description
+  };
+};
+
+export const createNewChat = (chatId: string): Chat => {
+  return {
+    chatId,
+    systemMessage: DEFAULT_SYSTEM_MESSAGE_CONTENT,
+    messages: [DEFAULT_SYSTEM_MESSAGE]
+  };
 };

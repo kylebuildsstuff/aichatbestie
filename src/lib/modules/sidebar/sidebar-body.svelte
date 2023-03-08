@@ -1,15 +1,37 @@
 <script lang="ts">
+  import { nanoid } from 'nanoid';
+  import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
 
-  export let isMobile = false;
+  import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
+  import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
+  import { chatList$, chats$ } from '$lib/shared/shared.store';
+  import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
+
   export let handleCloseMobileSidebar = () => {};
 
-  const sidebarLinkIconClasses = `text-gray-400 group-hover:text-gray-500 ${
-    isMobile ? 'mr-4' : 'mr-3'
-  } flex-shrink-0 h-6 w-6`;
-  const sidebarLinkTextClasses = `text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-${
-    isMobile ? 'base' : 'sm'
-  } font-medium rounded-md`;
+  /**
+   * Create but don't save (yet)
+   */
+  const handleCreateNewChat = () => {
+    // https://zelark.github.io/nano-id-cc/
+    const chatId = nanoid(5);
+    const key = `${LOCAL_STORAGE_KEY.CHAT_PREFIX}-${chatId}`;
+
+    if (browser) {
+      chatList$.update((chatList) => {
+        chatList.unshift(createNewChatListItem(key));
+        return chatList;
+      });
+      chats$.update((chats) => {
+        chats[key] = createNewChat(chatId);
+        return chats;
+      });
+    }
+  };
+
+  const sidebarLinkIconClasses = `text-gray-400 group-hover:text-gray-500 ${'mr-3'} flex-shrink-0 h-6 w-6`;
+  const sidebarLinkTextClasses = `text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-${'base'} font-medium rounded-md`;
 </script>
 
 <div class="flex flex-1 flex-col pt-5 pb-4 overflow-y-auto">
@@ -24,9 +46,17 @@
   </div>
 
   <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
+    <button
+      on:click={handleCreateNewChat}
+      class={sidebarLinkTextClasses}
+    >
+      <PlusIcon extraClasses={sidebarLinkIconClasses} />
+      New chat
+    </button>
+
     <a
       on:click={handleCloseMobileSidebar}
-      href="/templates"
+      href="/"
       class={sidebarLinkTextClasses}
     >
       <!-- Heroicon name: outline/folder -->
@@ -46,53 +76,6 @@
         />
       </svg>
       Templates
-    </a>
-
-    <a
-      on:click={handleCloseMobileSidebar}
-      href="/documents"
-      class={sidebarLinkTextClasses}
-    >
-      <!-- Heroicon name: outline/inbox -->
-      <svg
-        class={sidebarLinkIconClasses}
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        aria-hidden="true"
-      >
-        <path
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-        />
-      </svg>
-      Documents
-    </a>
-
-    <a
-      on:click={handleCloseMobileSidebar}
-      href="/saved-content"
-      class={sidebarLinkTextClasses}
-    >
-      <!-- Heroicon name: outline/heart -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class={sidebarLinkIconClasses}
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-        />
-      </svg>
-      Saved content
     </a>
   </nav>
 </div>

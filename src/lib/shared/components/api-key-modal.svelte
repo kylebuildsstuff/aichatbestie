@@ -2,16 +2,23 @@
   import { onMount, getContext } from 'svelte';
   import { getNotificationsContext } from 'svelte-notifications';
   import { NOTIFICATION_SETTINGS } from '../shared.constant';
+  import { openAiApiKey$ } from '../shared.store';
 
   import { LOCAL_STORAGE_KEY } from '../shared.type';
 
   const { close } = getContext('simple-modal') as any;
   const { addNotification } = getNotificationsContext();
 
-  let openAiKey = '';
+  let opneAiApiKey = $openAiApiKey$;
 
   onMount(() => {
-    openAiKey = localStorage.getItem(LOCAL_STORAGE_KEY.OPEN_AI_API_KEY) || '';
+    const unsubscribe = openAiApiKey$.subscribe((value) => {
+      localStorage.setItem(LOCAL_STORAGE_KEY.OPEN_AI_API_KEY, value);
+    });
+
+    return () => {
+      unsubscribe();
+    };
   });
 
   const closeModal = () => {
@@ -19,7 +26,7 @@
   };
 
   const setApiKey = () => {
-    localStorage.setItem(LOCAL_STORAGE_KEY.OPEN_AI_API_KEY, openAiKey);
+    openAiApiKey$.set(opneAiApiKey);
 
     addNotification({
       ...NOTIFICATION_SETTINGS,
@@ -43,7 +50,7 @@
       API key
     </label>
     <input
-      bind:value={openAiKey}
+      bind:value={opneAiApiKey}
       id="open-ai-key"
       name="open-ai-key"
       type="text"

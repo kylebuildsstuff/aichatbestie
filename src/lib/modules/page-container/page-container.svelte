@@ -9,7 +9,6 @@
    *
    * https://github.com/sveltejs/kit/issues/627
    */
-  export let user = {};
 
   let isMobileSidebarOpen = false;
 

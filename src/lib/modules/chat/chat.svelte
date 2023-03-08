@@ -12,9 +12,9 @@
   } from '$lib/shared/shared-utils';
   import { chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
   import { LOCAL_STORAGE_KEY, MESSAGE_ROLE } from '$lib/shared/shared.type';
+  import { DEFAULT_SYSTEM_MESSAGE_CONTENT } from '$lib/shared/shared.constant';
 
   import ChatMessage from './chat-message.svelte';
-  import { DEFAULT_SYSTEM_MESSAGE_CONTENT } from '$lib/shared/shared.constant';
 
   export let chatId = '';
 
@@ -27,13 +27,20 @@
 
   $: textareaRows = (inputMessage.match(/\n/g) || []).length + 1 || 1;
 
+  /**
+   * Resize textarea
+   */
   const handleTextareaResize = (e) => {
     textareaRef = e.target;
   };
 
+  /**
+   * Create new chat
+   */
   const handleCreateNewChat = (msgs, systemMessage) => {
     // https://zelark.github.io/nano-id-cc/
     const newChatId = nanoid(5);
+    chatId = newChatId;
 
     chatList$.update((chatList) => {
       chatList.unshift(createNewChatListItem(newChatId));
@@ -51,6 +58,9 @@
     localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
   };
 
+  /**
+   * Update chat
+   */
   const updateChat = (id, messages) => {
     chats$.update((chats) => {
       chats[id].messages = messages;
@@ -59,6 +69,9 @@
     localStorage.setItem(id, JSON.stringify($chats$[id]));
   };
 
+  /**
+   * Chat completion
+   */
   const handleChatCompletion = async () => {
     isLoading = true;
     const _inputMessage = inputMessage;

@@ -11,7 +11,11 @@
     resizeTextarea
   } from '$lib/shared/shared-utils';
   import { chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
-  import { LOCAL_STORAGE_KEY, MESSAGE_ROLE } from '$lib/shared/shared.type';
+  import {
+    LOCAL_STORAGE_KEY,
+    MESSAGE_ROLE,
+    type Message
+  } from '$lib/shared/shared.type';
   import { DEFAULT_SYSTEM_MESSAGE_CONTENT } from '$lib/shared/shared.constant';
 
   import ChatMessage from './chat-message.svelte';
@@ -75,6 +79,18 @@
     localStorage.setItem(id, JSON.stringify($chats$[id]));
   };
 
+  const upsertChat = (
+    chatId: string,
+    messages: Message[],
+    systemMessageContent: string
+  ) => {
+    if (!chatId) {
+      handleCreateNewChat(messages, systemMessageContent);
+    } else {
+      updateChat(chatId, messages);
+    }
+  };
+
   /**
    * Chat completion
    */
@@ -91,13 +107,7 @@
     const response = await chatCompletion(_inputMessage, messages, $openAiApiKey$);
 
     messages = messages.concat([userMessage]).concat(response);
-
-    if (!chatId) {
-      handleCreateNewChat(messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
-    } else {
-      updateChat(chatId, messages);
-    }
-
+    upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
     isLoading = false;
 
     return response;

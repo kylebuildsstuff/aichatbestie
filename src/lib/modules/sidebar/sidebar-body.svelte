@@ -18,9 +18,6 @@
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 
-  /**
-   * Create but don't save (yet)
-   */
   const handleCreateNewChat = () => {
     // https://zelark.github.io/nano-id-cc/
     const newChatId = nanoid(5);
@@ -33,6 +30,9 @@
       chats[newChatId] = createNewChat(newChatId);
       return chats;
     });
+
+    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+    localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
 
     goto(`/chat/${newChatId}`);
   };

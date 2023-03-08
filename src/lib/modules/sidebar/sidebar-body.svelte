@@ -10,7 +10,7 @@
   import ChatBubbleLeftIcon from '$lib/shared/icons/chat-bubble-left-icon.svelte';
   import TrashIcon from '$lib/shared/icons/trash-icon.svelte';
   import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
-  import PencilSquareIcon from '$lib/shared/icons/pencil-square-icon.svelte';
+  // import PencilSquareIcon from '$lib/shared/icons/pencil-square-icon.svelte';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 
@@ -95,11 +95,11 @@
         </div>
 
         <div class="flex gap-2">
-          <button on:click={() => handleDeleteChat(cId)}>
+          <!-- <button on:click={() => handleDeleteChat(cId)}>
             <PencilSquareIcon
               extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`}
             />
-          </button>
+          </button> -->
           <button on:click={() => handleDeleteChat(cId)}>
             <TrashIcon extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
           </button>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import { truncateString } from '../shared-utils';
+  import { truncateStringInMiddle } from '../shared-utils';
   import { openAiApiKey$ } from '../shared.store';
 
   import ApiKeyModal from './api-key-modal.svelte';
@@ -32,7 +32,7 @@
         type="button"
         class="rounded-full bg-indigo-600 py-2.5 px-4 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
-        {$openAiApiKey$ ? truncateString($openAiApiKey$) : `Enter API key`}
+        {$openAiApiKey$ ? truncateStringInMiddle($openAiApiKey$) : `Enter API key`}
       </button>
     </div>
 

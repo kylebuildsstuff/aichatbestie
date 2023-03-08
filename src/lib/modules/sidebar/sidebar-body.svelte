@@ -6,7 +6,11 @@
 
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
   import { chatList$, chats$ } from '$lib/shared/shared.store';
-  import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
+  import {
+    createNewChat,
+    createNewChatListItem,
+    truncateString
+  } from '$lib/shared/shared-utils';
   import ChatBubbleLeftIcon from '$lib/shared/icons/chat-bubble-left-icon.svelte';
   import TrashIcon from '$lib/shared/icons/trash-icon.svelte';
   import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
@@ -55,7 +59,7 @@
   };
 
   const sidebarLinkIconClasses = `text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5`;
-  const sidebarLinkTextClasses = `w-full text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-3 text-base font-medium rounded-md`;
+  const sidebarLinkTextClasses = `w-full text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-3 text-sm font-medium rounded-md`;
   const activeSidebarLinkTextClasses = `text-gray-900 bg-gray-200`;
 </script>
 
@@ -89,9 +93,9 @@
           cId === $page$?.params?.chatId ? activeSidebarLinkTextClasses : ''
         }`}
       >
-        <div class="flex flex-1">
+        <div class="flex flex-1 justify-start">
           <ChatBubbleLeftIcon extraClasses={sidebarLinkIconClasses} />
-          {title}
+          {truncateString(title)}
         </div>
 
         <div class="flex gap-2">

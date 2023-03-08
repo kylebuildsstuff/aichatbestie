@@ -16,7 +16,10 @@
     MESSAGE_ROLE,
     type Message
   } from '$lib/shared/shared.type';
-  import { DEFAULT_SYSTEM_MESSAGE_CONTENT } from '$lib/shared/shared.constant';
+  import {
+    CHAT_LABELLING_PROMPT,
+    DEFAULT_SYSTEM_MESSAGE_CONTENT
+  } from '$lib/shared/shared.constant';
 
   import ChatMessage from './chat-message.svelte';
 
@@ -24,9 +27,7 @@
 
   let inputMessage = '';
   let messages =
-    chatId && $chats$?.[chatId]
-      ? $chats$?.[chatId]?.messages?.filter?.(isNotSystemMessage)
-      : ([] as any);
+    chatId && $chats$?.[chatId] ? $chats$?.[chatId]?.messages : ([] as any);
 
   $: {
     console.log('messages: ', messages);
@@ -49,7 +50,7 @@
    */
   const handleCreateNewChat = (msgs, systemMessage) => {
     // https://zelark.github.io/nano-id-cc/
-    const newChatId = nanoid(5);
+    const newChatId = nanoid(8);
     chatId = newChatId;
 
     chatList$.update((chatList) => {
@@ -92,10 +93,31 @@
   };
 
   /**
+   * Chat title completion
+   */
+  const chatTitleCompletion = async (msgs) => {
+    const title = await chatCompletion(
+      CHAT_LABELLING_PROMPT,
+      msgs,
+      $openAiApiKey$
+    ).then((res) =>
+      res
+        .map((r) => r.content)
+        .map((r) => r.replace('Title:', ''))
+        .map((r) => r.trim())
+        .join('')
+    );
+
+    return title;
+  };
+
+  /**
    * Chat completion
    */
   const handleChatCompletion = async () => {
     isLoading = true;
+    // Means only system message is present
+    let requiresChatTitle = !messages?.length || messages?.length === 1;
     const _inputMessage = inputMessage;
     inputMessage = '';
 
@@ -113,13 +135,30 @@
     upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
     isLoading = false;
 
+    // Create and set title for chat
+    if (requiresChatTitle) {
+      const title = await chatTitleCompletion(messages.slice(0, 2));
+
+      // Update ChatList with title
+      chatList$.update((chatList) => {
+        chatList = chatList.map((chat) => {
+          if (chat.chatId === chatId) {
+            chat.title = title;
+          }
+          return chat;
+        });
+        return chatList;
+      });
+      localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+    }
+
     return response;
   };
 </script>
 
 <ul class="divide-y divide-gray-200">
   {#if messages.length > 0}
-    {#each messages as message}
+    {#each messages?.filter?.(isNotSystemMessage) as message}
       <ChatMessage
         role={message.role}
         message={message.content}

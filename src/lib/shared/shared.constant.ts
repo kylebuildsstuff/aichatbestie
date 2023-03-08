@@ -4,3 +4,8 @@ export const DEFAULT_SYSTEM_MESSAGE = {
 };
 
 export const CHAT_COMPLETION_ENDPOINT = `https://api.openai.com/v1/chat/completions`;
+
+export const NOTIFICATION_SETTINGS = {
+  position: 'bottom-center',
+  removeAfter: 2500
+};

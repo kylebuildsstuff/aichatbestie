@@ -39,6 +39,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "graphql": "^16.6.0",
+    "nanoid": "^4.0.1",
     "postcss": "^8.4.21",
     "prettier": "^2.8.0",
     "prettier-plugin-svelte": "^2.8.1",

@@ -1,4 +1,13 @@
 <script lang="ts">
+  import { getContext } from 'svelte';
+
+  import ApiKeyModal from './api-key-modal.svelte';
+
+  const { open } = getContext('simple-modal') as any;
+
+  const openApiKeyModal = () => {
+    open(ApiKeyModal, {});
+  };
 </script>
 
 <div class="bg-white sm:py-24">
@@ -16,6 +25,14 @@
         An enhanced UI wrapper for ChatGPT
       </p>
     </div>
+
+    <button
+      on:click={openApiKeyModal}
+      type="button"
+      class="rounded-full bg-indigo-600 py-2.5 px-4 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >Enter API key</button
+    >
+
     <!-- <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
       <dl
         class="grid max-w-xl grid-cols-1 gap-y-10 gap-x-8 lg:max-w-none lg:grid-cols-2 lg:gap-y-16"

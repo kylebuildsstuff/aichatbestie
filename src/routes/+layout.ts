@@ -25,12 +25,15 @@ export const load = async () => {
       if (parsedChatList.length > 0) {
         parsedChatList.forEach((listItem: any) => {
           const chatId = listItem.chatId;
-          // chats$ messages should already be present in localStorage
-          const chat = localStorage.getItem(
-            `${LOCAL_STORAGE_KEY.CHAT_PREFIX}-${chatId}`
-          );
+          // chats$ messages should already be present in localStorage, else ¯\_(ツ)_/¯
+          const chat = localStorage.getItem(chatId);
           if (chat) {
-            chats$.set({ [chatId]: JSON.parse(chat) });
+            chats$.update((chats) => {
+              return {
+                ...chats,
+                [chatId]: JSON.parse(chat)
+              };
+            });
           }
         });
       }

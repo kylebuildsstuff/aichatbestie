@@ -94,7 +94,6 @@ export const chatCompletion = async (
   };
 
   const messages = [
-    DEFAULT_SYSTEM_MESSAGE,
     ...messageHistory,
     {
       role: MESSAGE_ROLE.USER,
@@ -140,10 +139,16 @@ export const createNewChatListItem = (
   };
 };
 
-export const createNewChat = (chatId: string): Chat => {
-  return {
-    chatId,
+export const createNewChat = (
+  chatId: string,
+  config = {
     systemMessage: DEFAULT_SYSTEM_MESSAGE_CONTENT,
     messages: [DEFAULT_SYSTEM_MESSAGE]
+  }
+): Chat => {
+  return {
+    chatId,
+    systemMessage: config?.systemMessage,
+    messages: config?.messages
   };
 };

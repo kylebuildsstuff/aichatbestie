@@ -1,22 +1,62 @@
 <script lang="ts">
+  import { nanoid } from 'nanoid';
+  import { browser } from '$app/environment';
+
   import LoadingButtonSpinnerIcon from '$lib/shared/icons/loading-button-spinner-icon.svelte';
   import PaperAirplane from '$lib/shared/icons/paper-airplane.svelte';
-  import { chatCompletion, resizeTextarea } from '$lib/shared/shared-utils';
-  import { openAiApiKey$ } from '$lib/shared/shared.store';
-  import { MESSAGE_ROLE } from '$lib/shared/shared.type';
+  import {
+    chatCompletion,
+    createNewChat,
+    createNewChatListItem,
+    resizeTextarea
+  } from '$lib/shared/shared-utils';
+  import { chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
+  import { LOCAL_STORAGE_KEY, MESSAGE_ROLE } from '$lib/shared/shared.type';
 
   import ChatMessage from './chat-message.svelte';
+  import { DEFAULT_SYSTEM_MESSAGE_CONTENT } from '$lib/shared/shared.constant';
+
+  export let chatId = '';
+
+  let inputMessage = '';
+  let messages =
+    chatId && $chats$?.[chatId] ? $chats$?.[chatId]?.messages : ([] as any);
 
   let textareaRef;
-  let messages = [] as any;
-  let inputMessage = '';
-
   let isLoading = false;
 
   $: textareaRows = (inputMessage.match(/\n/g) || []).length + 1 || 1;
 
   const handleTextareaResize = (e) => {
     textareaRef = e.target;
+  };
+
+  const handleCreateNewChat = (msgs, systemMessage) => {
+    // https://zelark.github.io/nano-id-cc/
+    const newChatId = nanoid(5);
+
+    chatList$.update((chatList) => {
+      chatList.unshift(createNewChatListItem(newChatId));
+      return chatList;
+    });
+    chats$.update((chats) => {
+      chats[newChatId] = createNewChat(newChatId, {
+        systemMessage,
+        messages: msgs
+      });
+      return chats;
+    });
+
+    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+    localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
+  };
+
+  const updateChat = (id, messages) => {
+    chats$.update((chats) => {
+      chats[id].messages = messages;
+      return chats;
+    });
+    localStorage.setItem(id, JSON.stringify($chats$[id]));
   };
 
   const handleChatCompletion = async () => {
@@ -32,6 +72,13 @@
     const response = await chatCompletion(_inputMessage, messages, $openAiApiKey$);
 
     messages = messages.concat([userMessage]).concat(response);
+
+    if (!chatId) {
+      handleCreateNewChat(messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
+    } else {
+      updateChat(chatId, messages);
+    }
+
     isLoading = false;
 
     return response;

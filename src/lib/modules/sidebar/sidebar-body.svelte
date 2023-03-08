@@ -1,9 +1,7 @@
 <script lang="ts">
   import { nanoid } from 'nanoid';
-  import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
 
-  import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
   import { chatList$, chats$ } from '$lib/shared/shared.store';
   import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
@@ -17,18 +15,15 @@
   const handleCreateNewChat = () => {
     // https://zelark.github.io/nano-id-cc/
     const chatId = nanoid(5);
-    const key = `${LOCAL_STORAGE_KEY.CHAT_PREFIX}-${chatId}`;
 
-    if (browser) {
-      chatList$.update((chatList) => {
-        chatList.unshift(createNewChatListItem(key));
-        return chatList;
-      });
-      chats$.update((chats) => {
-        chats[key] = createNewChat(chatId);
-        return chats;
-      });
-    }
+    chatList$.update((chatList) => {
+      chatList.unshift(createNewChatListItem(chatId));
+      return chatList;
+    });
+    chats$.update((chats) => {
+      chats[chatId] = createNewChat(chatId);
+      return chats;
+    });
   };
 
   const sidebarLinkIconClasses = `text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5`;

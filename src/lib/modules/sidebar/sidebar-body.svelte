@@ -2,13 +2,12 @@
   import { getContext } from 'svelte';
   import { nanoid } from 'nanoid';
   import { goto } from '$app/navigation';
+  import { page as page$ } from '$app/stores';
 
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
   import { chatList$, chats$ } from '$lib/shared/shared.store';
   import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
   import ChatBubbleLeftIcon from '$lib/shared/icons/chat-bubble-left-icon.svelte';
-
-  export let chatId = '';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 
@@ -33,7 +32,7 @@
 
   const sidebarLinkIconClasses = `text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5`;
   const sidebarLinkTextClasses = `w-full text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-3 text-base font-medium rounded-md`;
-  const activeSidebarLinkTextClasses = `text-gray-900 bg-gray-50`;
+  const activeSidebarLinkTextClasses = `text-gray-900 bg-gray-200`;
 </script>
 
 <div class="flex flex-1 flex-col pt-5 pb-4 overflow-y-auto">
@@ -63,7 +62,7 @@
           handleCloseMobileSidebar();
         }}
         class={`${sidebarLinkTextClasses} ${
-          cId === chatId ? activeSidebarLinkTextClasses : ''
+          cId === $page$?.params?.chatId ? activeSidebarLinkTextClasses : ''
         }`}
       >
         <ChatBubbleLeftIcon extraClasses={sidebarLinkIconClasses} />

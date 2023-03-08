@@ -12,8 +12,6 @@
    * https://github.com/sveltejs/kit/issues/627
    */
 
-  export let chatId = '';
-
   let isMobileSidebarOpen$ = writable(false);
 
   setContext('sidebar', {

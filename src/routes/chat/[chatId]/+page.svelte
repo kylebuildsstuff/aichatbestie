@@ -5,7 +5,7 @@
   export let data;
 </script>
 
-<PageContainer chatId={data.chatId}>
+<PageContainer>
   <svelte:fragment slot="page-content">
     {#key data.chatId}
       <Chat chatId={data.chatId} />

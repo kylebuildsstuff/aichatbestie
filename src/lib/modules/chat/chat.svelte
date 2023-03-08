@@ -71,9 +71,9 @@
   /**
    * Update chat
    */
-  const updateChat = (id, messages) => {
+  const updateChat = (id, msgs) => {
     chats$.update((chats) => {
-      chats[id].messages = messages;
+      chats[id].messages = msgs;
       return chats;
     });
     localStorage.setItem(id, JSON.stringify($chats$[id]));
@@ -81,13 +81,13 @@
 
   const upsertChat = (
     chatId: string,
-    messages: Message[],
+    msgs: Message[],
     systemMessageContent: string
   ) => {
     if (!chatId) {
-      handleCreateNewChat(messages, systemMessageContent);
+      handleCreateNewChat(msgs, systemMessageContent);
     } else {
-      updateChat(chatId, messages);
+      updateChat(chatId, msgs);
     }
   };
 
@@ -104,9 +104,12 @@
       content: _inputMessage
     };
 
+    messages = messages.concat([userMessage]);
+    upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
+
     const response = await chatCompletion(_inputMessage, messages, $openAiApiKey$);
 
-    messages = messages.concat([userMessage]).concat(response);
+    messages = messages.concat(response);
     upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
     isLoading = false;
 

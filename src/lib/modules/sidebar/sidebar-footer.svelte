@@ -1,6 +1,7 @@
 <script lang="ts">
-  export let isMobile = false;
-  export let handleCloseMobileSidebar = () => {};
+  import { getContext } from 'svelte';
+
+  let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 </script>
 
 <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
@@ -12,11 +13,7 @@
     <div class="flex items-center justify-between">
       <div class="flex items-center">
         <div class="ml-3">
-          <p
-            class={`text-${
-              isMobile ? 'base' : 'sm'
-            } font-medium text-gray-700 group-hover:text-gray-900`}
-          >
+          <p class={`text-base font-medium text-gray-700 group-hover:text-gray-900`}>
             Settings
           </p>
         </div>

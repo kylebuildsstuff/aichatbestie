@@ -1,5 +1,7 @@
 <script>
-  export let openMobileSidebar = () => {};
+  import { getContext } from 'svelte';
+
+  let { openMobileSidebar } = getContext('sidebar');
 </script>
 
 <div class="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-white">

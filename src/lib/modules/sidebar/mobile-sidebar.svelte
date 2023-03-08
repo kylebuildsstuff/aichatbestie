@@ -1,4 +1,5 @@
 <script>
+  import { getContext } from 'svelte';
   import { slide } from 'svelte/transition';
 
   import { onClickOutside } from '$lib/shared/shared-utils';
@@ -6,11 +7,10 @@
   import SidebarBody from './sidebar-body.svelte';
   import SidebarFooter from './sidebar-footer.svelte';
 
-  export let isMobileSidebarOpen = false;
-  export let handleCloseMobileSidebar = () => {};
+  let { isMobileSidebarOpen$, handleCloseMobileSidebar } = getContext('sidebar');
 </script>
 
-{#if isMobileSidebarOpen}
+{#if $isMobileSidebarOpen$}
   <div
     transition:slide
     class={`fixed inset-0 flex z-40 md:hidden`}
@@ -56,15 +56,9 @@
       </div>
 
       <!-- Static sidebar for mobile (popped out) -->
-      <SidebarBody
-        isMobile
-        {handleCloseMobileSidebar}
-      />
+      <SidebarBody />
 
-      <SidebarFooter
-        isMobile
-        {handleCloseMobileSidebar}
-      />
+      <SidebarFooter />
     </div>
   </div>
 {/if}

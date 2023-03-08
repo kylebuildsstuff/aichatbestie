@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { setContext, getContext } from 'svelte';
+  import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
   import Banners from '$lib/modules/banners/banners.svelte';

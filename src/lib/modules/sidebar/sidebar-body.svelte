@@ -8,6 +8,8 @@
   import { chatList$, chats$ } from '$lib/shared/shared.store';
   import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
   import ChatBubbleLeftIcon from '$lib/shared/icons/chat-bubble-left-icon.svelte';
+  import TrashIcon from '$lib/shared/icons/trash-icon.svelte';
+  import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 
@@ -28,6 +30,27 @@
     });
 
     goto(`/chat/${newChatId}`);
+  };
+
+  /**
+   * Delete chat
+   */
+  const handleDeleteChat = (chatId: string) => {
+    chatList$.update((chatList) => {
+      chatList = chatList.filter((chat) => chat.chatId !== chatId);
+      return chatList;
+    });
+    chats$.update((chats) => {
+      delete chats[chatId];
+      return chats;
+    });
+
+    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+    localStorage.removeItem(chatId);
+
+    if ($page$.params?.chatId === chatId) {
+      goto('/');
+    }
   };
 
   const sidebarLinkIconClasses = `text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5`;
@@ -65,8 +88,14 @@
           cId === $page$?.params?.chatId ? activeSidebarLinkTextClasses : ''
         }`}
       >
-        <ChatBubbleLeftIcon extraClasses={sidebarLinkIconClasses} />
-        {title}
+        <div class="flex flex-1">
+          <ChatBubbleLeftIcon extraClasses={sidebarLinkIconClasses} />
+          {title}
+        </div>
+
+        <button on:click={() => handleDeleteChat(cId)}>
+          <TrashIcon extraClasses={`text-gray-400 hover:text-gray-900 h-3 w-3`} />
+        </button>
       </button>
     {/each}
   </nav>

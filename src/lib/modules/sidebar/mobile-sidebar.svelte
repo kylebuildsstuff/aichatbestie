@@ -11,9 +11,17 @@
 </script>
 
 {#if isMobileSidebarOpen}
-  <div transition:slide class={`fixed inset-0 flex z-40 md:hidden`} role="dialog" aria-modal="true">
+  <div
+    transition:slide
+    class={`fixed inset-0 flex z-40 md:hidden`}
+    role="dialog"
+    aria-modal="true"
+  >
     <!-- Off-canvas menu overlay, show/hide based on off-canvas menu state. -->
-    <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true" />
+    <div
+      class="fixed inset-0 bg-gray-600 bg-opacity-75"
+      aria-hidden="true"
+    />
     <!-- Off-canvas menu, show/hide based on off-canvas menu state. -->
     <div
       use:onClickOutside
@@ -48,9 +56,15 @@
       </div>
 
       <!-- Static sidebar for mobile (popped out) -->
-      <SidebarBody isMobile {handleCloseMobileSidebar} />
+      <SidebarBody
+        isMobile
+        {handleCloseMobileSidebar}
+      />
 
-      <SidebarFooter isMobile {handleCloseMobileSidebar} />
+      <SidebarFooter
+        isMobile
+        {handleCloseMobileSidebar}
+      />
     </div>
   </div>
 {/if}

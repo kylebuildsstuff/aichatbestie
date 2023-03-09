@@ -8,7 +8,7 @@
 </script>
 
 {#if $hasBanners$}
-  <div class="mb-4">
+  <div class="my-4">
     {#each $banners$ as { bannerId, title, description }}
       <Banner
         {bannerId}

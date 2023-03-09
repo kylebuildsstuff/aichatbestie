@@ -14,7 +14,7 @@
   };
 </script>
 
-<div class="rounded-md bg-red-50 p-4 my-2">
+<div class="w-full rounded-md bg-red-50 p-4 my-2">
   <div class="flex">
     <div class="flex-shrink-0">
       <XCircleIcon />

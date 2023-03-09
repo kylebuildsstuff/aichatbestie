@@ -33,10 +33,10 @@
   <nav class="flex-1 px-2 py-3 bg-gray-800 space-y-1">
     <button
       on:click={handleCreateNewChat}
-      class={`w-full text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-3 text-sm font-medium rounded-md mb-3 shadow-sm ring-1 ring-inset ring-gray-300 `}
+      class={`w-full text-gray-300 hover:bg-gray-700 flex items-center px-2 py-3 text-sm font-medium rounded-md mb-3 shadow-sm ring-1 ring-inset ring-gray-400 `}
     >
       <PlusIcon
-        extraClasses={'text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5'}
+        extraClasses={'text-gray-400 hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5'}
       />
       New chat
     </button>

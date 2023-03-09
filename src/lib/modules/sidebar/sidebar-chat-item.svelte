@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext, tick } from 'svelte';
+  import { getContext } from 'svelte';
   import { page as page$ } from '$app/stores';
   import { goto } from '$app/navigation';
 
@@ -90,8 +90,8 @@
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   type="button"
-  class={`w-full text-gray-600 hover:bg-gray-100 hover:text-gray-900 group flex items-center px-2 py-3 text-sm font-medium rounded-md ${
-    chatId === $page$?.params?.chatId ? `text-gray-900 bg-gray-200` : ''
+  class={`w-full text-gray-300 hover:bg-gray-700 group flex items-center px-2 py-3 text-sm font-medium rounded-md ${
+    chatId === $page$?.params?.chatId ? ` bg-gray-600` : ''
   }`}
 >
   <!-- Title  -->
@@ -121,21 +121,21 @@
   {#if isEditing}
     <div class="flex gap-2">
       <button on:click={() => handleSaveTitleEditClick()}>
-        <CheckIcon overrideClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
+        <CheckIcon overrideClasses={`text-gray-400 hover:text-gray-300 h-3.5 w-3.5`} />
       </button>
       <button on:click={() => handleCancelTitleEditClick()}>
-        <XMarkIcon overrideClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
+        <XMarkIcon overrideClasses={`text-gray-400 hover:text-gray-300 h-3.5 w-3.5`} />
       </button>
     </div>
   {:else if isHovering}
     <div class="flex gap-2">
       <button on:click={() => handleTitleEditClick()}>
         <PencilSquareIcon
-          overrideClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`}
+          overrideClasses={`text-gray-400 hover:text-gray-300 h-3.5 w-3.5`}
         />
       </button>
       <button on:click={() => handleDeleteChat(chatId)}>
-        <TrashIcon overrideClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
+        <TrashIcon overrideClasses={`text-gray-400 hover:text-gray-300 h-3.5 w-3.5`} />
       </button>
     </div>
   {/if}

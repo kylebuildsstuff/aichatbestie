@@ -156,29 +156,31 @@
   };
 </script>
 
-<ul class="divide-y divide-gray-200">
-  {#if messages.length > 0}
-    {#each messages?.filter?.(isNotSystemMessage) as message}
-      <ChatMessage
-        role={message.role}
-        message={message.content}
-      />
-    {/each}
-  {/if}
-</ul>
+<section class="w-full">
+  <ul class="divide-y divide-gray-200 mb-8">
+    {#if messages.length > 0}
+      {#each messages?.filter?.(isNotSystemMessage) as message}
+        <ChatMessage
+          role={message.role}
+          message={message.content}
+        />
+      {/each}
+    {/if}
+  </ul>
 
-<!-- Loading text -->
-{#if isLoading}
-  <div class="mt-4 flex justify-start items-center text-center text-gray-500">
-    <div class="inset-y-0 left-0 pl-3">
-      <LoadingButtonSpinnerIcon />
+  <!-- Loading text -->
+  {#if isLoading}
+    <div class="mt-4 flex justify-start items-center text-center text-gray-500">
+      <div class="inset-y-0 left-0 pl-3">
+        <LoadingButtonSpinnerIcon />
+      </div>
+
+      <div>Bestie is thinking...</div>
     </div>
+  {/if}
+</section>
 
-    <div>Bestie is thinking...</div>
-  </div>
-{/if}
-
-<form class="mt-4">
+<form class="w-full mt-4 sticky bottom-0 ">
   <div class="relative mt-1 flex items-center">
     <textarea
       bind:this={textareaRef}

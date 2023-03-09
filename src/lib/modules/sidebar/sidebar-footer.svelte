@@ -9,8 +9,15 @@
   import TwitterIcon from '$lib/shared/icons/twitter-icon.svelte';
   import EnvelopeIcon from '$lib/shared/icons/envelope-icon.svelte';
   import LinkedinIcon from '$lib/shared/icons/linkedin-icon.svelte';
+  import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
 
-  let { handleCloseMobileSidebar } = getContext('sidebar') as any;
+  const { handleCloseMobileSidebar } = getContext('sidebar') as any;
+  const { open } = getContext('simple-modal') as any;
+
+  const openApiKeyModal = () => {
+    open(ApiKeyModal, {});
+    handleCloseMobileSidebar();
+  };
 </script>
 
 <div class="flex flex-col border-t border-gray-500 bg-gray-800">
@@ -31,10 +38,9 @@
     </div>
   </a>
 
-  <!-- Join -->
-  <a
-    on:click={handleCloseMobileSidebar}
-    href="/settings"
+  <!-- Change API key -->
+  <button
+    on:click={openApiKeyModal}
     class="w-full p-4 hover:bg-gray-700"
   >
     <div class="flex items-center gap-2 justify-start">
@@ -44,9 +50,9 @@
         <p class={`text-gray-300 group-hover:text-gray-900`}>Change API key</p>
       </div>
     </div>
-  </a>
+  </button>
 
-  <!-- Change API key -->
+  <!-- Joins -->
   <a
     on:click={handleCloseMobileSidebar}
     href="/settings"

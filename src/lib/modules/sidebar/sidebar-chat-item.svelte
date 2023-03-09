@@ -18,8 +18,23 @@
   export let title;
 
   let isEditing = false;
+  let isHovering = false;
   let titleInput = title;
 
+  /**
+   * Hover
+   */
+  const handleMouseEnter = () => {
+    isHovering = true;
+  };
+
+  const handleMouseLeave = () => {
+    isHovering = false;
+  };
+
+  /**
+   * Title edits
+   */
   const handleTitleEditClick = () => {
     isEditing = true;
   };
@@ -27,7 +42,6 @@
   const handleCancelTitleEditClick = () => {
     isEditing = false;
   };
-
   const handleSaveTitleEditClick = () => {
     chatList$.update((chatList) => {
       chatList = chatList.map((chat) => {
@@ -73,6 +87,8 @@
     goto(`/chat/${chatId}`);
     handleCloseMobileSidebar();
   }}
+  on:mouseenter={handleMouseEnter}
+  on:mouseleave={handleMouseLeave}
   type="button"
   class={`w-full text-gray-600 hover:bg-gray-100 hover:text-gray-900 group flex items-center px-2 py-3 text-sm font-medium rounded-md ${
     chatId === $page$?.params?.chatId ? `text-gray-900 bg-gray-200` : ''
@@ -111,7 +127,7 @@
         <XMarkIcon overrideClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
       </button>
     </div>
-  {:else}
+  {:else if isHovering}
     <div class="flex gap-2">
       <button on:click={() => handleTitleEditClick()}>
         <PencilSquareIcon

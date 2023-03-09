@@ -81,7 +81,7 @@
   <!-- Title  -->
   <div class="flex flex-1 justify-start items-center flex-nowrap">
     <ChatBubbleLeftIcon
-      extraClasses={`text-gray-400 hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5`}
+      overrideClasses={`text-gray-400 hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5`}
     />
     {#if isEditing}
       <input
@@ -105,21 +105,21 @@
   {#if isEditing}
     <div class="flex gap-2">
       <button on:click={() => handleSaveTitleEditClick()}>
-        <CheckIcon extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
+        <CheckIcon overrideClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
       </button>
       <button on:click={() => handleCancelTitleEditClick()}>
-        <XMarkIcon extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
+        <XMarkIcon overrideClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
       </button>
     </div>
   {:else}
     <div class="flex gap-2">
       <button on:click={() => handleTitleEditClick()}>
         <PencilSquareIcon
-          extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`}
+          overrideClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`}
         />
       </button>
       <button on:click={() => handleDeleteChat(chatId)}>
-        <TrashIcon extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
+        <TrashIcon overrideClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
       </button>
     </div>
   {/if}

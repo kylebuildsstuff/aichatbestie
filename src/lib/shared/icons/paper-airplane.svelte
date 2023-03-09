@@ -1,9 +1,13 @@
 <script lang="ts">
-  export let extraClasses = '';
+  export let overrideClasses = '';
+
+  const classes = overrideClasses
+    ? overrideClasses
+    : `w-5 h-5 text-gray-400 hover:bg-gray-100`;
 </script>
 
 <svg
-  class="w-6 h-6 text-gray-400 {extraClasses}"
+  class={classes}
   xmlns="http://www.w3.org/2000/svg"
   fill="none"
   viewBox="0 0 24 24"

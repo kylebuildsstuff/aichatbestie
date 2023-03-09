@@ -203,36 +203,40 @@
   <section
     class="w-full fixed bottom-0 mt-4 py-10 z-10 bg-white max-w-md lg:max-w-2xl xl:max-w-4xl"
   >
-    <form>
+    <form class="w-full flex flex-col gap-2">
       <!-- Loading text -->
       {#if isLoading}
-        <div class="mt-4 flex justify-start items-center text-center text-gray-500">
-          <div class="inset-y-0 left-0 pl-3">
+        <div class="flex justify-start items-center text-center text-gray-500 text-sm">
+          <div class="inset-y-0 left-0 pl-2">
             <LoadingButtonSpinnerIcon />
           </div>
 
           <div>Bestie is thinking...</div>
         </div>
       {/if}
-      <div class="mt-2 flex items-center">
-        <textarea
-          bind:this={textareaRef}
-          bind:value={inputMessage}
-          use:resizeTextarea
-          on:resize={handleTextareaResize}
-          rows={textareaRows}
-          class="w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 overflow-y-auto"
-          on:keydown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleChatCompletion();
-            }
-          }}
-        />
+
+      <div class="relative flex gap-2 justify-between items-center">
+        <div class="w-full flex items-center">
+          <textarea
+            bind:this={textareaRef}
+            bind:value={inputMessage}
+            use:resizeTextarea
+            on:resize={handleTextareaResize}
+            rows={textareaRows}
+            class="w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 overflow-y-auto"
+            on:keydown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleChatCompletion();
+              }
+            }}
+          />
+        </div>
+        <!-- Send button -->
         <button
           on:click={handleChatCompletion}
           type="submit"
-          class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5"
+          class="absolute inset-y-0 right-0 flex py-2 pr-3"
         >
           <PaperAirplane />
         </button>

@@ -32,7 +32,7 @@
 <!-- Content  -->
 <main class="w-full h-full md:pl-64">
   <MobileHamburger />
-  <div class="mx-auto max-w-6xl">
+  <div class="mx-auto">
     <Banners />
     <slot name="page-content" />
   </div>

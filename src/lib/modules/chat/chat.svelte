@@ -186,20 +186,21 @@
   };
 </script>
 
-<main class="relative flex flex-col justify-center items-center overflow-auto">
-  <section class="w-full pb-16 mb-16 bg-gray-100">
-    <ul
-      class="divide-y mx-auto divide-gray-200 mb-8 max-w-md lg:max-w-2xl xl:max-w-4xl"
-    >
+<main class="relative flex flex-col justify-center items-center">
+  <section class="w-full pb-16 mb-16 ">
+    <ul class="w-full divide-y divide-gray-200 mb-8">
       {#if messages.length > 0}
-        {#each messages?.filter?.(isNotSystemMessage) as message}
-          <ChatMessage
-            role={message.role}
-            message={message.content}
-          />
+        {#each messages?.filter?.(isNotSystemMessage) as { role, content }}
+          <div class:bg-gray-100={role === 'assistant'}>
+            <ChatMessage
+              {role}
+              {content}
+            />
+          </div>
         {/each}
       {/if}
     </ul>
+    <div class="absolute bottom-0 bg-white py-20 " />
   </section>
 
   <section

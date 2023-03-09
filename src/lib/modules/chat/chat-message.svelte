@@ -15,8 +15,8 @@
     alt=""
   />
   <div class="ml-3">
-    <p class="text-sm font-medium text-gray-900">{name}</p>
-    <p class="prose text-sm text-gray-500 max-w-md lg:max-w-2xl xl:max-w-4xl">
+    <p class="prose max-w-max text-sm text-gray-500 w-full">
+      <!-- {@html marked.parse(content)} -->
       {@html marked.parse(content)}
     </p>
   </div>
@@ -45,3 +45,9 @@
     </p>
   </div>
 </li> -->
+<style>
+  :global(pre) {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+</style>

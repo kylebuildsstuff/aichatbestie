@@ -186,9 +186,9 @@
   };
 </script>
 
-<main class="relative flex flex-col justify-center items-center">
-  <section class="w-full pb-16 mb-16 ">
-    <ul class="w-full divide-y divide-gray-200 mb-8">
+<section class="relative flex flex-col justify-center items-center">
+  <div class="w-full pb-16 mb-16 ">
+    <ul class="divide-y divide-gray-200 mb-8">
       {#if messages.length > 0}
         {#each messages?.filter?.(isNotSystemMessage) as { role, content }}
           <div class:bg-gray-100={role === 'assistant'}>
@@ -201,9 +201,9 @@
       {/if}
     </ul>
     <div class="absolute bottom-0 bg-white py-20 " />
-  </section>
+  </div>
 
-  <section
+  <div
     class="w-full fixed bottom-0 mt-4 py-10 z-10 max-w-md lg:max-w-2xl xl:max-w-4xl bg-gradient-to-b from-transparent via-white to-white"
   >
     <form class="w-full flex flex-col gap-2">
@@ -250,5 +250,5 @@
         AI Chat Bestie - an enhanced UI wrapper for ChatGPT
       </div>
     </form>
-  </section>
-</main>
+  </div>
+</section>

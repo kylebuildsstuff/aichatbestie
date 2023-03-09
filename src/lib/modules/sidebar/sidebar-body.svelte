@@ -29,8 +29,8 @@
   };
 </script>
 
-<div class="flex flex-1 flex-col pt-3 pb-4 overflow-auto">
-  <nav class="flex-1 px-2 bg-white space-y-1">
+<div class="flex flex-1 flex-col overflow-auto">
+  <nav class="flex-1 px-2 py-3 bg-gray-800 space-y-1">
     <button
       on:click={handleCreateNewChat}
       class={`w-full text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-3 text-sm font-medium rounded-md mb-3 shadow-sm ring-1 ring-inset ring-gray-300 `}

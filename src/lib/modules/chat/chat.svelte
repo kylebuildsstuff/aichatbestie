@@ -41,7 +41,7 @@
   let isLoading = false;
 
   $: textareaRows = (inputMessage.match(/\n/g) || []).length + 1 || 1;
-  $: enableRegenerateMessage = !isLoading && inputMessage.length > 2;
+  $: enableRegenerateMessage = !isLoading && messages.length > 2;
 
   afterNavigate(async () => {
     if (browser) {
@@ -125,6 +125,42 @@
     );
 
     return title;
+  };
+
+  /**
+   * Regenerate response
+   */
+  const handleRegenerateResponse = async () => {
+    isLoading = true;
+
+    messages = messages.filter((_, i: number) => i !== messages.length - 1);
+    const _inputMessage = messages[messages.length - 1].content;
+
+    upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
+
+    if (browser) {
+      await tick();
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+
+    const response = await chatCompletion(_inputMessage, messages, $openAiApiKey$);
+
+    messages = messages.concat(response);
+    upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
+    isLoading = false;
+
+    if (browser) {
+      await tick();
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+
+    return response;
   };
 
   /**
@@ -222,8 +258,9 @@
         </div>
       {/if}
 
-      {#if true}
+      {#if enableRegenerateMessage}
         <button
+          on:click={handleRegenerateResponse}
           type="button"
           class="flex justify-center items-center gap-2 w-48 self-center whitespace-nowrap rounded-md mb-1 bg-white py-2 px-3 text-sm text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
         >

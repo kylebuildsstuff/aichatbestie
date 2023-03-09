@@ -28,18 +28,8 @@
   };
 </script>
 
-<div class="flex flex-1 flex-col pt-5 pb-4 overflow-y-auto">
-  <div class="flex items-center flex-shrink-0 px-4">
-    <button on:click={() => goto('/')}>
-      <img
-        class="h-16 w-auto cursor-pointer"
-        src="https://keylayapps.nyc3.cdn.digitaloceanspaces.com/copybuddy/copybuddy-logo-circle.svg"
-        alt="AI Chat Bestie"
-      />
-    </button>
-  </div>
-
-  <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
+<div class="flex flex-1 flex-col pt-3 pb-4 overflow-y-auto">
+  <nav class="flex-1 px-2 bg-white space-y-1">
     <button
       on:click={handleCreateNewChat}
       class={`w-full text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-3 text-sm font-medium rounded-md mb-3 shadow-sm ring-1 ring-inset ring-gray-300 `}

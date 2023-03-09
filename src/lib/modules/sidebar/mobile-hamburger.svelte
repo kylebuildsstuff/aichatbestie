@@ -1,8 +1,22 @@
 <script>
-  import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
   import { getContext } from 'svelte';
+  import { page as page$ } from '$app/stores';
+
+  import { chatList$, chats$ } from '$lib/shared/shared.store';
+  import MenuIcon from '$lib/shared/icons/menu-icon.svelte';
+  import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
+  import { truncateString } from '$lib/shared/shared-utils';
 
   let { openMobileSidebar } = getContext('sidebar');
+
+  $: chatId = $page$.params.chatId;
+  // $: title = $chats$[chatId]?.title;
+  $: title = truncateString(
+    $chatList$.find((chat) => chat.chatId === chatId)?.title || 'New chat',
+    40
+  );
+
+  // get page params
 </script>
 
 <div
@@ -14,25 +28,10 @@
     on:click={openMobileSidebar}
   >
     <span class="sr-only">Open sidebar</span>
-    <!-- Heroicon name: outline/menu -->
-    <svg
-      class="h-6 w-6"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M4 6h16M4 12h16M4 18h16"
-      />
-    </svg>
+    <MenuIcon />
   </button>
 
-  <span class="text-gray-300"> Hello </span>
+  <span class="text-gray-300"> {title} </span>
 
   <button
     type="button"

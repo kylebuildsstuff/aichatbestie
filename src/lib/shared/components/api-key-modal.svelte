@@ -60,7 +60,7 @@
   </div>
 
   <div class="pt-5">
-    <div class="flex justify-end">
+    <div class="flex gap-2 justify-end">
       <button
         on:click={closeModal}
         type="button"
@@ -70,7 +70,7 @@
       </button>
       <button
         on:click={setApiKey}
-        class="ml-3 disabled:opacity-50 inline-flex justify-center py-1.5 px-2.5 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        class="disabled:opacity-50 inline-flex justify-center py-1.5 px-2.5 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         Save
       </button>

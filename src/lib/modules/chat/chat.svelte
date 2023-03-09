@@ -25,6 +25,7 @@
 
   import ChatMessage from './chat-message.svelte';
   import { afterNavigate } from '$app/navigation';
+  import ArrowPathIcon from '$lib/shared/icons/arrow-path-icon.svelte';
 
   export let chatId = '';
 
@@ -40,6 +41,7 @@
   let isLoading = false;
 
   $: textareaRows = (inputMessage.match(/\n/g) || []).length + 1 || 1;
+  $: enableRegenerateMessage = !isLoading && inputMessage.length > 2;
 
   afterNavigate(async () => {
     if (browser) {
@@ -220,6 +222,16 @@
         </div>
       {/if}
 
+      {#if true}
+        <button
+          type="button"
+          class="flex justify-center items-center gap-2 w-48 self-center whitespace-nowrap rounded-md mb-1 bg-white py-2 px-3 text-sm text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        >
+          <ArrowPathIcon />
+          Regenerate response
+        </button>
+      {/if}
+
       <!-- Input -->
       <div class="flex gap-2 justify-center items-center">
         <div
@@ -231,7 +243,7 @@
             use:resizeTextarea
             on:resize={handleTextareaResize}
             rows={textareaRows}
-            class="w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 overflow-y-auto"
+            class="w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow drop-shadow shado ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 overflow-y-auto"
             on:keydown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();

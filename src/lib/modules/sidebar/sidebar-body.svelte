@@ -6,6 +6,7 @@
   import { chatList$, chats$ } from '$lib/shared/shared.store';
   import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
   import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
+
   import SidebarChatItem from './sidebar-chat-item.svelte';
 
   const handleCreateNewChat = () => {
@@ -28,7 +29,7 @@
   };
 </script>
 
-<div class="flex flex-1 flex-col pt-3 pb-4 overflow-y-auto">
+<div class="flex flex-1 flex-col pt-3 pb-4 overflow-auto">
   <nav class="flex-1 px-2 bg-white space-y-1">
     <button
       on:click={handleCreateNewChat}

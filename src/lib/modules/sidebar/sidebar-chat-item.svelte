@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext } from 'svelte';
+  import { getContext, tick } from 'svelte';
   import { page as page$ } from '$app/stores';
   import { goto } from '$app/navigation';
 
@@ -9,11 +9,38 @@
   import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
   import PencilSquareIcon from '$lib/shared/icons/pencil-square-icon.svelte';
   import TrashIcon from '$lib/shared/icons/trash-icon.svelte';
+  import CheckIcon from '$lib/shared/icons/check-icon.svelte';
+  import XMarkIcon from '$lib/shared/icons/x-mark-icon.svelte';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 
   export let chatId;
   export let title;
+
+  let isEditing = false;
+  let titleInput = title;
+
+  const handleTitleEditClick = () => {
+    isEditing = true;
+  };
+
+  const handleCancelTitleEditClick = () => {
+    isEditing = false;
+  };
+
+  const handleSaveTitleEditClick = () => {
+    chatList$.update((chatList) => {
+      chatList = chatList.map((chat) => {
+        if (chat.chatId === chatId) {
+          chat.title = titleInput;
+        }
+        return chat;
+      });
+      return chatList;
+    });
+    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+    isEditing = false;
+  };
 
   /**
    * Delete chat
@@ -38,34 +65,62 @@
 </script>
 
 <button
-  on:click={() => {
+  on:click={(e) => {
+    if (isEditing) {
+      return;
+    }
+
     goto(`/chat/${chatId}`);
     handleCloseMobileSidebar();
   }}
-  class={`w-full text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-3 text-sm font-medium rounded-md ${
+  type="button"
+  class={`w-full text-gray-600 hover:bg-gray-100 hover:text-gray-900 group flex items-center px-2 py-3 text-sm font-medium rounded-md ${
     chatId === $page$?.params?.chatId ? `text-gray-900 bg-gray-200` : ''
   }`}
 >
+  <!-- Title  -->
   <div class="flex flex-1 justify-start items-center flex-nowrap">
     <ChatBubbleLeftIcon
-      extraClasses={`text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5`}
+      extraClasses={`text-gray-400 hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5`}
     />
-    <span
-      class="text-left overflow-hidden whitespace-nowrap"
-      {title}
-    >
-      {truncateString(title)}
-    </span>
+    {#if isEditing}
+      <input
+        bind:value={titleInput}
+        on:click={(e) => e.stopPropagation()}
+        type="text"
+        name="title"
+        class="block w-full mr-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      />
+    {:else}
+      <span
+        class="text-left overflow-hidden whitespace-nowrap"
+        {title}
+      >
+        {truncateString(title)}
+      </span>
+    {/if}
   </div>
 
-  <div class="flex gap-2">
-    <button on:click={() => handleDeleteChat(chatId)}>
-      <PencilSquareIcon
-        extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`}
-      />
-    </button>
-    <button on:click={() => handleDeleteChat(chatId)}>
-      <TrashIcon extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
-    </button>
-  </div>
+  <!-- Actions -->
+  {#if isEditing}
+    <div class="flex gap-2">
+      <button on:click={() => handleSaveTitleEditClick()}>
+        <CheckIcon extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
+      </button>
+      <button on:click={() => handleCancelTitleEditClick()}>
+        <XMarkIcon extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
+      </button>
+    </div>
+  {:else}
+    <div class="flex gap-2">
+      <button on:click={() => handleTitleEditClick()}>
+        <PencilSquareIcon
+          extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`}
+        />
+      </button>
+      <button on:click={() => handleDeleteChat(chatId)}>
+        <TrashIcon extraClasses={`text-gray-400 hover:text-gray-900 h-3.5 w-3.5`} />
+      </button>
+    </div>
+  {/if}
 </button>

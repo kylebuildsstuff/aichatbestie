@@ -2,6 +2,7 @@
   import { nanoid } from 'nanoid';
   import { tick } from 'svelte';
   import { browser } from '$app/environment';
+  import { afterNavigate, goto } from '$app/navigation';
 
   import LoadingButtonSpinnerIcon from '$lib/shared/icons/loading-button-spinner-icon.svelte';
   import PaperAirplane from '$lib/shared/icons/paper-airplane.svelte';
@@ -24,8 +25,8 @@
   } from '$lib/shared/shared.constant';
 
   import ChatMessage from './chat-message.svelte';
-  import { afterNavigate } from '$app/navigation';
   import ArrowPathIcon from '$lib/shared/icons/arrow-path-icon.svelte';
+  import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
 
   export let chatId = '';
 
@@ -62,9 +63,31 @@
   };
 
   /**
-   * Create new chat
+   * Create new chat (and navigate to it)
    */
-  const handleCreateNewChat = (msgs, systemMessage) => {
+  const handleCreateNewChat = () => {
+    // https://zelark.github.io/nano-id-cc/
+    const newChatId = nanoid(5);
+
+    chatList$.update((chatList) => {
+      chatList.unshift(createNewChatListItem(newChatId));
+      return chatList;
+    });
+    chats$.update((chats) => {
+      chats[newChatId] = createNewChat(newChatId);
+      return chats;
+    });
+
+    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+    localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
+
+    goto(`/chat/${newChatId}`);
+  };
+
+  /**
+   * Insert new chat (For the root route)
+   */
+  const insertNewChat = (msgs, systemMessage) => {
     // https://zelark.github.io/nano-id-cc/
     const newChatId = nanoid(8);
     chatId = newChatId;
@@ -102,7 +125,7 @@
     systemMessageContent: string
   ) => {
     if (!chatId) {
-      handleCreateNewChat(msgs, systemMessageContent);
+      insertNewChat(msgs, systemMessageContent);
     } else {
       updateChat(chatId, msgs);
     }
@@ -293,12 +316,20 @@
           <button
             on:click={handleChatCompletion}
             type="submit"
-            id="thisone"
             class="absolute right-0 inset-y-0 py-2 pr-3"
           >
             <PaperAirplane />
           </button>
         </div>
+        <button
+          on:click={handleCreateNewChat}
+          type="button"
+          title="Create new chat"
+        >
+          <PlusIcon
+            overrideClasses={'text-gray-400 hover:text-gray-500 hover:bg-gray-100 flex-shrink-0 h-6 w-6 rounded-md'}
+          />
+        </button>
       </div>
 
       <div class="text-xs text-center text-gray-400">

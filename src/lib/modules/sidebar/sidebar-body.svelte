@@ -40,7 +40,7 @@
       class={`w-full text-gray-300 hover:bg-gray-700 flex items-center px-2 py-3 text-sm font-medium rounded-md mb-3 shadow-sm ring-1 ring-inset ring-gray-400 `}
     >
       <PlusIcon
-        extraClasses={'text-gray-400 hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5'}
+        overrideClasses={'text-gray-400 hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5'}
       />
       New chat
     </button>

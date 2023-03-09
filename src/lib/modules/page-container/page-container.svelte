@@ -3,7 +3,7 @@
   import { writable } from 'svelte/store';
 
   import Banners from '$lib/modules/banners/banners.svelte';
-  import MobileHamburger from '$lib/modules/sidebar/mobile-hamburger.svelte';
+  import MobileNavbar from '$lib/modules/sidebar/mobile-navbar.svelte';
   import MobileSidebar from '$lib/modules/sidebar/mobile-sidebar.svelte';
   import Sidebar from '$lib/modules/sidebar/sidebar.svelte';
   /**
@@ -32,7 +32,7 @@
 
   <!-- Content  -->
   <section class="w-full">
-    <MobileHamburger />
+    <MobileNavbar />
     <Banners />
     <slot name="page-content" />
   </section>

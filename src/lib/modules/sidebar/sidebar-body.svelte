@@ -138,5 +138,18 @@
         {title}
       />
     {/each}
+
+    <!-- Empty state -->
+    {#if !chatList.length || chatList.length === 0}
+      <div class="flex flex-col items-center justify-center h-full">
+        <div class="text-gray-400 text-sm">No chats found</div>
+        <button
+          on:click={handleCreateNewChat}
+          class="mt-2 text-gray-400 hover:text-gray-500 text-sm border border-gray-400 rounded-md px-2 py-1"
+        >
+          Create new chat
+        </button>
+      </div>
+    {/if}
   </nav>
 </div>

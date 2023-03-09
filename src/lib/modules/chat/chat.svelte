@@ -187,7 +187,7 @@
 </script>
 
 <main class="relative flex flex-col justify-center items-center overflow-auto">
-  <section class="w-full max-w-md lg:max-w-2xl xl:max-w-4xl">
+  <section class="w-full pb-16 mb-16 max-w-md lg:max-w-2xl xl:max-w-4xl">
     <ul class="divide-y divide-gray-200 mb-8">
       {#if messages.length > 0}
         {#each messages?.filter?.(isNotSystemMessage) as message}
@@ -200,7 +200,9 @@
     </ul>
   </section>
 
-  <section class="w-full fixed bottom-0 mt-4 max-w-md lg:max-w-2xl xl:max-w-4xl">
+  <section
+    class="w-full fixed bottom-0 mt-4 py-10 z-10 bg-white max-w-md lg:max-w-2xl xl:max-w-4xl"
+  >
     <form>
       <!-- Loading text -->
       {#if isLoading}
@@ -212,7 +214,7 @@
           <div>Bestie is thinking...</div>
         </div>
       {/if}
-      <div class="mt-1 flex items-center">
+      <div class="mt-2 flex items-center">
         <textarea
           bind:this={textareaRef}
           bind:value={inputMessage}

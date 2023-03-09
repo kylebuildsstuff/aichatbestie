@@ -187,6 +187,7 @@
 </script>
 
 <section class="relative flex flex-col justify-center items-center">
+  <!-- Messages -->
   <div class="w-full pb-16 mb-16 ">
     <ul class="divide-y divide-gray-200 mb-8">
       {#if messages.length > 0}
@@ -203,13 +204,14 @@
     <div class="absolute bottom-0 bg-white py-20 " />
   </div>
 
+  <!-- Chat input -->
   <div
-    class="w-full fixed bottom-0 mt-4 py-10 z-10 max-w-md lg:max-w-2xl xl:max-w-4xl bg-gradient-to-b from-transparent via-white to-white"
+    class="w-full fixed bottom-0 mt-4 py-10 z-10 bg-gradient-to-b from-transparent via-white to-white"
   >
     <form class="w-full flex flex-col gap-2">
       <!-- Loading text -->
       {#if isLoading}
-        <div class="flex justify-start items-center text-center text-gray-500 text-sm">
+        <div class="flex self-center items-center text-gray-500 text-sm">
           <div class="inset-y-0 left-0 pl-2">
             <LoadingButtonSpinnerIcon />
           </div>
@@ -219,8 +221,10 @@
       {/if}
 
       <!-- Input -->
-      <div class="relative flex gap-2 justify-between items-center">
-        <div class="w-full flex items-center">
+      <div class="relative flex gap-2 justify-center items-center">
+        <div
+          class="w-full flex justify-center items-center max-w-md lg:max-w-2xl xl:max-w-4xl"
+        >
           <textarea
             bind:this={textareaRef}
             bind:value={inputMessage}

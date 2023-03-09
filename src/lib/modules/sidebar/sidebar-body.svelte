@@ -1,5 +1,6 @@
 <script lang="ts">
   import { nanoid } from 'nanoid';
+  import { getContext } from 'svelte';
   import { goto } from '$app/navigation';
 
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
@@ -8,6 +9,8 @@
   import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
 
   import SidebarChatItem from './sidebar-chat-item.svelte';
+
+  let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 
   const handleCreateNewChat = () => {
     // https://zelark.github.io/nano-id-cc/
@@ -26,6 +29,7 @@
     localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
 
     goto(`/chat/${newChatId}`);
+    handleCloseMobileSidebar();
   };
 </script>
 

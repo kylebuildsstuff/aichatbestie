@@ -8,6 +8,7 @@
   import YoutubeIcon from '$lib/shared/icons/youtube-icon.svelte';
   import TwitterIcon from '$lib/shared/icons/twitter-icon.svelte';
   import EnvelopeIcon from '$lib/shared/icons/envelope-icon.svelte';
+  import LinkedinIcon from '$lib/shared/icons/linkedin-icon.svelte';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 </script>
@@ -69,6 +70,7 @@
     <DiscordIcon />
     <YoutubeIcon />
     <TwitterIcon />
+    <LinkedinIcon />
     <EnvelopeIcon />
   </div>
 

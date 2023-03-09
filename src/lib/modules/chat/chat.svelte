@@ -215,6 +215,7 @@
         </div>
       {/if}
 
+      <!-- Input -->
       <div class="relative flex gap-2 justify-between items-center">
         <div class="w-full flex items-center">
           <textarea
@@ -240,6 +241,10 @@
         >
           <PaperAirplane />
         </button>
+      </div>
+
+      <div class="text-xs text-center text-gray-400">
+        AI Chat Bestie - an enhanced UI wrapper for ChatGPT
       </div>
     </form>
   </section>

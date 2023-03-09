@@ -221,9 +221,9 @@
       {/if}
 
       <!-- Input -->
-      <div class="relative flex gap-2 justify-center items-center">
+      <div class="flex gap-2 justify-center items-center">
         <div
-          class="w-full flex justify-center items-center max-w-md lg:max-w-2xl xl:max-w-4xl"
+          class="relative w-full flex justify-center items-center max-w-md lg:max-w-2xl xl:max-w-4xl"
         >
           <textarea
             bind:this={textareaRef}
@@ -239,15 +239,17 @@
               }
             }}
           />
+
+          <!-- Send button -->
+          <button
+            on:click={handleChatCompletion}
+            type="submit"
+            id="thisone"
+            class="absolute right-0 inset-y-0 py-2 pr-3"
+          >
+            <PaperAirplane />
+          </button>
         </div>
-        <!-- Send button -->
-        <button
-          on:click={handleChatCompletion}
-          type="submit"
-          class="absolute inset-y-0 right-0 flex py-2 pr-3"
-        >
-          <PaperAirplane />
-        </button>
       </div>
 
       <div class="text-xs text-center text-gray-400">

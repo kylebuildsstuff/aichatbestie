@@ -4,6 +4,10 @@
   import KeyIcon from '$lib/shared/icons/key-icon.svelte';
   import UserIcon from '$lib/shared/icons/user-icon.svelte';
   import SparklesIcon from '$lib/shared/icons/sparkles-icon.svelte';
+  import DiscordIcon from '$lib/shared/icons/discord-icon.svelte';
+  import YoutubeIcon from '$lib/shared/icons/youtube-icon.svelte';
+  import TwitterIcon from '$lib/shared/icons/twitter-icon.svelte';
+  import EnvelopeIcon from '$lib/shared/icons/envelope-icon.svelte';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 </script>
@@ -60,21 +64,11 @@
 </div>
 
 <!-- Socials & terms -->
-<div class="flex flex-col bg-gray-800">
-  <!-- Upgrade -->
-  <a
-    on:click={handleCloseMobileSidebar}
-    href="/settings"
-    class="w-full p-4 hover:bg-gray-700"
-  >
-    <div class="flex items-center gap-2 justify-start">
-      <SparklesIcon
-        overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`}
-      />
+<div class="flex gap-3 py-3 justify-center items-center bg-gray-800">
+  <span class="text-xs text-gray-500"> AI Chat Bestie © 2023 </span>
 
-      <div class="flex items-center">
-        <p class={`text-gray-700 group-hover:text-gray-900`}>Upgrade</p>
-      </div>
-    </div>
-  </a>
+  <DiscordIcon />
+  <YoutubeIcon />
+  <TwitterIcon />
+  <EnvelopeIcon />
 </div>

@@ -30,8 +30,7 @@
 </section>
 
 <!-- Content  -->
-<!-- <main class="min-h-[70vh] overflow-scroll"> -->
-<main class="relative w-full h-full md:pl-64">
+<main class="w-full h-full md:pl-64">
   <MobileHamburger />
   <div class="mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
     <Banners />

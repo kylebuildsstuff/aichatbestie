@@ -156,8 +156,8 @@
   };
 </script>
 
-<main class="relative flex flex-col justify-center items-center">
-  <section class="w-full">
+<main class="relative flex flex-col justify-center items-center overflow-scroll">
+  <section class="w-full max-w-md lg:max-w-2xl xl:max-w-4xl">
     <ul class="divide-y divide-gray-200 mb-8">
       {#if messages.length > 0}
         {#each messages?.filter?.(isNotSystemMessage) as message}
@@ -170,7 +170,7 @@
     </ul>
   </section>
 
-  <section class="w-full fixed bottom-0 mt-4 max-w-lg lg:max-w-2xl xl:max-w-4xl">
+  <section class="w-full fixed bottom-0 mt-4 max-w-md lg:max-w-2xl xl:max-w-4xl">
     <form>
       <!-- Loading text -->
       {#if isLoading}

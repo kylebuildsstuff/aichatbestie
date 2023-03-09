@@ -22,13 +22,13 @@
 </script>
 
 <main class="flex flex-1">
-  <section class="z-10 md:w-64">
+  <aside class="z-20 md:w-64">
     <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
     <MobileSidebar />
 
     <!-- Static sidebar for desktop -->
     <Sidebar />
-  </section>
+  </aside>
 
   <!-- Content  -->
   <section class="w-full">

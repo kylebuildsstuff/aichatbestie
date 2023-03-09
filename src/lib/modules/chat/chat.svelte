@@ -201,7 +201,7 @@
   </section>
 
   <section
-    class="w-full fixed bottom-0 mt-4 py-10 z-10 bg-white max-w-md lg:max-w-2xl xl:max-w-4xl"
+    class="w-full fixed bottom-0 mt-4 py-10 z-10 max-w-md lg:max-w-2xl xl:max-w-4xl bg-gradient-to-b from-transparent via-white to-white"
   >
     <form class="w-full flex flex-col gap-2">
       <!-- Loading text -->

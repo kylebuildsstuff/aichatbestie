@@ -1,5 +1,7 @@
 <script lang="ts">
   import { nanoid } from 'nanoid';
+  import { tick } from 'svelte';
+  import { browser } from '$app/environment';
 
   import LoadingButtonSpinnerIcon from '$lib/shared/icons/loading-button-spinner-icon.svelte';
   import PaperAirplane from '$lib/shared/icons/paper-airplane.svelte';
@@ -22,6 +24,7 @@
   } from '$lib/shared/shared.constant';
 
   import ChatMessage from './chat-message.svelte';
+  import { afterNavigate } from '$app/navigation';
 
   export let chatId = '';
 
@@ -37,6 +40,17 @@
   let isLoading = false;
 
   $: textareaRows = (inputMessage.match(/\n/g) || []).length + 1 || 1;
+
+  afterNavigate(async () => {
+    if (browser) {
+      // The tick is needed for some reason, if not here then below
+      await tick();
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  });
 
   /**
    * Resize textarea
@@ -129,6 +143,14 @@
     messages = messages.concat([userMessage]);
     upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
 
+    if (browser) {
+      await tick();
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+
     const response = await chatCompletion(_inputMessage, messages, $openAiApiKey$);
 
     messages = messages.concat(response);
@@ -152,11 +174,19 @@
       localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
     }
 
+    if (browser) {
+      await tick();
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+
     return response;
   };
 </script>
 
-<main class="relative flex flex-col justify-center items-center overflow-scroll">
+<main class="relative flex flex-col justify-center items-center overflow-auto">
   <section class="w-full max-w-md lg:max-w-2xl xl:max-w-4xl">
     <ul class="divide-y divide-gray-200 mb-8">
       {#if messages.length > 0}

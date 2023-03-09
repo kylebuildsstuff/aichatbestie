@@ -1,7 +1,9 @@
 <script lang="ts">
   import { getContext } from 'svelte';
 
-  import CogIcon from '$lib/shared/icons/cog-icon.svelte';
+  import KeyIcon from '$lib/shared/icons/key-icon.svelte';
+  import UserIcon from '$lib/shared/icons/user-icon.svelte';
+  import SparklesIcon from '$lib/shared/icons/sparkles-icon.svelte';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 </script>
@@ -14,7 +16,9 @@
     class="w-full p-4 hover:bg-gray-50"
   >
     <div class="flex items-center gap-2 justify-start">
-      <CogIcon />
+      <SparklesIcon
+        overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`}
+      />
 
       <div class="flex items-center">
         <p class={`text-base font-medium text-gray-700 group-hover:text-gray-900`}>
@@ -31,7 +35,7 @@
     class="w-full p-4 hover:bg-gray-50"
   >
     <div class="flex items-center gap-2 justify-start">
-      <CogIcon />
+      <KeyIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
 
       <div class="flex items-center">
         <p class={`text-base font-medium text-gray-700 group-hover:text-gray-900`}>
@@ -48,7 +52,7 @@
     class="w-full p-4 hover:bg-gray-50"
   >
     <div class="flex items-center gap-2 justify-start">
-      <CogIcon />
+      <UserIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
 
       <div class="flex items-center">
         <p class={`text-base font-medium text-gray-700 group-hover:text-gray-900`}>

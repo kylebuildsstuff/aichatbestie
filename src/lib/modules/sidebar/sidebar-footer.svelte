@@ -64,11 +64,23 @@
 </div>
 
 <!-- Socials & terms -->
-<div class="flex gap-3 py-3 justify-center items-center bg-gray-800">
-  <span class="text-xs text-gray-500"> AI Chat Bestie © 2023 </span>
+<div class="flex flex-col gap-1 py-3 justify-center items-center bg-gray-800">
+  <div class="flex flex-row gap-3 justify-center items-center text-gray-400 text-sm">
+    <DiscordIcon />
+    <YoutubeIcon />
+    <TwitterIcon />
+    <EnvelopeIcon />
+  </div>
 
-  <DiscordIcon />
-  <YoutubeIcon />
-  <TwitterIcon />
-  <EnvelopeIcon />
+  <div class="flex gap-1">
+    <span class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer"
+      >Privacy</span
+    >
+    <span class="text-xs text-gray-500"> · </span>
+    <span class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer"
+      >FAQs</span
+    >
+    <span class="text-xs text-gray-500"> · </span>
+    <span class="text-xs text-gray-500"> AI Chat Bestie © 2023</span>
+  </div>
 </div>

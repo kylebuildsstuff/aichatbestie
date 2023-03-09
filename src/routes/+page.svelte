@@ -5,14 +5,18 @@
   import Hero from '$lib/shared/components/hero.svelte';
   import Chat from '$lib/modules/chat/chat.svelte';
   import { banners$ } from '$lib/shared/shared.store';
+  import { ERROR } from '$lib/shared/shared.type';
 
   onMount(() => {
     banners$.update((state) => [
-      ...state.filter((banner) => banner.bannerId !== 'sss'),
+      ...state.filter(
+        (banner) => banner.bannerId !== ERROR.LOCAL_STORAGE_STORAGE_LIMIT_REACHED
+      ),
       {
-        bannerId: 'sss',
-        title: 'A problem occurred while changing plans',
-        description: 'Please refresh the page and try again later, or contact support.'
+        bannerId: ERROR.LOCAL_STORAGE_STORAGE_LIMIT_REACHED,
+        title: 'Browser storage running low',
+        description:
+          'Old chats will be overwritten, please delete unused chats to free up space.'
       }
     ]);
   });

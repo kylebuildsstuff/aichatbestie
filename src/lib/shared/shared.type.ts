@@ -11,6 +11,10 @@ export enum MESSAGE_ROLE {
   USER = 'user'
 }
 
+export enum ERROR {
+  LOCAL_STORAGE_STORAGE_LIMIT_REACHED = 'LOCAL_STORAGE_STORAGE_LIMIT_REACHED'
+}
+
 export type Message = {
   role: MESSAGE_ROLE;
   content: string;

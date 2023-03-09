@@ -21,7 +21,7 @@
   });
 </script>
 
-<section class="mb-4">
+<section>
   <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
   <MobileSidebar />
 
@@ -32,7 +32,7 @@
 <!-- Content  -->
 <main class="w-full h-full md:pl-64">
   <MobileHamburger />
-  <div class="mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-6xl">
     <Banners />
     <slot name="page-content" />
   </div>

@@ -6,7 +6,7 @@
   const name = role === 'assistant' ? 'Alfred' : 'Batman';
 </script>
 
-<li class="flex py-4">
+<li class="flex py-4 w-full">
   <img
     class="h-10 w-10 rounded-full"
     src={imgSrc}

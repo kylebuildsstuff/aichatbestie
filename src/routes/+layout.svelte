@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-  <title>AI Chat Bestie - UI Wrapper for ChatGPT</title>
+  <title>AI Chat Bestie - Enhanced UI Wrapper for ChatGPT</title>
   <meta
     name="description"
     content={'Enhance your ChatGPT experience with faster response times, customizable prompts, searchable history, and more.'}

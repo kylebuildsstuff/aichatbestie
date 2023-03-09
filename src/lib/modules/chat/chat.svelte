@@ -187,8 +187,10 @@
 </script>
 
 <main class="relative flex flex-col justify-center items-center overflow-auto">
-  <section class="w-full pb-16 mb-16 max-w-md lg:max-w-2xl xl:max-w-4xl">
-    <ul class="divide-y divide-gray-200 mb-8">
+  <section class="w-full pb-16 mb-16 bg-gray-100">
+    <ul
+      class="divide-y mx-auto divide-gray-200 mb-8 max-w-md lg:max-w-2xl xl:max-w-4xl"
+    >
       {#if messages.length > 0}
         {#each messages?.filter?.(isNotSystemMessage) as message}
           <ChatMessage

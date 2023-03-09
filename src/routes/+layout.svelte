@@ -17,16 +17,12 @@
   />
 </svelte:head>
 
-<div class="w-full h-full">
-  <Notifications item={_Toast}>
-    <Modal
-      closeButton={true}
-      unstyled={false}
-      styleWindow={{ width: '70%' }}
-    >
-      <div class="w-full h-full">
-        <slot />
-      </div>
-    </Modal>
-  </Notifications>
-</div>
+<Notifications item={_Toast}>
+  <Modal
+    closeButton={true}
+    unstyled={false}
+    styleWindow={{ width: '70%' }}
+  >
+    <slot />
+  </Modal>
+</Notifications>

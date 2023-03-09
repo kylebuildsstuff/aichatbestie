@@ -4,34 +4,48 @@
   import Fuse from 'fuse.js';
   import { goto } from '$app/navigation';
 
+  import MagnifyingGlassIcon from '$lib/shared/icons/magnifying-glass-icon.svelte';
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
   import { chatList$, chats$ } from '$lib/shared/shared.store';
   import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
   import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
 
   import SidebarChatItem from './sidebar-chat-item.svelte';
-  import MagnifyingGlassIcon from '$lib/shared/icons/magnifying-glass-icon.svelte';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 
   const chatListFuseOptions = {
     // Lower threshold = closer match
-    threshold: 0.4,
+    threshold: 0.3,
     keys: ['title']
   };
 
   const chatsFuseOptions = {
     // Lower threshold = closer match
-    threshold: 0.7,
+    threshold: 0.5,
     keys: ['messages.content']
   };
 
-  let searchRef;
+  let searchInput;
   let isSearchInputFocused = false;
-  let searchInput = '';
+  let searchQuery = '';
 
   $: chatListFuse = new Fuse($chatList$, chatListFuseOptions);
   $: chatsFuse = new Fuse(Object.values($chats$), chatsFuseOptions);
+
+  $: searchedChats = chatsFuse.search(searchQuery).map((result) => result.item);
+  $: searchedChatList = chatListFuse.search(searchQuery).map((result) => result.item);
+
+  $: matchedChatIds = [
+    ...new Set([
+      ...searchedChats.map((chat) => chat.chatId),
+      ...searchedChatList.map((chat) => chat.chatId)
+    ])
+  ];
+
+  $: chatList = searchQuery
+    ? $chatList$.filter((chat) => matchedChatIds.includes(chat.chatId))
+    : $chatList$;
 
   /**
    * Search
@@ -44,7 +58,7 @@
     if ((key === '/' || keyCode === 191) && !isSearchInputFocused) {
       event.stopPropagation();
       event.preventDefault();
-      searchRef?.focus?.();
+      searchInput?.focus?.();
     }
   };
 
@@ -101,8 +115,8 @@
         <MagnifyingGlassIcon />
       </div>
       <input
-        bind:value={searchInput}
-        bind:this={searchRef}
+        bind:value={searchQuery}
+        bind:this={searchInput}
         on:focus={handleSearchFocus}
         on:blur={handleSearchBlur}
         placeholder="Search"
@@ -118,7 +132,7 @@
       </div>
     </div>
 
-    {#each $chatList$ as { chatId: cId, title }, index}
+    {#each chatList as { chatId: cId, title }, index}
       <SidebarChatItem
         chatId={cId}
         {title}

@@ -18,6 +18,11 @@
     open(ApiKeyModal, {});
     handleCloseMobileSidebar();
   };
+
+  // const openAuthModal = () => {
+  //   open(AuthModal, {});
+  //   handleCloseMobileSidebar();
+  // };
 </script>
 
 <div class="flex flex-col border-t border-gray-500 bg-gray-800">
@@ -81,9 +86,9 @@
   </div>
 
   <div class="flex gap-1">
-    <span class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer"
-      >Privacy</span
-    >
+    <span class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer">
+      Privacy
+    </span>
     <span class="text-xs text-gray-500"> · </span>
     <span class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer"
       >FAQs</span

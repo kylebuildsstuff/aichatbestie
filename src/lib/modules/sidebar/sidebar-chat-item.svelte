@@ -57,7 +57,7 @@
     } catch (e: any) {
       banners$.update((banners) => {
         banners.push({
-          id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+          id: ERROR.LOCAL_STORAGE_SET_ITEM,
           bannerType: BANNER_TYPE.ERROR,
           title: 'Access to browser storage failed',
           description: e?.message || e?.name || ''
@@ -87,7 +87,7 @@
     } catch (e: any) {
       banners$.update((banners) => {
         banners.push({
-          id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+          id: ERROR.LOCAL_STORAGE_SET_ITEM,
           bannerType: BANNER_TYPE.ERROR,
           title: 'Access to browser storage failed',
           description: e?.message || e?.name || ''

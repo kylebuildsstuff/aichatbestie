@@ -1,5 +1,7 @@
 import { MESSAGE_ROLE } from './shared.type';
 
+export const LOGO_CDN_LINK = '';
+
 export const EMAIL_LINK = `mailto:aichatbestie@gmail.com`;
 export const DISCORD_LINK = `https://discord.gg/xDWFE3n6dc`;
 export const YOUTUBE_LINK = `https://www.youtube.com/@aichatbestie`;

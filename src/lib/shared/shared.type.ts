@@ -46,8 +46,11 @@ export enum BANNER_TYPE {
 }
 
 export enum ERROR {
-  LOCAL_STORAGE_SET_ITEM_FAILED = 'LOCAL_STORAGE_SET_ITEM_FAILED',
-  OPENAI_CHAT_COMPLETION_FAILED = 'OPENAI_CHAT_COMPLETION_FAILED'
+  LOCAL_STORAGE_SET_ITEM = 'LOCAL_STORAGE_SET_ITEM',
+  OPENAI_CHAT_COMPLETION = 'OPENAI_CHAT_COMPLETION',
+  REGISTRATION = 'REGISTRATION',
+  LOGIN = 'LOGIN',
+  PASSWORD_RESET = 'PASSWORD_RESET'
 }
 
 export type Message = {
@@ -200,4 +203,12 @@ export type UserSettings = {
 export type PromptProfile = {
   profileId: string;
   userId: string;
+};
+
+// In-memory only
+export type Banner = {
+  bannerId: string;
+  bannerType: BANNER_TYPE;
+  title: string;
+  description: string;
 };

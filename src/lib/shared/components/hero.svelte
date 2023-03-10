@@ -33,7 +33,7 @@
     },
     {
       title: 'Searchable chat history.',
-      description: `Dig up old conversations and find previously lost answers.`,
+      description: `Dig up old conversations and find lost answers.`,
       icon: MagnifyingGlassIcon
     },
     {

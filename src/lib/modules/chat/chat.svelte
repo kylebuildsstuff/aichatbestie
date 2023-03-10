@@ -310,9 +310,10 @@
             on:resize={handleTextareaResize}
             rows={textareaRows}
             disabled={!$openAiApiKey$}
+            placeholder={$openAiApiKey$ ? '' : 'Please enter your OpenAI API key first'}
             class={`${
-              !$openAiApiKey$ ? 'opacity-50' : ''
-            } w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow drop-shadow shado ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 overflow-y-auto`}
+              !$openAiApiKey$ ? 'opacity-50' : 'shadow drop-shadow'
+            } w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 overflow-y-auto`}
             on:keydown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -322,24 +323,29 @@
           />
 
           <!-- Send button -->
-          <button
-            on:click={handleChatCompletion}
-            disabled={!$openAiApiKey$}
-            type="submit"
-            class="absolute right-0 inset-y-0 py-2 pr-3"
-          >
-            <PaperAirplane />
-          </button>
+          {#if $openAiApiKey$}
+            <button
+              on:click={handleChatCompletion}
+              type="submit"
+              class="absolute right-0 inset-y-0 py-2 pr-3"
+            >
+              <PaperAirplane />
+            </button>
+          {/if}
         </div>
-        <button
-          on:click={handleCreateNewChat}
-          type="button"
-          title="Create new chat"
-        >
-          <PlusIcon
-            overrideClasses={'text-gray-400 hover:text-gray-500 hover:bg-gray-100 flex-shrink-0 h-6 w-6 rounded-md'}
-          />
-        </button>
+
+        <!-- New chat -->
+        {#if $openAiApiKey$}
+          <button
+            on:click={handleCreateNewChat}
+            type="button"
+            title="Create new chat"
+          >
+            <PlusIcon
+              overrideClasses={'text-gray-400 hover:text-gray-500 hover:bg-gray-100 flex-shrink-0 h-6 w-6 rounded-md'}
+            />
+          </button>
+        {/if}
       </div>
 
       <div class="text-xs text-center text-gray-400">

@@ -10,8 +10,7 @@
     chatCompletion,
     createNewChat,
     createNewChatListItem,
-    isNotSystemMessage,
-    resizeTextarea
+    isNotSystemMessage
   } from '$lib/shared/shared-utils';
   import { banners$, chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
   import {
@@ -34,6 +33,7 @@
   export let chatId = '';
 
   let isLoading = false;
+  let textareaRef;
   let inputMessage = '';
   let messages =
     chatId && $chats$?.[chatId] ? $chats$?.[chatId]?.messages : ([] as any);
@@ -55,10 +55,14 @@
   /**
    * Resize textarea
    */
-  function resizeTextArea(event) {
+  function resizeTextarea(event) {
     event.target.style.height = 'auto';
     event.target.style.height = event.target.scrollHeight + 'px';
   }
+
+  const resetTextareaHeight = () => {
+    textareaRef.style.height = 'auto';
+  };
 
   /**
    * Create new chat (and navigate to it)
@@ -271,6 +275,7 @@
     let requiresChatTitle = !messages?.length || messages?.length === 1;
     const _inputMessage = inputMessage;
     inputMessage = '';
+    resetTextareaHeight();
 
     const userMessage = {
       role: MESSAGE_ROLE.USER,
@@ -418,9 +423,9 @@
           class="relative w-full flex justify-center items-center max-w-md lg:max-w-2xl xl:max-w-4xl"
         >
           <textarea
+            bind:this={textareaRef}
             bind:value={inputMessage}
-            use:resizeTextarea
-            on:input={resizeTextArea}
+            on:input={resizeTextarea}
             rows={1}
             disabled={!$openAiApiKey$}
             placeholder={$openAiApiKey$ ? '' : 'Please enter your OpenAI API key first'}

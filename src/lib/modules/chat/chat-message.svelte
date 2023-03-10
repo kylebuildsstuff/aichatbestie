@@ -7,7 +7,7 @@
   const imgSrc = role === 'assistant' ? '/alfred-headshot.png' : '/batman-headshot.png';
 </script>
 
-<li class="w-full mx-auto flex py-5 max-w-md lg:max-w-2xl xl:max-w-4xl">
+<li class="w-full mx-auto flex py-6 max-w-md lg:max-w-2xl xl:max-w-4xl">
   <img
     class="h-10 w-10 rounded-md"
     src={imgSrc}

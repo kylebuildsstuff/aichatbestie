@@ -23,10 +23,11 @@
     CHAT_LABELLING_PROMPT,
     DEFAULT_SYSTEM_MESSAGE_CONTENT
   } from '$lib/shared/shared.constant';
-
-  import ChatMessage from './chat-message.svelte';
   import ArrowPathIcon from '$lib/shared/icons/arrow-path-icon.svelte';
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
+  import Hero from '$lib/shared/components/hero.svelte';
+
+  import ChatMessage from './chat-message.svelte';
 
   export let chatId = '';
 
@@ -34,13 +35,10 @@
   let messages =
     chatId && $chats$?.[chatId] ? $chats$?.[chatId]?.messages : ([] as any);
 
-  $: {
-    console.log('messages: ', messages);
-  }
-
   let textareaRef;
   let isLoading = false;
 
+  $: hasMessages = messages.filter(isNotSystemMessage).length > 0;
   $: textareaRows = (inputMessage.match(/\n/g) || []).length + 1 || 1;
   $: enableRegenerateMessage = !isLoading && messages.length > 2;
 
@@ -247,6 +245,10 @@
   };
 </script>
 
+{#if !hasMessages}
+  <Hero />
+{/if}
+
 <section class="relative flex flex-col justify-center items-center">
   <!-- Messages -->
   <div class="w-full pb-16 mb-16 ">
@@ -333,7 +335,13 @@
       </div>
 
       <div class="text-xs text-center text-gray-400">
-        AI Chat Bestie - an enhanced UI wrapper for ChatGPT
+        <a
+          href="/"
+          class="hover:font-medium hover:underline hover:text-blue-400"
+        >
+          AI Chat Bestie
+        </a>
+        - an enhanced UI wrapper for ChatGPT
       </div>
     </form>
   </div>

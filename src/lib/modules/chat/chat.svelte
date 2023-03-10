@@ -33,15 +33,12 @@
 
   export let chatId = '';
 
+  let isLoading = false;
   let inputMessage = '';
   let messages =
     chatId && $chats$?.[chatId] ? $chats$?.[chatId]?.messages : ([] as any);
 
-  let textareaRef;
-  let isLoading = false;
-
   $: hasMessages = messages.filter(isNotSystemMessage).length > 0;
-  $: textareaRows = (inputMessage.match(/\n/g) || []).length + 1 || 1;
   $: enableRegenerateMessage = !isLoading && messages.length > 2;
 
   afterNavigate(async () => {
@@ -58,9 +55,10 @@
   /**
    * Resize textarea
    */
-  const handleTextareaResize = (e) => {
-    textareaRef = e.target;
-  };
+  function resizeTextArea(event) {
+    event.target.style.height = 'auto';
+    event.target.style.height = event.target.scrollHeight + 'px';
+  }
 
   /**
    * Create new chat (and navigate to it)
@@ -420,16 +418,15 @@
           class="relative w-full flex justify-center items-center max-w-md lg:max-w-2xl xl:max-w-4xl"
         >
           <textarea
-            bind:this={textareaRef}
             bind:value={inputMessage}
             use:resizeTextarea
-            on:resize={handleTextareaResize}
-            rows={textareaRows}
+            on:input={resizeTextArea}
+            rows={1}
             disabled={!$openAiApiKey$}
             placeholder={$openAiApiKey$ ? '' : 'Please enter your OpenAI API key first'}
             class={`${
               !$openAiApiKey$ ? 'opacity-50' : 'shadow drop-shadow'
-            } w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 overflow-y-auto`}
+            } resize-none w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 overflow-y-auto`}
             on:keydown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();

@@ -54,7 +54,7 @@
    */
   // const handleKeydown = (event) => {
   //   const key = event.key;
-  //   // keyCode is deprecated, and event.code
+  //   // keyCode is deprecated and not specific enough, and event.code
   //   // const keyCode = event.keyCode;
 
   //   if (

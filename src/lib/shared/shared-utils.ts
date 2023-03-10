@@ -127,7 +127,7 @@ export const chatCompletion = async (
   return completionMessage;
 };
 
-export const truncateString = (str: string, cutLength = 20) => {
+export const truncateString = (str: string, cutLength = 18) => {
   const truncated = str.substring(0, cutLength);
 
   return truncated.length < str.length ? `${truncated}...` : truncated;

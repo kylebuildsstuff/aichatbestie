@@ -6,7 +6,6 @@
   import IdentificationIcon from '../icons/identification-icon.svelte';
   import MagnifyingGlassIcon from '../icons/magnifying-glass-icon.svelte';
   import WifiIcon from '../icons/wifi-icon.svelte';
-  import XMarkIcon from '../icons/x-mark-icon.svelte';
   import { truncateStringInMiddle } from '../shared-utils';
   import { openAiApiKey$ } from '../shared.store';
 
@@ -53,10 +52,10 @@
   };
 </script>
 
-<div class="bg-white sm:py-24">
+<div class="bg-white py-12">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:text-center">
-      <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
         AI Chat
         <span
           class="inline-block bg-gradient-to-r from-cyan-400 to-emerald-400 text-transparent bg-clip-text"
@@ -64,15 +63,15 @@
           Bestie
         </span>
       </p>
-      <p class="mt-6 text-lg leading-8 text-gray-600">
+      <p class="mt-3 text-lg leading-8 text-gray-600">
         An enhanced UI wrapper for ChatGPT
       </p>
     </div>
 
     <!-- Features -->
-    <div class="mx-auto mt-16 max-w-7xl px-6 sm:mt-20 md:mt-24 lg:px-8">
+    <div class="flex justify-center mx-auto mt-16 md:mt-20 max-w-xl lg:max-w-4xl">
       <dl
-        class="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-10 text-base leading-7 text-gray-600 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16"
+        class="mx-auto grid grid-cols-1 gap-x-6 gap-y-10 text-base leading-7 text-gray-600 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16"
       >
         {#each features as { title, description, icon }}
           <HeroFeature
@@ -85,14 +84,13 @@
           </HeroFeature>
         {/each}
       </dl>
-
-      <button
-        on:click={openApiKeyModal}
-        type="button"
-        class="rounded-full bg-indigo-600 py-2.5 px-4 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      >
-        {$openAiApiKey$ ? truncateStringInMiddle($openAiApiKey$) : `Enter API key`}
-      </button>
     </div>
+    <button
+      on:click={openApiKeyModal}
+      type="button"
+      class="rounded-full bg-indigo-600 py-2.5 px-4 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    >
+      {$openAiApiKey$ ? truncateStringInMiddle($openAiApiKey$) : `Enter API key`}
+    </button>
   </div>
 </div>

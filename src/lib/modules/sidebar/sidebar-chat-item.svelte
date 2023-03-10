@@ -90,7 +90,7 @@
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   type="button"
-  class={`w-full text-gray-300 hover:bg-gray-700 group flex items-center px-2 py-3 text-sm font-medium rounded-md ${
+  class={`relative w-full text-gray-300 hover:bg-gray-700 group flex items-center px-2 py-3 text-sm font-medium rounded-md ${
     chatId === $page$?.params?.chatId ? ` bg-gray-600` : ''
   }`}
 >

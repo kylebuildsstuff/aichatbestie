@@ -6,8 +6,8 @@
   import Toast from '$lib/modules/toast/toast.svelte';
   import { nhost } from '$lib/core/nhost/nhost';
   import { BANNER_TYPE, ERROR, NHOST_AUTH_STATE } from '$lib/shared/shared.type';
-  import { fetchUserSettingsQuery } from '$lib/shared/shared.graphql';
-  import { banners$, userSettings$ } from '$lib/shared/shared.store';
+  import { fetchUserDataQuery } from '$lib/shared/shared.graphql';
+  import { banners$, user$, userSettings$ } from '$lib/shared/shared.store';
 
   import '../app.css';
 
@@ -19,7 +19,7 @@
       const userId = session?.user?.id;
 
       if (isSignedIn && userId) {
-        const { data, error } = await nhost.graphql.request(fetchUserSettingsQuery, {
+        const { data, error } = await nhost.graphql.request(fetchUserDataQuery, {
           userId
         });
 
@@ -36,6 +36,7 @@
         }
 
         if (data) {
+          user$.set(data.user || {});
           userSettings$.set(data.userSettingsByPk || {});
         }
       }

@@ -16,10 +16,14 @@ isUpgraded`;
  * QUERIES ==================================================
  * //////////////////////////////////////////////////////////
  */
-export const fetchUserSettingsQuery = `
+export const fetchUserDataQuery = `
   query FetchUserSettings (
     $userId: uuid!
   ) {
+    user(id: $userId) {
+      ${userFields}
+    }
+
     userSettingsByPk(userId: $userId) {
       ${userSettingsFields}
     }

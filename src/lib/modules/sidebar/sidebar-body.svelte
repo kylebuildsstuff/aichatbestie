@@ -101,7 +101,7 @@
     <!-- New chat -->
     <button
       on:click={handleCreateNewChat}
-      class={`w-full text-gray-300 hover:bg-gray-500 flex items-center px-2 py-3 text-sm font-medium rounded-md mb-3 shadow-sm ring-1 ring-inset ring-gray-400 `}
+      class={`w-full text-gray-300 hover:bg-gray-500 flex items-center px-2 py-3 text-sm font-medium rounded-md mb-2 shadow-sm ring-1 ring-inset ring-gray-400 `}
     >
       <PlusIcon
         overrideClasses={'text-gray-400 hover:text-gray-500 mr-3 flex-shrink-0 h-5 w-5'}
@@ -110,7 +110,7 @@
     </button>
 
     <!-- Search -->
-    <div class="relative flex flex-grow items-stretch focus-within">
+    <div class="relative flex flex-grow">
       <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
         <MagnifyingGlassIcon overrideClasses={`h-5 w-5 text-gray-400`} />
       </div>

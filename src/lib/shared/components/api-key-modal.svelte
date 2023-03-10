@@ -57,6 +57,16 @@
       placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       class={`block w-full text-sm mt-1 pl-3 pr-10 py-2 rounded border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 flex-1`}
     />
+    <p class="mt-1 text-sm text-gray-600">
+      <a
+        href="https://beta.openai.com/docs/developer-quickstart"
+        class="text-gray-400 hover:underline hover:text-blue-400"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Get your API key for free from OpenAI.
+      </a>
+    </p>
   </div>
 
   <div class="pt-5">

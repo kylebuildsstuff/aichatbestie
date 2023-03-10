@@ -133,7 +133,7 @@ export const truncateString = (str: string, cutLength = 18) => {
   return truncated.length < str.length ? `${truncated}...` : truncated;
 };
 
-export const truncateStringInMiddle = (str: string, cutLength = 3) => {
+export const truncateStringInMiddle = (str: string, cutLength = 4) => {
   const cutStart = str.substring(0, cutLength);
   const cutEnd = str.substring(str.length - cutLength, str.length);
   return `${cutStart}...${cutEnd}`;

@@ -1,13 +1,11 @@
 <script lang="ts">
   import { getContext, setContext } from 'svelte';
   import { writable } from 'svelte/store';
-  import { getNotificationsContext } from 'svelte-notifications';
 
   import Register from './register/register.svelte';
   import Login from './login/login.svelte';
 
   const { close } = getContext('simple-modal') as any;
-  const { addNotification } = getNotificationsContext();
 
   let isRegistering$ = writable(true);
   let registerBag$ = writable({} as any);

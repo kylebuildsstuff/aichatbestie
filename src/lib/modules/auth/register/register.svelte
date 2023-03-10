@@ -1,8 +1,7 @@
 <script lang="ts">
   import { createForm } from 'felte';
   import { getNotificationsContext } from 'svelte-notifications';
-  import { getContext, onMount } from 'svelte';
-  import { invalidateAll } from '$app/navigation';
+  import { getContext, onDestroy, onMount } from 'svelte';
 
   import { nhost } from '$lib/core/nhost/nhost';
   import { NOTIFICATION_SETTINGS } from '$lib/shared/shared.constant';
@@ -65,12 +64,11 @@
         )) as any;
 
         if (!userSettingsError) {
-          await invalidateAll();
-          close();
           addNotification({
             ...NOTIFICATION_SETTINGS,
             text: 'Account created'
           });
+          close();
           // await nhost.auth.sendVerificationEmail({
           //   email,
           //   options: {

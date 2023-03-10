@@ -16,6 +16,15 @@ isUpgraded`;
  * QUERIES ==================================================
  * //////////////////////////////////////////////////////////
  */
+export const fetchUserSettingsQuery = `
+  query FetchUserSettings (
+    $userId: uuid!
+  ) {
+    userSettingsByPk(userId: $userId) {
+      ${userSettingsFields}
+    }
+  }
+`;
 
 /**
  * //////////////////////////////////////////////////////////

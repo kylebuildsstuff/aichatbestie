@@ -2,7 +2,6 @@
   import { getContext, onMount } from 'svelte';
   import { createForm } from 'felte';
   import { getNotificationsContext } from 'svelte-notifications';
-  import { invalidateAll } from '$app/navigation';
 
   import { nhost } from '$lib/core/nhost/nhost';
 
@@ -75,12 +74,11 @@
       });
 
       if (session) {
-        await invalidateAll();
-        close();
         addNotification({
           ...NOTIFICATION_SETTINGS,
           text: 'Sign in successful'
         });
+        close();
       }
 
       if (error) {
@@ -123,7 +121,7 @@
       </div>
     </div>
 
-    <div class="mt-4 flex items-center justify-between">
+    <div class="mt-4 flex flex-wrap gap-2 items-center justify-between">
       <!-- Signup -->
       <p class="text-center text-sm text-gray-600">
         Don't have an account?

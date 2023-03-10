@@ -1,3 +1,8 @@
+export enum NHOST_AUTH_STATE {
+  SIGNED_IN = 'SIGNED_IN',
+  SIGNED_OUT = 'SIGNED_OUT'
+}
+
 export enum HASURA_ROLE {
   USER = 'user',
   HASURA = 'hasura'
@@ -50,7 +55,8 @@ export enum ERROR {
   OPENAI_CHAT_COMPLETION = 'OPENAI_CHAT_COMPLETION',
   REGISTRATION = 'REGISTRATION',
   LOGIN = 'LOGIN',
-  PASSWORD_RESET = 'PASSWORD_RESET'
+  PASSWORD_RESET = 'PASSWORD_RESET',
+  USER_DATA_FETCH = 'USER_DATA_FETCH'
 }
 
 export type Message = {
@@ -73,12 +79,12 @@ export type Chat = {
 /**
  * Bound to stripe products, appears in completed-checkout webhook
  */
-type CheckoutSessionMetadata = {
-  // app_subscription_type?: APP_SUBSCRIPTION_TYPE;
-  // metadata behaves like .env, values are strings
-  // is_PREPAID?: string;
-  // characters: number;
-};
+// type CheckoutSessionMetadata = {
+//   // app_subscription_type?: APP_SUBSCRIPTION_TYPE;
+//   // metadata behaves like .env, values are strings
+//   // is_PREPAID?: string;
+//   // characters: number;
+// };
 
 // https://stripe.com/docs/api/checkout/sessions/object
 type CheckoutSession = {

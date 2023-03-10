@@ -1,14 +1,14 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import BoltIcon from '../icons/bolt-icon.svelte';
-  import CircleStackIcon from '../icons/circle-stack-icon.svelte';
-  import GiftIcon from '../icons/gift-icon.svelte';
-  import IdentificationIcon from '../icons/identification-icon.svelte';
-  import KeyIcon from '../icons/key-icon.svelte';
-  import MagnifyingGlassIcon from '../icons/magnifying-glass-icon.svelte';
-  import WifiIcon from '../icons/wifi-icon.svelte';
-  import { truncateStringInMiddle } from '../shared-utils';
-  import { openAiApiKey$ } from '../shared.store';
+  import BoltIcon from '$lib/shared/icons/bolt-icon.svelte';
+  import CircleStackIcon from '$lib/shared/icons/circle-stack-icon.svelte';
+  import GiftIcon from '$lib/shared/icons/gift-icon.svelte';
+  import IdentificationIcon from '$lib/shared/icons/identification-icon.svelte';
+  import KeyIcon from '$lib/shared/icons/key-icon.svelte';
+  import MagnifyingGlassIcon from '$lib/shared/icons/magnifying-glass-icon.svelte';
+  import WifiIcon from '$lib/shared/icons/wifi-icon.svelte';
+  import { truncateStringInMiddle } from '$lib/shared/shared-utils';
+  import { openAiApiKey$ } from '$lib/shared/shared.store';
 
   import ApiKeyModal from './api-key-modal.svelte';
   import HeroFeature from './hero-feature.svelte';

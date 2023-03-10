@@ -1,19 +1,45 @@
 <script>
+  import { onMount } from 'svelte';
   import Notifications from 'svelte-notifications';
   import Modal from 'svelte-simple-modal';
 
   import Toast from '$lib/modules/toast/toast.svelte';
+  import { nhost } from '$lib/core/nhost/nhost';
+  import { BANNER_TYPE, ERROR, NHOST_AUTH_STATE } from '$lib/shared/shared.type';
+  import { fetchUserSettingsQuery } from '$lib/shared/shared.graphql';
+  import { banners$, userSettings$ } from '$lib/shared/shared.store';
 
   import '../app.css';
-  import { onMount } from 'svelte';
-  import { nhost } from '$lib/core/nhost/nhost';
 
   let _Toast = Toast;
 
-  onMount(async () => {
-    let session = nhost.auth.getSession();
+  onMount(() => {
+    nhost.auth.onAuthStateChanged(async (event, session) => {
+      const isSignedIn = event === NHOST_AUTH_STATE.SIGNED_IN;
+      const userId = session?.user?.id;
 
-    console.log('session: ', session);
+      if (isSignedIn && userId) {
+        const { data, error } = await nhost.graphql.request(fetchUserSettingsQuery, {
+          userId
+        });
+
+        if (error) {
+          banners$.update((state) => [
+            ...state.filter((banner) => banner.bannerId !== ERROR.USER_DATA_FETCH),
+            {
+              bannerId: ERROR.USER_DATA_FETCH,
+              bannerType: BANNER_TYPE.ERROR,
+              title: 'An error occurred while fetching your account',
+              description: ''
+            }
+          ]);
+        }
+
+        if (data) {
+          userSettings$.set(data.userSettingsByPk || {});
+        }
+      }
+    });
   });
 </script>
 

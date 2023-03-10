@@ -13,8 +13,10 @@
     isNotSystemMessage,
     resizeTextarea
   } from '$lib/shared/shared-utils';
-  import { chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
+  import { banners$, chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
   import {
+    BANNER_TYPE,
+    ERROR,
     LOCAL_STORAGE_KEY,
     MESSAGE_ROLE,
     type Message
@@ -138,7 +140,7 @@
       msgs,
       $openAiApiKey$
     ).then((res) =>
-      res
+      res?.data
         .map((r) => r.content)
         .map((r) => r.replace('Title:', ''))
         .map((r) => r.trim())
@@ -167,9 +169,34 @@
       });
     }
 
-    const response = await chatCompletion(_inputMessage, messages, $openAiApiKey$);
+    const { data, error } = await chatCompletion(
+      _inputMessage,
+      messages,
+      $openAiApiKey$
+    );
 
-    messages = messages.concat(response);
+    if (error) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.OPENAI_CHAT_COMPLETION_FAILED,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Request to OpenAI failed',
+          description: error?.message || ''
+        });
+        return banners;
+      });
+      isLoading = false;
+      if (browser) {
+        await tick();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+      return;
+    }
+
+    messages = messages.concat(data);
     upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
     isLoading = false;
 
@@ -181,7 +208,7 @@
       });
     }
 
-    return response;
+    return;
   };
 
   /**
@@ -214,9 +241,37 @@
       });
     }
 
-    const response = await chatCompletion(_inputMessage, messages, $openAiApiKey$);
+    const { data, error } = (await chatCompletion(
+      _inputMessage,
+      messages,
+      $openAiApiKey$
+    ).catch((err) => {
+      console.error(err);
+      return err;
+    })) as any;
 
-    messages = messages.concat(response);
+    if (error) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.OPENAI_CHAT_COMPLETION_FAILED,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Request to OpenAI failed',
+          description: error?.message || ''
+        });
+        return banners;
+      });
+      isLoading = false;
+      if (browser) {
+        await tick();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+      return;
+    }
+
+    messages = messages.concat(data);
     upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
     isLoading = false;
 
@@ -245,7 +300,7 @@
       });
     }
 
-    return response;
+    return;
   };
 </script>
 

@@ -49,18 +49,24 @@
 
   /**
    * Search
+   *
+   * Too many conflicts with actual usage of "/"
    */
-  const handleKeydown = (event) => {
-    const key = event.key;
-    const keyCode = event.keyCode;
+  // const handleKeydown = (event) => {
+  //   const key = event.key;
+  //   // keyCode is deprecated, and event.code
+  //   // const keyCode = event.keyCode;
 
-    // "s" key
-    if ((key === '/' || keyCode === 191) && !isSearchInputFocused) {
-      event.stopPropagation();
-      event.preventDefault();
-      searchInput?.focus?.();
-    }
-  };
+  //   if (
+  //     (event.code === 'Slash' || key === '/') &&
+  //     !event.shiftKey &&
+  //     !isSearchInputFocused
+  //   ) {
+  //     event.stopPropagation();
+  //     event.preventDefault();
+  //     searchInput?.focus?.();
+  //   }
+  // };
 
   const handleSearchFocus = () => {
     isSearchInputFocused = true;
@@ -94,7 +100,7 @@
   };
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<!-- <svelte:window on:keydown={handleKeydown} /> -->
 
 <div class="flex flex-1 flex-col overflow-auto">
   <nav class="flex-1 px-2 py-3 bg-gray-800 space-y-1">
@@ -124,12 +130,12 @@
         name="search"
         class="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
       />
-      <div class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+      <!-- <div class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
         <kbd
           class="inline-flex items-center rounded border border-gray-200 px-2 font-sans text-xs text-gray-400"
           >/</kbd
         >
-      </div>
+      </div> -->
     </div>
 
     {#each chatList as { chatId: cId, title }, index}

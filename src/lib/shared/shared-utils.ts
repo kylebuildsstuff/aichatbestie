@@ -115,16 +115,30 @@ export const chatCompletion = async (
     method: 'POST',
     headers: completionHeaders,
     body: JSON.stringify(completionBody)
-  })
-    .then(throwIfHttpError)
-    .then(readResponseStreamAsJson);
+  }).then(readResponseStreamAsJson);
+
+  const { error } = completion;
 
   const completionMessage = completion?.choices?.map?.((choice) => ({
     role: choice.message?.role,
     content: choice.message?.content
   }));
 
-  return completionMessage;
+  /**
+   * success: { choices: [...], usage: {...}, created: number, model, object }
+   * error: { code}
+   */
+  return error
+    ? { error, data: null }
+    : completionMessage
+    ? { data: completionMessage, error: null }
+    : {
+        data: null,
+        error: {
+          code: 'unknown',
+          message: 'Request to OpenAI failed'
+        }
+      };
 };
 
 export const truncateString = (str: string, cutLength = 18) => {

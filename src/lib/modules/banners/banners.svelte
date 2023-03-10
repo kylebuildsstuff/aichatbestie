@@ -9,9 +9,10 @@
 
 {#if $hasBanners$}
   <div class="my-4">
-    {#each $banners$ as { bannerId, title, description }}
+    {#each $banners$ as { bannerId, bannerType, title, description }}
       <Banner
         {bannerId}
+        {bannerType}
         {title}
         {description}
       />

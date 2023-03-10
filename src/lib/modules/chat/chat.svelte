@@ -188,6 +188,10 @@
    * Chat completion
    */
   const handleChatCompletion = async () => {
+    if (isLoading) {
+      return;
+    }
+
     isLoading = true;
     // Means only system message is present
     let requiresChatTitle = !messages?.length || messages?.length === 1;

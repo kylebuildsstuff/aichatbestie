@@ -4,7 +4,6 @@
   const classes = overrideClasses
     ? overrideClasses
     : 'absolute top-1 left-1 h-5 w-5 text-indigo-600';
-  // const classes = overrideClasses ? overrideClasses : 'h-5 w-5 text-gray-400';
 </script>
 
 <svg
@@ -18,6 +17,6 @@
   <path
     stroke-linecap="round"
     stroke-linejoin="round"
-    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+    d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
   />
 </svg>

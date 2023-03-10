@@ -55,7 +55,7 @@
   <!-- Joins -->
   <a
     on:click={handleCloseMobileSidebar}
-    href="/settings"
+    href="/register"
     class="w-full p-4 hover:bg-gray-700"
   >
     <div class="flex items-center gap-2 justify-start">

@@ -23,3 +23,44 @@ configuration:
     update: updateUserSettings
     update_by_pk: updateUserSettingsByPk
     update_many: updateUserSettingsMany
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      columns:
+        - is_upgraded
+        - user_id
+select_permissions:
+  - role: hasura
+    permission:
+      columns:
+        - is_upgraded
+        - user_id
+      filter: {}
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - is_upgraded
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - is_upgraded
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id

@@ -26,3 +26,86 @@ configuration:
     update: updateStripeEvent
     update_by_pk: updateStripeEventByPk
     update_many: updateStripeEventMany
+insert_permissions:
+  - role: hasura
+    permission:
+      check: {}
+      columns:
+        - created
+        - livemode
+        - pending_webhooks
+        - data
+        - request
+        - api_version
+        - id
+        - object
+        - type
+        - user_id
+  - role: user
+    permission:
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      columns:
+        - created
+        - livemode
+        - pending_webhooks
+        - data
+        - request
+        - api_version
+        - id
+        - object
+        - type
+        - user_id
+select_permissions:
+  - role: hasura
+    permission:
+      columns:
+        - created
+        - livemode
+        - pending_webhooks
+        - data
+        - request
+        - api_version
+        - id
+        - object
+        - type
+        - user_id
+      filter: {}
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - created
+        - livemode
+        - pending_webhooks
+        - data
+        - request
+        - api_version
+        - id
+        - object
+        - type
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - created
+        - livemode
+        - pending_webhooks
+        - data
+        - request
+        - api_version
+        - id
+        - object
+        - type
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id

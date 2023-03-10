@@ -1,0 +1,1 @@
+CREATE TABLE "public"."user_settings" ("user_id" UUID NOT NULL, "is_upgraded" boolean NOT NULL DEFAULT false, PRIMARY KEY ("user_id") , FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON UPDATE cascade ON DELETE cascade);

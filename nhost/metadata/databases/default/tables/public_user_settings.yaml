@@ -1,0 +1,25 @@
+table:
+  name: user_settings
+  schema: public
+configuration:
+  column_config:
+    is_upgraded:
+      custom_name: isUpgraded
+    user_id:
+      custom_name: userId
+  custom_column_names:
+    is_upgraded: isUpgraded
+    user_id: userId
+  custom_name: userSettings
+  custom_root_fields:
+    delete: deleteUserSettings
+    delete_by_pk: deleteUserSettingsByPk
+    insert: insertUserSettings
+    insert_one: insertUserSettingsOne
+    select: userSettings
+    select_aggregate: userSettingsAggregate
+    select_by_pk: userSettingsByPk
+    select_stream: userSettingsStream
+    update: updateUserSettings
+    update_by_pk: updateUserSettingsByPk
+    update_many: updateUserSettingsMany

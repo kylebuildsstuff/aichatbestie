@@ -1,0 +1,28 @@
+table:
+  name: stripe_event
+  schema: public
+configuration:
+  column_config:
+    api_version:
+      custom_name: apiVersion
+    pending_webhooks:
+      custom_name: pendingWebhooks
+    user_id:
+      custom_name: userId
+  custom_column_names:
+    api_version: apiVersion
+    pending_webhooks: pendingWebhooks
+    user_id: userId
+  custom_name: stripeEvent
+  custom_root_fields:
+    delete: deleteStripeEvent
+    delete_by_pk: deleteStripeEventByPk
+    insert: insertStripeEvent
+    insert_one: insertStripeEventOne
+    select: stripeEvent
+    select_aggregate: stripeEventAggregate
+    select_by_pk: stripeEventByPk
+    select_stream: stripeEventStream
+    update: updateStripeEvent
+    update_by_pk: updateStripeEventByPk
+    update_many: updateStripeEventMany

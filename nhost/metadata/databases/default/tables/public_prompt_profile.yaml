@@ -1,0 +1,25 @@
+table:
+  name: prompt_profile
+  schema: public
+configuration:
+  column_config:
+    profile_id:
+      custom_name: profileId
+    user_id:
+      custom_name: userId
+  custom_column_names:
+    profile_id: profileId
+    user_id: userId
+  custom_name: promptProfile
+  custom_root_fields:
+    delete: deletePromptProfile
+    delete_by_pk: deletePromptProfileByPk
+    insert: insertPromptProfile
+    insert_one: insertPromptProfileOne
+    select: promptProfile
+    select_aggregate: promptProfileAggregate
+    select_by_pk: promptProfileByPk
+    select_stream: promptProfileStream
+    update: updatePromptProfile
+    update_by_pk: updatePromptProfileByPk
+    update_many: updatePromptProfileMany

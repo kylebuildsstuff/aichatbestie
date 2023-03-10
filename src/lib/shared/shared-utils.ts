@@ -182,14 +182,7 @@ export const isNotSystemMessage = (message: Message) => {
   return message?.role !== MESSAGE_ROLE.SYSTEM;
 };
 
-// export const scrollToBottom = (node) => {
-//   console.log('scrollToBottom', node.scrollHeight);
-//   const scroll = () =>
-//     node.scroll({
-//       top: node.scrollHeight,
-//       behavior: 'smooth'
-//     });
-//   scroll();
-
-//   return { update: scroll };
-// };
+// Svelte action
+export function autofocus(el: any) {
+  el.focus();
+}

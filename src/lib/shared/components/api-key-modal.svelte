@@ -1,8 +1,10 @@
 <script lang="ts">
   import { onMount, getContext } from 'svelte';
   import { getNotificationsContext } from 'svelte-notifications';
+
   import { NOTIFICATION_SETTINGS } from '../shared.constant';
   import { openAiApiKey$ } from '../shared.store';
+  import { autofocus } from '../shared-utils';
 
   import { LOCAL_STORAGE_KEY } from '../shared.type';
 
@@ -51,6 +53,7 @@
     </label>
     <input
       bind:value={opneAiApiKey}
+      use:autofocus
       id="open-ai-key"
       name="open-ai-key"
       type="text"

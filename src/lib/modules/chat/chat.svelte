@@ -78,8 +78,20 @@
       return chats;
     });
 
-    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
-    localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+      localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
 
     goto(`/chat/${newChatId}`);
   };
@@ -104,8 +116,20 @@
       return chats;
     });
 
-    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
-    localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+      localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
   };
 
   /**
@@ -116,7 +140,19 @@
       chats[id].messages = msgs;
       return chats;
     });
-    localStorage.setItem(id, JSON.stringify($chats$[id]));
+    try {
+      localStorage.setItem(id, JSON.stringify($chats$[id]));
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
   };
 
   const upsertChat = (
@@ -135,17 +171,30 @@
    * Chat title completion
    */
   const chatTitleCompletion = async (msgs) => {
-    const title = await chatCompletion(
+    const { data, error } = await chatCompletion(
       CHAT_LABELLING_PROMPT,
       msgs,
       $openAiApiKey$
-    ).then((res) =>
-      res?.data
-        .map((r) => r.content)
-        .map((r) => r.replace('Title:', ''))
-        .map((r) => r.trim())
-        .join('')
     );
+
+    if (error) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.OPENAI_CHAT_COMPLETION_FAILED,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Request to OpenAI failed',
+          description: error?.message || ''
+        });
+        return banners;
+      });
+      return;
+    }
+
+    const title = data
+      .map((r) => r.content)
+      .map((r) => r.replace('Title:', ''))
+      .map((r) => r.trim())
+      .join('');
 
     return title;
   };
@@ -289,7 +338,19 @@
         });
         return chatList;
       });
-      localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+      try {
+        localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+      } catch (e: any) {
+        banners$.update((banners) => {
+          banners.push({
+            id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+            bannerType: BANNER_TYPE.ERROR,
+            title: 'Access to browser storage failed',
+            description: e?.message || e?.name || ''
+          });
+          return banners;
+        });
+      }
     }
 
     if (browser) {

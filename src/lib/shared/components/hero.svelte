@@ -100,7 +100,7 @@
       {$openAiApiKey$ ? truncateStringInMiddle($openAiApiKey$) : `Enter API key`}
     </button>
     <!-- Help text to get key -->
-    <p class="mt-2 text-sm text-gray-600">
+    <p class="mt-2 text-xs text-gray-600">
       <a
         href="https://beta.openai.com/docs/developer-quickstart"
         class="text-gray-400 hover:underline hover:text-blue-400"

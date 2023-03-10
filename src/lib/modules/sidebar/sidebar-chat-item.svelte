@@ -5,8 +5,8 @@
 
   import ChatBubbleLeftIcon from '$lib/shared/icons/chat-bubble-left-icon.svelte';
   import { truncateString } from '$lib/shared/shared-utils';
-  import { chatList$, chats$ } from '$lib/shared/shared.store';
-  import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
+  import { banners$, chatList$, chats$ } from '$lib/shared/shared.store';
+  import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
   import PencilSquareIcon from '$lib/shared/icons/pencil-square-icon.svelte';
   import TrashIcon from '$lib/shared/icons/trash-icon.svelte';
   import CheckIcon from '$lib/shared/icons/check-icon.svelte';
@@ -52,7 +52,19 @@
       });
       return chatList;
     });
-    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
     isEditing = false;
   };
 
@@ -69,8 +81,20 @@
       return chats;
     });
 
-    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
-    localStorage.removeItem(chatId);
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+      localStorage.removeItem(chatId);
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
 
     if ($page$.params?.chatId === chatId) {
       goto('/');

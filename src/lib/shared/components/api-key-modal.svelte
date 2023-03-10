@@ -3,10 +3,10 @@
   import { getNotificationsContext } from 'svelte-notifications';
 
   import { NOTIFICATION_SETTINGS } from '../shared.constant';
-  import { openAiApiKey$ } from '../shared.store';
+  import { banners$, openAiApiKey$ } from '../shared.store';
   import { autofocus } from '../shared-utils';
 
-  import { LOCAL_STORAGE_KEY } from '../shared.type';
+  import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '../shared.type';
 
   const { close } = getContext('simple-modal') as any;
   const { addNotification } = getNotificationsContext();
@@ -15,7 +15,19 @@
 
   onMount(() => {
     const unsubscribe = openAiApiKey$.subscribe((value) => {
-      localStorage.setItem(LOCAL_STORAGE_KEY.OPEN_AI_API_KEY, value);
+      try {
+        localStorage.setItem(LOCAL_STORAGE_KEY.OPEN_AI_API_KEY, value);
+      } catch (e: any) {
+        banners$.update((banners) => {
+          banners.push({
+            id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+            bannerType: BANNER_TYPE.ERROR,
+            title: 'Access to browser storage failed',
+            description: e?.message || e?.name || ''
+          });
+          return banners;
+        });
+      }
     });
 
     return () => {

@@ -6,9 +6,9 @@
 
   import MagnifyingGlassIcon from '$lib/shared/icons/magnifying-glass-icon.svelte';
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
-  import { chatList$, chats$ } from '$lib/shared/shared.store';
+  import { banners$, chatList$, chats$ } from '$lib/shared/shared.store';
   import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
-  import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
+  import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
 
   import SidebarChatItem from './sidebar-chat-item.svelte';
 
@@ -92,8 +92,20 @@
       return chats;
     });
 
-    localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
-    localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+      localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM_FAILED,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
 
     goto(`/chat/${newChatId}`);
     handleCloseMobileSidebar();
@@ -138,7 +150,7 @@
       </div> -->
     </div>
 
-    {#each chatList as { chatId: cId, title }, index}
+    {#each chatList as { chatId: cId, title }}
       <SidebarChatItem
         chatId={cId}
         {title}

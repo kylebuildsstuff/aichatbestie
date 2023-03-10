@@ -57,14 +57,17 @@
   <div class="flex flex-col items-center mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mb-8 md:mb-12">
       <div class="mx-auto max-w-2xl text-center">
-        <p class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <a
+          href="/"
+          class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+        >
           AI Chat
           <span
             class="inline-block bg-gradient-to-r from-cyan-400 to-emerald-400 text-transparent bg-clip-text"
           >
             Bestie
           </span>
-        </p>
+        </a>
         <p class="mt-3 text-lg leading-8 text-gray-600">
           An enhanced UI wrapper for ChatGPT
         </p>

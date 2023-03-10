@@ -8,3 +8,7 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.nhost
+web/node_modules
+node_modules
+functions/node_modules

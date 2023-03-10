@@ -10,6 +10,7 @@
   import EnvelopeIcon from '$lib/shared/icons/envelope-icon.svelte';
   import LinkedinIcon from '$lib/shared/icons/linkedin-icon.svelte';
   import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
+  import AuthModal from '$lib/modules/auth/auth-modal.svelte';
 
   const { handleCloseMobileSidebar } = getContext('sidebar') as any;
   const { open } = getContext('simple-modal') as any;
@@ -19,10 +20,10 @@
     handleCloseMobileSidebar();
   };
 
-  // const openAuthModal = () => {
-  //   open(AuthModal, {});
-  //   handleCloseMobileSidebar();
-  // };
+  const openAuthModal = () => {
+    open(AuthModal, {});
+    handleCloseMobileSidebar();
+  };
 </script>
 
 <div class="flex flex-col border-t border-gray-500 bg-gray-800">
@@ -58,9 +59,8 @@
   </button>
 
   <!-- Joins -->
-  <a
-    on:click={handleCloseMobileSidebar}
-    href="/register"
+  <button
+    on:click={openAuthModal}
     class="w-full p-4 hover:bg-gray-700"
   >
     <div class="flex items-center gap-2 justify-start">
@@ -72,7 +72,7 @@
         </p>
       </div>
     </div>
-  </a>
+  </button>
 </div>
 
 <!-- Socials & terms -->

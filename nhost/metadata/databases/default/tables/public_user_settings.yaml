@@ -30,7 +30,6 @@ insert_permissions:
         user_id:
           _eq: X-Hasura-User-Id
       columns:
-        - is_upgraded
         - user_id
 select_permissions:
   - role: hasura
@@ -49,10 +48,16 @@ select_permissions:
         user_id:
           _eq: X-Hasura-User-Id
 update_permissions:
-  - role: user
+  - role: hasura
     permission:
       columns:
         - is_upgraded
+        - user_id
+      filter: {}
+      check: null
+  - role: user
+    permission:
+      columns:
         - user_id
       filter:
         user_id:

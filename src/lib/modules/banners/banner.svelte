@@ -51,7 +51,7 @@
     <div class="flex-shrink-0">
       <ExclamationCircle overrideClasses={`w-6 h-6 ${iconTextColor[bannerType]}`} />
     </div>
-    <div class="ml-3">
+    <div class="ml-3 z-10">
       {#if title}
         <h3 class={`text-sm font-medium ${titleColor[bannerType]}`}>{title}</h3>
       {/if}

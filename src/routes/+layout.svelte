@@ -5,8 +5,16 @@
   import Toast from '$lib/modules/toast/toast.svelte';
 
   import '../app.css';
+  import { onMount } from 'svelte';
+  import { nhost } from '$lib/core/nhost/nhost';
 
   let _Toast = Toast;
+
+  onMount(async () => {
+    let session = nhost.auth.getSession();
+
+    console.log('session: ', session);
+  });
 </script>
 
 <svelte:head>

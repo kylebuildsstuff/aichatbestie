@@ -16,8 +16,6 @@
 
   const { addNotification } = getNotificationsContext();
 
-  export let data;
-
   const {
     form,
     data: formValues$,

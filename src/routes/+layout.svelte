@@ -7,7 +7,13 @@
   import { nhost } from '$lib/core/nhost/nhost';
   import { BANNER_TYPE, ERROR, NHOST_AUTH_STATE } from '$lib/shared/shared.type';
   import { fetchUserDataQuery } from '$lib/shared/shared.graphql';
-  import { banners$, user$, userSettings$ } from '$lib/shared/shared.store';
+  import {
+    banners$,
+    isSignedIn$,
+    user$,
+    userData$,
+    userSettings$
+  } from '$lib/shared/shared.store';
 
   import '../app.css';
 
@@ -47,6 +53,10 @@
         }
         isInitializing = false;
       }
+
+      console.log('1');
+      console.log('isSignedIn$: ', $isSignedIn$);
+      console.log('userData: ', $userData$);
     });
 
     // Cover BEFORE onMount cases
@@ -82,6 +92,10 @@
         isInitialized = true;
       }
       isInitializing = false;
+
+      console.log('2');
+      console.log('isSignedIn$: ', $isSignedIn$);
+      console.log('userData: ', $userData$);
     }
   });
 </script>

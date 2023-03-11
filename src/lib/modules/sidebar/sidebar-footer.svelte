@@ -63,20 +63,22 @@
   </a>
 
   <!-- Joins -->
-  <a
-    href="/register"
-    class="w-full p-4 hover:bg-gray-700"
-  >
-    <div class="flex items-center gap-2 justify-start">
-      <UserIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
+  {#if !$isSignedIn$}
+    <a
+      href="/register"
+      class="w-full p-4 hover:bg-gray-700"
+    >
+      <div class="flex items-center gap-2 justify-start">
+        <UserIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
 
-      <div class="flex items-center">
-        <p class={`text-gray-300 group-hover:text-gray-900`}>
-          Join <span class="text-gray-400 text-sm">(optional)</span>
-        </p>
+        <div class="flex items-center">
+          <p class={`text-gray-300 group-hover:text-gray-900`}>
+            Join <span class="text-gray-400 text-sm">(optional)</span>
+          </p>
+        </div>
       </div>
-    </div>
-  </a>
+    </a>
+  {/if}
 </div>
 
 <!-- Socials & terms -->

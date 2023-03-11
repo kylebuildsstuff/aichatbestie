@@ -1,8 +1,17 @@
 <script lang="ts">
+  import { getContext } from 'svelte';
+  import { getNotificationsContext } from 'svelte-notifications';
+
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
-  import Chat from '$lib/modules/chat/chat.svelte';
   import { nhost } from '$lib/core/nhost/nhost';
   import { clearUserData } from '$lib/shared/shared-utils';
+  import { goto } from '$app/navigation';
+  import { NOTIFICATION_SETTINGS } from '$lib/shared/shared.constant';
+
+  import ChangePasswordModal from './change-password-modal.svelte';
+
+  const { open } = getContext('simple-modal') as any;
+  const { addNotification } = getNotificationsContext();
 
   let isEditing = false;
 
@@ -14,18 +23,23 @@
     isEditing = false;
   };
 
-  const handleSaveEditClick = () => {
-    isEditing = false;
-  };
+  // const handleSaveEditClick = () => {
+  //   isEditing = false;
+  // };
 
   const handleEditPasswordClick = () => {
-    isEditing = false;
+    open(ChangePasswordModal, {});
   };
 
   const handleSignout = async () => {
     await nhost.auth.signOut();
 
     clearUserData();
+    addNotification({
+      ...NOTIFICATION_SETTINGS,
+      text: 'Signed out'
+    });
+    goto('/');
   };
 </script>
 

@@ -33,9 +33,12 @@
   <!-- Content  -->
   <section class="w-full">
     <MobileNavbar />
+    <!-- Banners -->
     <div class="flex justify-center self-center mx-auto w-3/4">
       <Banners />
     </div>
+
+    <!-- Content -->
     <slot name="page-content" />
   </section>
 </main>

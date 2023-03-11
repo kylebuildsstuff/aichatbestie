@@ -22,12 +22,6 @@
     open(ApiKeyModal, {});
     handleCloseMobileSidebar();
   };
-
-  const handleSignout = async () => {
-    await nhost.auth.signOut();
-
-    clearUserData();
-  };
 </script>
 
 <div class="flex flex-col border-t border-gray-500 bg-gray-800">

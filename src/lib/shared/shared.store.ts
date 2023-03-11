@@ -28,6 +28,10 @@ export const isSignedIn$ = derived(user$, (user) => {
   return !!user?.id;
 });
 
+export const isUpgraded$ = derived(userSettings$, (userSettings) => {
+  return !!userSettings?.isUpgraded;
+});
+
 export const userData$ = derived([user$, userSettings$], ([user, userSettings]) => {
   const { createdAt, updatedAt, lastSeen, disabled, email, emailVerified } = user || {};
   const { userId, isUpgraded } = userSettings || {};

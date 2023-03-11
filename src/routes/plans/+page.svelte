@@ -4,20 +4,25 @@
   import { getNotificationsContext } from 'svelte-notifications';
 
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
-  import { banners$, isSignedIn$ } from '$lib/shared/shared.store';
+  import { banners$, isSignedIn$, isUpgraded$ } from '$lib/shared/shared.store';
   import { nhost } from '$lib/core/nhost/nhost';
   import { readResponseStreamAsJson, throwIfHttpError } from '$lib/shared/shared-utils';
   import { APP_PRODUCT, BANNER_TYPE, ERROR } from '$lib/shared/shared.type';
   import { goto } from '$app/navigation';
+  import Confetti from '$lib/shared/components/confetti.svelte';
 
   const { addNotification } = getNotificationsContext();
 
+  let showConfetti = false;
+
+  /**
+   * Early bird countdown
+   */
   // early bird pricing ends March 16th, 2023 8pm EST
   const earlyBirdEnds = DateTime.fromISO('2023-03-16T20:00:00.000Z');
   $: countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
   $: formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
 
-  // set interval for countdown
   onMount(() => {
     setInterval(() => {
       countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
@@ -25,6 +30,20 @@
     }, 1000);
   });
 
+  /**
+   * Confetti
+   */
+  const handleShowConfetti = () => {
+    showConfetti = true;
+  };
+
+  const handleHideConfetti = () => {
+    showConfetti = false;
+  };
+
+  /**
+   * Purchase
+   */
   const handlePurchase = async () => {
     const accessToken = nhost.auth.getAccessToken();
 
@@ -199,7 +218,21 @@
                     {formattedCountdownString}
                   </p>
 
-                  {#if $isSignedIn$}
+                  {#if $isUpgraded$}
+                    {#if showConfetti}
+                      <Confetti
+                        onComplete={() => {
+                          showConfetti = false;
+                        }}
+                      />
+                    {/if}
+                    <button
+                      on:click={handleShowConfetti}
+                      class="mt-8 block w-full text-center hover:underline bg-gradient-to-r from-emerald-400 to-cyan-400 text-lg text-white font-bold rounded py-3 px-6 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                    >
+                      Click me, Bestie!
+                    </button>
+                  {:else if $isSignedIn$}
                     <button
                       on:click={handlePurchase}
                       class="mt-8 block w-full text-center hover:underline bg-gradient-to-r from-emerald-400 to-cyan-400 text-lg text-white font-bold rounded py-3 px-6 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"

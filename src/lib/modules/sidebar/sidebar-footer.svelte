@@ -85,12 +85,16 @@
   </div>
 
   <div class="flex gap-1">
-    <span class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer">
+    <a
+      href="/privacy"
+      class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer"
+    >
       Privacy
-    </span>
+    </a>
     <span class="text-xs text-gray-500"> · </span>
-    <span class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer"
-      >FAQs</span
+    <a
+      href="/faqs"
+      class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer">FAQs</a
     >
     <span class="text-xs text-gray-500"> · </span>
     <span class="text-xs text-gray-500">

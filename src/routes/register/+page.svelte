@@ -58,11 +58,11 @@
         )) as any;
 
         if (!userSettingsError) {
-          goto('/');
           addNotification({
             ...NOTIFICATION_SETTINGS,
             text: 'Account created'
           });
+          goto('/');
           // await nhost.auth.sendVerificationEmail({
           //   email,
           //   options: {

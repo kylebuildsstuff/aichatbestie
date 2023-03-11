@@ -66,11 +66,11 @@
       });
 
       if (session) {
-        goto('/');
         addNotification({
           ...NOTIFICATION_SETTINGS,
           text: 'Sign in successful'
         });
+        goto('/');
       }
 
       if (error) {
@@ -78,6 +78,7 @@
           ...state.filter((banner) => banner.bannerId !== ERROR.LOGIN),
           {
             bannerId: ERROR.LOGIN,
+            bannerType: BANNER_TYPE.ERROR,
             title: error?.message || 'An error occurred while signing in',
             description: ''
           }

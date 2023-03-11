@@ -46,9 +46,9 @@
                 Lifetime Membership
               </h3>
               <p class="mt-6 text-base leading-7 text-gray-600">
-                Unlock all upcoming features listed below and in future updates. Base
-                features will be free forever, premium features will be exclusive to
-                lifetime members <span class="text-xs">(account required)</span>.
+                Unlock all upcoming premium features listed below and in future updates.
+                Base features will be free forever, premium features will be exclusive
+                to lifetime members.
               </p>
               <div class="mt-10 flex items-center gap-x-4">
                 <h4 class="flex-none text-sm font-semibold leading-6 text-indigo-600">
@@ -106,7 +106,7 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                  Voice support
+                  Dark mode
                 </li>
 
                 <li class="flex gap-x-3">
@@ -122,7 +122,7 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                  UI themes
+                  Custom themes
                 </li>
               </ul>
             </div>
@@ -161,8 +161,12 @@
                     <a
                       href="/register"
                       class="mt-8 block w-full text-center hover:underline bg-gradient-to-r from-emerald-400 to-cyan-400 text-lg text-white font-bold rounded py-3 px-6 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-                      >Join</a
                     >
+                      <div class="flex flex-col gap-1">
+                        <div>Get access</div>
+                        <span class="text-xs">(account required)</span>
+                      </div>
+                    </a>
                   {/if}
                   <p class="mt-6 text-xs leading-5 text-gray-600">
                     Invoices and receipts available for easy company reimbursement

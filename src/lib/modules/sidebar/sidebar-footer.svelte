@@ -2,7 +2,6 @@
   import { getContext } from 'svelte';
 
   import { isSignedIn$ } from '$lib/shared/shared.store';
-  import KeyIcon from '$lib/shared/icons/key-icon.svelte';
   import UserIcon from '$lib/shared/icons/user-icon.svelte';
   import SparklesIcon from '$lib/shared/icons/sparkles-icon.svelte';
   import DiscordIcon from '$lib/shared/icons/discord-icon.svelte';
@@ -12,8 +11,6 @@
   import LinkedinIcon from '$lib/shared/icons/linkedin-icon.svelte';
   import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
   import CogIcon from '$lib/shared/icons/cog-icon.svelte';
-  import { nhost } from '$lib/core/nhost/nhost';
-  import { clearUserData } from '$lib/shared/shared-utils';
 
   const { handleCloseMobileSidebar } = getContext('sidebar') as any;
   const { open } = getContext('simple-modal') as any;
@@ -43,18 +40,20 @@
   </a>
 
   <!-- Settings -->
-  <a
-    href="/settings"
-    class="w-full p-4 hover:bg-gray-700"
-  >
-    <div class="flex items-center gap-2 justify-start">
-      <CogIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
+  {#if $isSignedIn$}
+    <a
+      href="/settings"
+      class="w-full p-4 hover:bg-gray-700"
+    >
+      <div class="flex items-center gap-2 justify-start">
+        <CogIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
 
-      <div class="flex items-center">
-        <p class={`text-gray-300 group-hover:text-gray-900`}>Settings</p>
+        <div class="flex items-center">
+          <p class={`text-gray-300 group-hover:text-gray-900`}>Settings</p>
+        </div>
       </div>
-    </div>
-  </a>
+    </a>
+  {/if}
 
   <!-- Joins -->
   {#if !$isSignedIn$}

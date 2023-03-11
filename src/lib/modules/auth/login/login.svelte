@@ -12,6 +12,7 @@
 
   import { validateLoginForm } from './login-validators';
   import { loginFormConfig } from './login.constant';
+  import { browser } from '$app/environment';
 
   const { addNotification } = getNotificationsContext();
 
@@ -82,6 +83,7 @@
       }
 
       if (error) {
+        close();
         banners$.update((state) => [
           ...state.filter((banner) => banner.bannerId !== ERROR.LOGIN),
           {
@@ -91,6 +93,12 @@
             description: ''
           }
         ]);
+        // scroll window to top
+        browser &&
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
       }
     }
   });
@@ -129,6 +137,7 @@
           on:click={() => {
             isRegistering$.set(true);
           }}
+          type="button"
           class="font-medium text-indigo-600 hover:text-indigo-500">Sign up</button
         >
       </p>

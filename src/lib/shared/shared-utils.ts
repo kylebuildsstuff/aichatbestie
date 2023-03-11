@@ -3,6 +3,7 @@ import {
   DEFAULT_SYSTEM_MESSAGE,
   DEFAULT_SYSTEM_MESSAGE_CONTENT
 } from './shared.constant';
+import { user$, userSettings$ } from './shared.store';
 import {
   MESSAGE_ROLE,
   type Chat,
@@ -156,3 +157,8 @@ export const isNotSystemMessage = (message: Message) => {
 export function autofocus(el: any) {
   el.focus();
 }
+
+export const clearUserData = () => {
+  user$.set({} as any);
+  userSettings$.set({} as any);
+};

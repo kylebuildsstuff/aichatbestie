@@ -12,6 +12,7 @@
 
   import { validateRegisterForm } from './register-validators';
   import { registerFormConfig } from './register.constant';
+  import { browser } from '$app/environment';
 
   const { addNotification } = getNotificationsContext();
 
@@ -76,6 +77,7 @@
           //   }
           // });
         } else {
+          close();
           banners$.update((state) => [
             ...state.filter((banner: Banner) => banner.bannerId !== ERROR.REGISTRATION),
             {
@@ -85,11 +87,18 @@
               description: ''
             }
           ]);
+
+          browser &&
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
         }
       }
 
       // Signup error
       if (error) {
+        close();
         banners$.update((state) => [
           ...state.filter((banner) => banner.bannerId !== ERROR.REGISTRATION),
           {
@@ -99,6 +108,11 @@
             description: ''
           }
         ]);
+        browser &&
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
       }
     }
   });
@@ -135,6 +149,7 @@
         on:click={() => {
           isRegistering$.set(false);
         }}
+        type="button"
         class="font-medium text-indigo-600 hover:text-indigo-500">Sign in</button
       >
     </p>

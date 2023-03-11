@@ -24,6 +24,10 @@ export const chats$ = writable({} as Record<string, Chat>);
 export const user$ = writable({} as User);
 export const userSettings$ = writable({} as UserSettings);
 
+export const isSignedIn$ = derived(user$, (user) => {
+  return !!user?.id;
+});
+
 export const userData$ = derived([user$, userSettings$], ([user, userSettings]) => {
   const { createdAt, updatedAt, lastSeen, disabled, email, emailVerified } = user || {};
   const { userId, isUpgraded } = userSettings || {};

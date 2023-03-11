@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createForm } from 'felte';
   import { getNotificationsContext } from 'svelte-notifications';
-  import { getContext, onDestroy, onMount } from 'svelte';
+  import { getContext, onMount } from 'svelte';
 
   import { nhost } from '$lib/core/nhost/nhost';
   import { NOTIFICATION_SETTINGS } from '$lib/shared/shared.constant';

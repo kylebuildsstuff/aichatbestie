@@ -71,8 +71,8 @@
     </button>
 
     <!-- Signout -->
-    <button
-      on:click={handleSignout}
+    <a
+      href="/register"
       class="w-full p-4 hover:bg-gray-700"
     >
       <div class="flex items-center gap-2 justify-start">
@@ -82,7 +82,7 @@
           <p class={`text-gray-300 group-hover:text-gray-900`}>Signout</p>
         </div>
       </div>
-    </button>
+    </a>
 
     <!-- Signed out -->
   {:else}
@@ -119,8 +119,8 @@
     </button>
 
     <!-- Joins -->
-    <button
-      on:click={openAuthModal}
+    <a
+      href="/register"
       class="w-full p-4 hover:bg-gray-700"
     >
       <div class="flex items-center gap-2 justify-start">
@@ -132,7 +132,7 @@
           </p>
         </div>
       </div>
-    </button>
+    </a>
   {/if}
 </div>
 

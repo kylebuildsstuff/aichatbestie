@@ -3,9 +3,19 @@
 declare global {
   namespace App {
     // interface Error {}
-    // interface Locals {}
+    interface Locals {
+      user: any;
+      hasuraJwt: string;
+    }
     // interface PageData {}
     // interface Platform {}
+  }
+}
+
+declare namespace svelte.JSX {
+  interface HTMLAttributes<T> {
+    // You can replace any with something more specific if you like
+    onclickoutside?: (event: any) => any;
   }
 }
 

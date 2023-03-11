@@ -1,3 +1,4 @@
+import { isEmpty, isNil } from 'ramda';
 import {
   CHAT_COMPLETION_ENDPOINT,
   DEFAULT_SYSTEM_MESSAGE,
@@ -19,6 +20,13 @@ export const throwIfHttpError = (response: any) => {
     throw new Error(formattedErrorString);
   }
 
+  return response;
+};
+
+export const throwIfGraphqlError = (response: any) => {
+  if (response.errors && !isNil(response.errors)) {
+    throw new Error(JSON.stringify(response));
+  }
   return response;
 };
 
@@ -110,6 +118,32 @@ export const chatCompletion = async (
           message: 'Request to OpenAI failed'
         }
       };
+};
+
+export const hasuraGraphqlRequest = async <T>(
+  query: string,
+  variables = {},
+  hasuraUrl = '',
+  hasuraJwtToken: string
+): Promise<T> => {
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${hasuraJwtToken}`
+  };
+
+  const body = JSON.stringify({
+    query,
+    variables: isNil(variables) || isEmpty(variables) ? null : variables
+  });
+
+  return await fetch(hasuraUrl, {
+    method: 'POST',
+    headers,
+    body
+  })
+    .then(throwIfHttpError)
+    .then(readResponseStreamAsJson)
+    .then(throwIfGraphqlError);
 };
 
 export const truncateString = (str: string, cutLength = 18) => {

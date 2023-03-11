@@ -1,11 +1,14 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { DateTime } from 'luxon';
   import { getNotificationsContext } from 'svelte-notifications';
 
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
+  import { banners$, isSignedIn$ } from '$lib/shared/shared.store';
+  import { nhost } from '$lib/core/nhost/nhost';
+  import { readResponseStreamAsJson, throwIfHttpError } from '$lib/shared/shared-utils';
+  import { APP_PRODUCT, BANNER_TYPE, ERROR } from '$lib/shared/shared.type';
   import { goto } from '$app/navigation';
-  import { isSignedIn$ } from '$lib/shared/shared.store';
-  import { onMount } from 'svelte';
 
   const { addNotification } = getNotificationsContext();
 
@@ -21,6 +24,49 @@
       formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
     }, 1000);
   });
+
+  const handlePurchase = async () => {
+    const accessToken = nhost.auth.getAccessToken();
+
+    console.log('accessToken: ', accessToken);
+
+    if (accessToken) {
+      const url = `/api/payments/checkout-session`;
+
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          appProduct: APP_PRODUCT.BESTIES_FOREVER
+        })
+      })
+        .then(throwIfHttpError)
+        .then(readResponseStreamAsJson)
+        .catch((_) => {
+          banners$.update((state) => [
+            ...state.filter(
+              (banner) => banner.bannerId !== ERROR.CHECKOUT_SESSION_CREATE
+            ),
+            {
+              bannerId: ERROR.CHECKOUT_SESSION_CREATE,
+              bannerType: BANNER_TYPE.ERROR,
+              title: 'A problem occurred while proceeding to checkout',
+              description:
+                'Please refresh the page and try again later, or contact support.'
+            }
+          ]);
+        });
+
+      const checkoutUrl = res?.checkoutUrl || '';
+
+      if (checkoutUrl) {
+        goto(checkoutUrl);
+      }
+    }
+  };
 </script>
 
 <PageContainer>
@@ -154,11 +200,12 @@
                   </p>
 
                   {#if $isSignedIn$}
-                    <a
-                      href="/"
+                    <button
+                      on:click={handlePurchase}
                       class="mt-8 block w-full text-center hover:underline bg-gradient-to-r from-emerald-400 to-cyan-400 text-lg text-white font-bold rounded py-3 px-6 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-                      >Get access</a
                     >
+                      Get access
+                    </button>
                   {:else}
                     <a
                       href="/register"

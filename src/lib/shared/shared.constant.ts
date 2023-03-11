@@ -21,3 +21,10 @@ export const NOTIFICATION_SETTINGS = {
   position: 'bottom-center',
   removeAfter: 2500
 };
+
+// export const PRICING_CONFIG = {
+//   [APP_PRODUCT.BESTIES_FOREVER]: {
+//     appProduct: APP_PRODUCT.BESTIES_FOREVER,
+
+//   }
+// }

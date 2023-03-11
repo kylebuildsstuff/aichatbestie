@@ -42,13 +42,15 @@
             class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 lg:mx-0 lg:flex lg:max-w-none"
           >
             <div class="p-8 sm:p-10 lg:flex-auto">
-              <h3 class="text-2xl font-bold tracking-tight text-gray-900">
-                Lifetime Membership
+              <h3
+                class="text-2xl font-bold tracking-tight text-gray-900 bg-gradient-to-r from-cyan-400 to-emerald-400 text-transparent bg-clip-text"
+              >
+                Besties Forever
               </h3>
               <p class="mt-6 text-base leading-7 text-gray-600">
-                Unlock all upcoming premium features listed below and in future updates.
-                Base features will be free forever, premium features will be exclusive
-                to lifetime members.
+                Get exclusive access to all current and future premium features, while
+                continuing to enjoy the forever free base features. Join the Besties
+                Forever membership and enjoy AI Chat Bestie to the fullest!
               </p>
               <div class="mt-10 flex items-center gap-x-4">
                 <h4 class="flex-none text-sm font-semibold leading-6 text-indigo-600">

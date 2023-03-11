@@ -1,11 +1,26 @@
 <script lang="ts">
+  import { DateTime } from 'luxon';
   import { getNotificationsContext } from 'svelte-notifications';
 
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
   import { goto } from '$app/navigation';
   import { isSignedIn$ } from '$lib/shared/shared.store';
+  import { onMount } from 'svelte';
 
   const { addNotification } = getNotificationsContext();
+
+  // early bird pricing ends March 16th, 2023 8pm EST
+  const earlyBirdEnds = DateTime.fromISO('2023-03-16T20:00:00.000Z');
+  $: countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
+  $: formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
+
+  // set interval for countdown
+  onMount(() => {
+    setInterval(() => {
+      countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
+      formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
+    }, 1000);
+  });
 </script>
 
 <PageContainer>
@@ -58,22 +73,6 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                  Longer chats and histories
-                </li>
-
-                <li class="flex gap-x-3">
-                  <svg
-                    class="h-6 w-5 flex-none text-indigo-600"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
                   Prompt library
                 </li>
 
@@ -90,7 +89,24 @@
                       clip-rule="evenodd"
                     />
                   </svg>
+
                   Saved profiles
+                </li>
+
+                <li class="flex gap-x-3">
+                  <svg
+                    class="h-6 w-5 flex-none text-indigo-600"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Voice support
                 </li>
 
                 <li class="flex gap-x-3">
@@ -128,8 +144,11 @@
                       $9
                     </span>
                   </p>
+                  <p class="mt-2 text-xs font-semibold text-gray-600">
+                    Early bird price ends in
+                  </p>
                   <p class="mt-2 text-sm font-semibold text-gray-600">
-                    Early bird pricing ends in 5 days
+                    {formattedCountdownString}
                   </p>
 
                   {#if $isSignedIn$}

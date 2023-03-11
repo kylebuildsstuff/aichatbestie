@@ -13,7 +13,7 @@
 
 {#if $isMobileSidebarOpen$}
   <div
-    transition:slide
+    transition:slide={{ axis: 'x' }}
     class={`fixed inset-0 flex z-40 md:hidden`}
     role="dialog"
     aria-modal="true"

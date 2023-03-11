@@ -19,7 +19,7 @@
    * Early bird countdown
    */
   // early bird pricing ends March 16th, 2023 8pm EST
-  const earlyBirdEnds = DateTime.fromISO('2023-03-16T20:00:00.000Z');
+  const earlyBirdEnds = DateTime.fromISO('2023-03-26T20:00:00.000Z');
   $: countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
   $: formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
 
@@ -110,8 +110,8 @@
               </h3>
               <p class="mt-6 text-base leading-7 text-gray-600">
                 Get exclusive access to all current and future premium features, while
-                continuing to enjoy the forever free base features. Join the Besties
-                Forever membership and enjoy AI Chat Bestie to the fullest!
+                continuing to enjoy the forever free base features. Upgrade to Besties
+                Forever and enjoy AI Chat Bestie to the fullest!
               </p>
               <div class="mt-10 flex items-center gap-x-4">
                 <h4 class="flex-none text-sm font-semibold leading-6 text-indigo-600">
@@ -194,25 +194,36 @@
                 class="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16"
               >
                 <div class="mx-auto max-w-xs px-8">
-                  <p class="text-base font-semibold text-gray-600">
-                    Pay once, own it forever
-                  </p>
-                  <p class="mt-6 flex items-baseline justify-center gap-x-2">
-                    <span class="mt-2 text-3xl font-medium text-gray-500 line-through">
-                      $19
-                    </span>
-                    <span
-                      class="text-5xl font-bold tracking-tight text-gray-900 bg-gradient-to-r from-cyan-400 to-emerald-400 text-transparent bg-clip-text"
-                    >
-                      $9
-                    </span>
-                  </p>
-                  <p class="mt-2 text-xs font-semibold text-gray-600">
-                    Early bird price ends in
-                  </p>
-                  <p class="mt-2 text-sm font-semibold text-gray-600">
-                    {formattedCountdownString}
-                  </p>
+                  {#if $isUpgraded$}
+                    <p class="text-base font-semibold text-gray-600">
+                      Thank you for your support
+                    </p>
+                    <p class="mt-2 text-xs font-semibold text-gray-600">
+                      (Your account has been upgraded)
+                    </p>
+                  {:else}
+                    <p class="text-base font-semibold text-gray-600">
+                      Pay once, own it forever
+                    </p>
+                    <p class="mt-6 flex items-baseline justify-center gap-x-2">
+                      <span
+                        class="mt-2 text-3xl font-medium text-gray-500 line-through"
+                      >
+                        $29
+                      </span>
+                      <span
+                        class="text-5xl font-bold tracking-tight text-gray-900 bg-gradient-to-r from-cyan-400 to-emerald-400 text-transparent bg-clip-text"
+                      >
+                        $19
+                      </span>
+                    </p>
+                    <p class="mt-2 text-xs font-semibold text-gray-600">
+                      Early bird price ends in
+                    </p>
+                    <p class="mt-2 text-sm font-semibold text-gray-600">
+                      {formattedCountdownString}
+                    </p>
+                  {/if}
 
                   {#if $isUpgraded$}
                     {#if showConfetti}
@@ -226,7 +237,7 @@
                       on:click={handleShowConfetti}
                       class="mt-8 block w-full text-center hover:underline bg-gradient-to-r from-emerald-400 to-cyan-400 text-lg text-white font-bold rounded py-3 px-6 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                     >
-                      Click me, Bestie!
+                      Besties Forever!
                     </button>
                   {:else if $isSignedIn$}
                     <button
@@ -246,9 +257,12 @@
                       </div>
                     </a>
                   {/if}
-                  <p class="mt-6 text-xs leading-5 text-gray-600">
-                    Invoices and receipts available for easy company reimbursement
-                  </p>
+
+                  {#if !$isUpgraded$}
+                    <p class="mt-6 text-xs leading-5 text-gray-600">
+                      Invoices and receipts available for easy company reimbursement
+                    </p>
+                  {/if}
                 </div>
               </div>
             </div>

@@ -11,7 +11,6 @@
   import EnvelopeIcon from '$lib/shared/icons/envelope-icon.svelte';
   import LinkedinIcon from '$lib/shared/icons/linkedin-icon.svelte';
   import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
-  import AuthModal from '$lib/modules/auth/auth-modal.svelte';
   import CogIcon from '$lib/shared/icons/cog-icon.svelte';
   import { nhost } from '$lib/core/nhost/nhost';
   import { clearUserData } from '$lib/shared/shared-utils';
@@ -24,11 +23,6 @@
     handleCloseMobileSidebar();
   };
 
-  const openAuthModal = () => {
-    open(AuthModal, {});
-    handleCloseMobileSidebar();
-  };
-
   const handleSignout = async () => {
     await nhost.auth.signOut();
 
@@ -37,103 +31,52 @@
 </script>
 
 <div class="flex flex-col border-t border-gray-500 bg-gray-800">
-  <!-- Signed in -->
-  {#if $isSignedIn$}
-    <!-- Upgrade -->
-    <a
-      on:click={handleCloseMobileSidebar}
-      href="/"
-      class="w-full p-4 hover:bg-gray-700"
-    >
-      <div class="flex items-center gap-2 justify-start">
-        <SparklesIcon
-          overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`}
-        />
+  <!-- Upgrade -->
+  <a
+    on:click={handleCloseMobileSidebar}
+    href="/"
+    class="w-full p-4 hover:bg-gray-700"
+  >
+    <div class="flex items-center gap-2 justify-start">
+      <SparklesIcon
+        overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`}
+      />
 
-        <div class="flex items-center">
-          <p class={`text-gray-300 group-hover:text-gray-900`}>Upgrade</p>
-        </div>
+      <div class="flex items-center">
+        <p class={`text-gray-300 group-hover:text-gray-900`}>Upgrade</p>
       </div>
-    </a>
+    </div>
+  </a>
 
-    <!-- Settings -->
-    <button
-      on:click={openAuthModal}
-      class="w-full p-4 hover:bg-gray-700"
-    >
-      <div class="flex items-center gap-2 justify-start">
-        <CogIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
+  <!-- Settings -->
+  <a
+    href="/settings"
+    class="w-full p-4 hover:bg-gray-700"
+  >
+    <div class="flex items-center gap-2 justify-start">
+      <CogIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
 
-        <div class="flex items-center">
-          <p class={`text-gray-300 group-hover:text-gray-900`}>Settings</p>
-        </div>
+      <div class="flex items-center">
+        <p class={`text-gray-300 group-hover:text-gray-900`}>Settings</p>
       </div>
-    </button>
+    </div>
+  </a>
 
-    <!-- Signout -->
-    <a
-      href="/register"
-      class="w-full p-4 hover:bg-gray-700"
-    >
-      <div class="flex items-center gap-2 justify-start">
-        <CogIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
+  <!-- Joins -->
+  <a
+    href="/register"
+    class="w-full p-4 hover:bg-gray-700"
+  >
+    <div class="flex items-center gap-2 justify-start">
+      <UserIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
 
-        <div class="flex items-center">
-          <p class={`text-gray-300 group-hover:text-gray-900`}>Signout</p>
-        </div>
+      <div class="flex items-center">
+        <p class={`text-gray-300 group-hover:text-gray-900`}>
+          Join <span class="text-gray-400 text-sm">(optional)</span>
+        </p>
       </div>
-    </a>
-
-    <!-- Signed out -->
-  {:else}
-    <!-- Upgrade -->
-    <a
-      on:click={handleCloseMobileSidebar}
-      href="/"
-      class="w-full p-4 hover:bg-gray-700"
-    >
-      <div class="flex items-center gap-2 justify-start">
-        <SparklesIcon
-          overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`}
-        />
-
-        <div class="flex items-center">
-          <p class={`text-gray-300 group-hover:text-gray-900`}>Upgrade</p>
-        </div>
-      </div>
-    </a>
-
-    <!-- Change API key -->
-    <button
-      on:click={openApiKeyModal}
-      class="w-full p-4 hover:bg-gray-700"
-    >
-      <div class="flex items-center gap-2 justify-start">
-        <!-- <KeyIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} /> -->
-        <CogIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
-
-        <div class="flex items-center">
-          <p class={`text-gray-300 group-hover:text-gray-900`}>Settings</p>
-        </div>
-      </div>
-    </button>
-
-    <!-- Joins -->
-    <a
-      href="/register"
-      class="w-full p-4 hover:bg-gray-700"
-    >
-      <div class="flex items-center gap-2 justify-start">
-        <UserIcon overrideClasses={`h-5 w-5 text-gray-400 group-hover:text-gray-500`} />
-
-        <div class="flex items-center">
-          <p class={`text-gray-300 group-hover:text-gray-900`}>
-            Join <span class="text-gray-400 text-sm">(optional)</span>
-          </p>
-        </div>
-      </div>
-    </a>
-  {/if}
+    </div>
+  </a>
 </div>
 
 <!-- Socials & terms -->

@@ -2,7 +2,7 @@
   import { createForm } from 'felte';
   import { getNotificationsContext } from 'svelte-notifications';
   import { onMount } from 'svelte';
-  import { goto, invalidateAll } from '$app/navigation';
+  import { goto } from '$app/navigation';
 
   import { nhost } from '$lib/core/nhost/nhost';
   import { LOGO_CDN_LINK, NOTIFICATION_SETTINGS } from '$lib/shared/shared.constant';

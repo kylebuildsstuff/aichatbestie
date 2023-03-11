@@ -45,6 +45,10 @@
   $: hasMessages = messages.filter(isNotSystemMessage).length > 0;
   $: enableRegenerateMessage = !isLoading && messages.length > 2;
 
+  $: {
+    console.log('messages: ', messages);
+  }
+
   const openApiKeyModal = () => {
     open(ApiKeyModal, {});
   };

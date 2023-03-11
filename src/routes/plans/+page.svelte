@@ -39,7 +39,7 @@
             </p>
           </div>
           <div
-            class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none"
+            class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 lg:mx-0 lg:flex lg:max-w-none"
           >
             <div class="p-8 sm:p-10 lg:flex-auto">
               <h3 class="text-2xl font-bold tracking-tight text-gray-900">

@@ -96,7 +96,7 @@
     <span class="text-xs text-gray-500">
       <a
         href="/"
-        class="hover:underline hover:text-blue-400"
+        class="hover:text-gray-300"
       >
         AI Chat Bestie
       </a> © 2023</span

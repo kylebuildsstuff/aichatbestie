@@ -45,7 +45,6 @@
       const { error } = await chatCompletion('Hi', [], openAiApiKey);
 
       if (error) {
-        console.log('error: ', error);
         errorMessage =
           error?.message || error?.name || error?.code || 'Connection to OpenAI failed';
         return;

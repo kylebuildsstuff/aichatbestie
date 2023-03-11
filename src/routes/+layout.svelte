@@ -53,10 +53,6 @@
         }
         isInitializing = false;
       }
-
-      console.log('1');
-      console.log('isSignedIn$: ', $isSignedIn$);
-      console.log('userData: ', $userData$);
     });
 
     // Cover BEFORE onMount cases
@@ -92,19 +88,15 @@
         isInitialized = true;
       }
       isInitializing = false;
-
-      console.log('2');
-      console.log('isSignedIn$: ', $isSignedIn$);
-      console.log('userData: ', $userData$);
     }
   });
 </script>
 
 <svelte:head>
-  <title>AI Chat Bestie - Enhanced UI Wrapper for ChatGPT</title>
+  <title>Get more out of ChatGPT - AI Chat Bestie</title>
   <meta
     name="description"
-    content={'Enhance your ChatGPT experience with faster response times, customizable prompts, searchable history, and more.'}
+    content={'Use ChatGPT with faster responses, 24/7 available searchable chat histories, and uninterrupted connectivity. All chats are sent and stored locally within your browser, no intermediary servers involved.'}
   />
 </svelte:head>
 

@@ -107,11 +107,11 @@
 <PageContainer>
   <svelte:fragment slot="page-content">
     <form use:form>
-      <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div class="flex min-h-full flex-col justify-center py-12 px-6 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
           <a
             href={`/`}
-            class="flex flex-shrink-0 mb-8 justify-start items-center gap-2"
+            class="flex flex-shrink-0 mb-6 justify-start items-center gap-2"
           >
             <div class="inline-flex">
               <span class="sr-only">AI Chat Bestie</span>

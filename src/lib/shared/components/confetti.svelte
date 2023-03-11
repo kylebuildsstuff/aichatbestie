@@ -30,7 +30,6 @@
   onMount(() => {
     if (!destroyOnComplete || infinite || iterationCount == 'infinite') return;
 
-    console.log('1');
     setTimeout(() => (complete = true), (duration + delay[1]) * iterationCount);
   });
 

@@ -22,19 +22,19 @@
       icon: BoltIcon
     },
     {
-      title: 'Uninterrupted connectivity.',
+      title: 'Stay connected.',
       description: `Leave your tab open and stay connected forever without having to log back in.`,
       icon: WifiIcon
-    },
-    {
-      title: '24/7 available chat history.',
-      description: `All keys and chats are stored locally within your browser, accessible any time.`,
-      icon: CircleStackIcon
     },
     {
       title: 'Searchable chat history.',
       description: `Dig up old conversations and find lost answers.`,
       icon: MagnifyingGlassIcon
+    },
+    {
+      title: '24/7 available chat history.',
+      description: `All keys and chats are stored locally within your browser, accessible any time.`,
+      icon: CircleStackIcon
     },
     {
       title: 'No registration required.',
@@ -68,9 +68,7 @@
             Bestie
           </span>
         </a>
-        <p class="mt-3 text-lg leading-8 text-gray-600">
-          An enhanced UI wrapper for ChatGPT
-        </p>
+        <p class="mt-3 text-lg leading-8 text-gray-600">Get more out of ChatGPT</p>
       </div>
 
       <!-- Features -->

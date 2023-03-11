@@ -1,6 +1,7 @@
 import { MESSAGE_ROLE } from './shared.type';
 
-export const LOGO_CDN_LINK = '';
+export const LOGO_CDN_LINK =
+  'https://keylayapps.nyc3.cdn.digitaloceanspaces.com/ai-chat-bestie%2Flogo%2Fai-chat-bestie-logo.png';
 
 export const EMAIL_LINK = `mailto:aichatbestie@gmail.com`;
 export const DISCORD_LINK = `https://discord.gg/xDWFE3n6dc`;

@@ -21,9 +21,7 @@
       aria-controls="faq-0"
       aria-expanded="false"
     >
-      <span class="text-base font-semibold leading-7"
-        >What&#039;s the best thing about Switzerland?</span
-      >
+      <span class="text-base font-semibold leading-7">{question}</span>
       <span class="ml-6 flex h-7 items-center">
         {#if isCollapsed}
           <svg
@@ -67,8 +65,7 @@
       class="mt-2 pr-12"
     >
       <p class="text-base leading-7 text-gray-600">
-        I don&#039;t know, but the flag is a big plus. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
+        {answer}
       </p>
     </dd>
   {/if}

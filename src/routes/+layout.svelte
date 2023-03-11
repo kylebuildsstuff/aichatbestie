@@ -7,13 +7,7 @@
   import { nhost } from '$lib/core/nhost/nhost';
   import { BANNER_TYPE, ERROR, NHOST_AUTH_STATE } from '$lib/shared/shared.type';
   import { userDataQuery } from '$lib/shared/shared.graphql';
-  import {
-    banners$,
-    isSignedIn$,
-    user$,
-    userData$,
-    userSettings$
-  } from '$lib/shared/shared.store';
+  import { banners$, user$, userSettings$ } from '$lib/shared/shared.store';
 
   import '../app.css';
 
@@ -96,7 +90,7 @@
   <title>Get more out of ChatGPT - AI Chat Bestie</title>
   <meta
     name="description"
-    content={'Use ChatGPT with faster responses, 24/7 available searchable chat histories, and uninterrupted connectivity. All chats are sent and stored locally within your browser, no intermediary servers involved.'}
+    content={'Use ChatGPT with faster responses, always available histories, searchable chats, and persistent connectivity. Browser-only storage for privacy and reliability.'}
   />
 </svelte:head>
 

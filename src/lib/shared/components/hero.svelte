@@ -32,7 +32,7 @@
       icon: MagnifyingGlassIcon
     },
     {
-      title: '24/7 available chat history.',
+      title: 'Always available chat history.',
       description: `All keys and chats are stored locally within your browser, accessible any time.`,
       icon: CircleStackIcon
     },

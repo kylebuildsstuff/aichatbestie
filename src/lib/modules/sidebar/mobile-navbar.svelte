@@ -10,7 +10,7 @@
 
   $: chatId = $page$.params.chatId;
   $: title = truncateString(
-    $chatList$.find((chat) => chat.chatId === chatId)?.title || 'New chat',
+    $chatList$.find((chat) => chat.chatId === chatId)?.title || '',
     50
   );
 </script>

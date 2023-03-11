@@ -25,7 +25,7 @@
   <!-- Upgrade -->
   <a
     on:click={handleCloseMobileSidebar}
-    href="/"
+    href="/plans"
     class="w-full p-4 hover:bg-gray-700"
   >
     <div class="flex items-center gap-2 justify-start">

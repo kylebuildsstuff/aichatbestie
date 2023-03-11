@@ -3,7 +3,7 @@
 
   const classes = overrideClasses
     ? overrideClasses
-    : `w-5 h-5 text-gray-400 hover:bg-gray-100`;
+    : `w-5 h-5 text-gray-400 hover:text-gray-600`;
 </script>
 
 <svg

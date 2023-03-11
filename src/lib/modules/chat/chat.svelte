@@ -45,10 +45,6 @@
   $: hasMessages = messages.filter(isNotSystemMessage).length > 0;
   $: enableRegenerateMessage = !isLoading && messages.length > 2;
 
-  $: {
-    console.log('messages: ', messages);
-  }
-
   const openApiKeyModal = () => {
     open(ApiKeyModal, {});
   };
@@ -442,7 +438,7 @@
               title="Create new chat"
             >
               <PlusIcon
-                overrideClasses={'text-gray-400 hover:text-gray-500 hover:bg-gray-100 flex-shrink-0 h-6 w-6 rounded-md'}
+                overrideClasses={'text-gray-400 hover:text-gray-600 flex-shrink-0 h-6 w-6 rounded-md'}
               />
             </button>
           {/if}
@@ -455,7 +451,7 @@
               title="Create new chat"
             >
               <CogIcon
-                overrideClasses={'text-gray-400 hover:text-gray-500 hover:bg-gray-100 flex-shrink-0 h-6 w-6 rounded-md'}
+                overrideClasses={'text-gray-400 hover:text-gray-600 flex-shrink-0 h-6 w-6 rounded-md'}
               />
             </button>
           {/if}

@@ -1,19 +1,18 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { createForm } from 'felte';
   import { getNotificationsContext } from 'svelte-notifications';
-  import { goto, invalidateAll } from '$app/navigation';
-  import { page as page$ } from '$app/stores';
+  import { goto } from '$app/navigation';
 
   import { nhost } from '$lib/core/nhost/nhost';
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
   import { LOGO_CDN_LINK, NOTIFICATION_SETTINGS } from '$lib/shared/shared.constant';
-  import { ERROR } from '$lib/shared/shared.type';
-  import { banners$ } from '$lib/shared/shared.store';
+  import { BANNER_TYPE, ERROR } from '$lib/shared/shared.type';
+  import { banners$, isSignedIn$ } from '$lib/shared/shared.store';
   import TextInput from '$lib/shared/form/text-input.svelte';
 
   import { validateLoginForm } from './login-validators';
   import { loginFormConfig } from './login.constant';
+  import { onMount } from 'svelte';
 
   const { addNotification } = getNotificationsContext();
 
@@ -48,6 +47,7 @@
         ...state.filter((banner) => banner.bannerId !== ERROR.PASSWORD_RESET),
         {
           bannerId: ERROR.PASSWORD_RESET,
+          bannerType: BANNER_TYPE.ERROR,
           title: error?.message || 'An error occurred while resetting your password',
           description: ''
         }
@@ -68,7 +68,6 @@
       });
 
       if (session) {
-        await invalidateAll();
         goto('/');
         addNotification({
           ...NOTIFICATION_SETTINGS,
@@ -90,8 +89,8 @@
   });
 
   onMount(() => {
-    if (data?.isSignedIn) {
-      goto('/');
+    if ($isSignedIn$) {
+      goto('/settings');
     }
   });
 </script>

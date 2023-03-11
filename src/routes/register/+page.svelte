@@ -6,8 +6,8 @@
 
   import { nhost } from '$lib/core/nhost/nhost';
   import { LOGO_CDN_LINK, NOTIFICATION_SETTINGS } from '$lib/shared/shared.constant';
-  import { banners$ } from '$lib/shared/shared.store';
-  import { ERROR, type Banner } from '$lib/shared/shared.type';
+  import { banners$, isSignedIn$ } from '$lib/shared/shared.store';
+  import { BANNER_TYPE, ERROR, type Banner } from '$lib/shared/shared.type';
   import TextInput from '$lib/shared/form/text-input.svelte';
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
   import { createUserSettingsQuery } from '$lib/shared/shared.graphql';
@@ -60,11 +60,10 @@
         )) as any;
 
         if (!userSettingsError) {
-          await invalidateAll();
-          goto('/projects');
+          goto('/');
           addNotification({
             ...NOTIFICATION_SETTINGS,
-            text: 'Sign up successful'
+            text: 'Account created'
           });
           // await nhost.auth.sendVerificationEmail({
           //   email,
@@ -77,7 +76,8 @@
             ...state.filter((banner: Banner) => banner.bannerId !== ERROR.REGISTRATION),
             {
               bannerId: ERROR.REGISTRATION,
-              title: 'An error occurred while signing up',
+              bannerType: BANNER_TYPE.ERROR,
+              title: 'An error occurred while creating your account',
               description: ''
             }
           ]);
@@ -90,7 +90,8 @@
           ...state.filter((banner) => banner.bannerId !== ERROR.REGISTRATION),
           {
             bannerId: ERROR.REGISTRATION,
-            title: error?.message || 'An error occurred while signing up',
+            bannerType: BANNER_TYPE.ERROR,
+            title: error?.message || 'An error occurred while creating your account',
             description: ''
           }
         ]);
@@ -99,8 +100,8 @@
   });
 
   onMount(() => {
-    if (data?.isSignedIn) {
-      goto('/');
+    if ($isSignedIn$) {
+      goto('/settings');
     }
   });
 </script>

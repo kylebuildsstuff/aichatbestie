@@ -4,14 +4,15 @@
 
   import { NOTIFICATION_SETTINGS } from '../shared.constant';
   import { banners$, openAiApiKey$ } from '../shared.store';
-  import { autofocus } from '../shared-utils';
+  import { autofocus, chatCompletion } from '../shared-utils';
 
   import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '../shared.type';
 
   const { close } = getContext('simple-modal') as any;
   const { addNotification } = getNotificationsContext();
 
-  let opneAiApiKey = $openAiApiKey$;
+  let openAiApiKey = $openAiApiKey$;
+  let errorMessage = '';
 
   onMount(() => {
     const unsubscribe = openAiApiKey$.subscribe((value) => {
@@ -39,8 +40,19 @@
     close();
   };
 
-  const setApiKey = () => {
-    openAiApiKey$.set(opneAiApiKey);
+  const setApiKey = async () => {
+    if (openAiApiKey) {
+      const { error } = await chatCompletion('Hi', [], openAiApiKey);
+
+      if (error) {
+        console.log('error: ', error);
+        errorMessage =
+          error?.message || error?.name || error?.code || 'Connection to OpenAI failed';
+        return;
+      }
+    }
+
+    openAiApiKey$.set(openAiApiKey);
 
     addNotification({
       ...NOTIFICATION_SETTINGS,
@@ -64,7 +76,7 @@
       API key
     </label>
     <input
-      bind:value={opneAiApiKey}
+      bind:value={openAiApiKey}
       use:autofocus
       id="open-ai-key"
       name="open-ai-key"
@@ -72,6 +84,10 @@
       placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       class={`block w-full text-sm mt-1 pl-3 pr-10 py-2 rounded border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 flex-1`}
     />
+    {#if errorMessage}
+      <p class="mt-2 text-sm text-red-600">{errorMessage}</p>
+    {/if}
+
     <p class="mt-1 text-sm text-gray-600">
       <a
         href="https://beta.openai.com/docs/developer-quickstart"

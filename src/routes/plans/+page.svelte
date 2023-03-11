@@ -37,10 +37,6 @@
     showConfetti = true;
   };
 
-  const handleHideConfetti = () => {
-    showConfetti = false;
-  };
-
   /**
    * Purchase
    */

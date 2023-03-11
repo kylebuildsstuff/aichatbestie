@@ -53,7 +53,7 @@
   };
 </script>
 
-<div class="bg-white py-12">
+<div class="bg-white pt-12 pb-8">
   <div class="flex flex-col items-center mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mb-8 md:mb-12">
       <div class="mx-auto max-w-2xl text-center">
@@ -74,7 +74,7 @@
       </div>
 
       <!-- Features -->
-      <div class="flex justify-center mx-auto mt-12 lg:mt-20 max-w-xl lg:max-w-4xl">
+      <div class="flex justify-center mx-auto mt-12 lg:mt-16 max-w-xl lg:max-w-4xl">
         <dl
           class="mx-auto grid grid-cols-1 gap-x-6 gap-y-10 text-base leading-7 text-gray-600 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16"
         >

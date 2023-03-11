@@ -75,8 +75,8 @@
 </div>
 
 <!-- Socials & terms -->
-<div class="flex flex-col gap-1 py-3 justify-center items-center bg-gray-800">
-  <div class="flex flex-row gap-3 justify-center items-center text-gray-400 text-sm">
+<div class="flex flex-col gap-3 py-3 justify-center items-center bg-gray-800">
+  <div class="flex flex-row gap-5 justify-center items-center text-gray-400 text-sm">
     <DiscordIcon />
     <YoutubeIcon />
     <TwitterIcon />
@@ -93,6 +93,13 @@
       >FAQs</span
     >
     <span class="text-xs text-gray-500"> · </span>
-    <span class="text-xs text-gray-500"> AI Chat Bestie © 2023</span>
+    <span class="text-xs text-gray-500">
+      <a
+        href="/"
+        class="hover:underline hover:text-blue-400"
+      >
+        AI Chat Bestie
+      </a> © 2023</span
+    >
   </div>
 </div>

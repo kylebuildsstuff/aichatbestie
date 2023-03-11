@@ -1,6 +1,6 @@
 <script lang="ts">
   import { nanoid } from 'nanoid';
-  import { tick } from 'svelte';
+  import { getContext, tick } from 'svelte';
   import { browser } from '$app/environment';
   import { afterNavigate, goto } from '$app/navigation';
 
@@ -27,8 +27,12 @@
   import ArrowPathIcon from '$lib/shared/icons/arrow-path-icon.svelte';
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
   import Hero from '$lib/shared/components/hero.svelte';
+  import CogIcon from '$lib/shared/icons/cog-icon.svelte';
+  import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
 
   import ChatMessage from './chat-message.svelte';
+
+  const { open } = getContext('simple-modal') as any;
 
   export let chatId = '';
 
@@ -40,6 +44,10 @@
 
   $: hasMessages = messages.filter(isNotSystemMessage).length > 0;
   $: enableRegenerateMessage = !isLoading && messages.length > 2;
+
+  const openApiKeyModal = () => {
+    open(ApiKeyModal, {});
+  };
 
   afterNavigate(async () => {
     if (browser) {
@@ -420,8 +428,35 @@
       <!-- Input -->
       <div class="flex gap-2 justify-center items-center">
         <div
-          class="relative w-full flex justify-center items-center max-w-md lg:max-w-2xl xl:max-w-4xl"
+          class="relative w-full flex gap-3 justify-center items-center max-w-md lg:max-w-2xl xl:max-w-4xl"
         >
+          <!-- New chat -->
+          {#if $openAiApiKey$ && hasMessages}
+            <button
+              on:click={handleCreateNewChat}
+              type="button"
+              title="Create new chat"
+            >
+              <PlusIcon
+                overrideClasses={'text-gray-400 hover:text-gray-500 hover:bg-gray-100 flex-shrink-0 h-6 w-6 rounded-md'}
+              />
+            </button>
+          {/if}
+
+          <!-- Prompt settings -->
+          {#if hasMessages}
+            <button
+              on:click={openApiKeyModal}
+              type="button"
+              title="Create new chat"
+            >
+              <CogIcon
+                overrideClasses={'text-gray-400 hover:text-gray-500 hover:bg-gray-100 flex-shrink-0 h-6 w-6 rounded-md'}
+              />
+            </button>
+          {/if}
+
+          <!-- Textarea -->
           <textarea
             bind:this={textareaRef}
             bind:value={inputMessage}
@@ -451,19 +486,6 @@
             </button>
           {/if}
         </div>
-
-        <!-- New chat -->
-        {#if $openAiApiKey$}
-          <button
-            on:click={handleCreateNewChat}
-            type="button"
-            title="Create new chat"
-          >
-            <PlusIcon
-              overrideClasses={'text-gray-400 hover:text-gray-500 hover:bg-gray-100 flex-shrink-0 h-6 w-6 rounded-md'}
-            />
-          </button>
-        {/if}
       </div>
 
       <div class="text-xs text-center text-gray-400">

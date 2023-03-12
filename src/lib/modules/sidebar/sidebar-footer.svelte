@@ -11,6 +11,7 @@
   import LinkedinIcon from '$lib/shared/icons/linkedin-icon.svelte';
   import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
   import CogIcon from '$lib/shared/icons/cog-icon.svelte';
+  import { PRIVACY_POLICY_LINK } from '$lib/shared/shared.constant';
 
   const { handleCloseMobileSidebar } = getContext('sidebar') as any;
   const { open } = getContext('simple-modal') as any;
@@ -86,7 +87,8 @@
 
   <div class="flex gap-1">
     <a
-      href="/privacy"
+      href={PRIVACY_POLICY_LINK}
+      target="_blank"
       class="text-xs text-gray-500 hover:text-gray-300 hover:cursor-pointer"
     >
       Privacy

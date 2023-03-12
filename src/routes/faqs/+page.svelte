@@ -9,6 +9,12 @@
       answer:
         'Yes, the app is free to use. It requires you to bring your own OpenAI API key but the base features are free.'
     },
+    // How do I get a OpenAI API key?
+    {
+      question: 'How do I get a OpenAI API key?',
+      answer:
+        'You can get a OpenAI API key by creating an OpenAI account and registering an app. You can get started at https://platform.openai.com/.'
+    },
     // What are the differences between ChatGPT and AI Chat Bestie?
     {
       question: 'What are the differences between ChatGPT and AI Chat Bestie?',
@@ -55,12 +61,6 @@
       question: 'How much does it cost to use a OpenAI API Key?',
       answer:
         "It currently costs $0.002 / 1K tokens. Each token is approximately 4 English characters, so it's about $0.002 per 250 characters, which works out to be around $0.002 per 50 words or $0.04 for 1,000 words."
-    },
-    // How do I get a OpenAI API key?
-    {
-      question: 'How do I get a OpenAI API key?',
-      answer:
-        'You can get a OpenAI API key by creating an OpenAI account and registering an app. You can get started at https://platform.openai.com/.'
     },
     // Do I need to pay for a ChatGPT API Key?
     {

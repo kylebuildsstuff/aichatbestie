@@ -33,21 +33,11 @@
   import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
 
   import ChatMessage from './chat-message.svelte';
+  import ChatSettingsPopover from './chat-settings-popover.svelte';
 
   const { open } = getContext('simple-modal') as any;
 
   export let chatId = '';
-
-  /**
-   * Chat options popover
-   */
-  const [popperRef, popperContent] = createPopperActions({
-    placement: 'top',
-    strategy: 'fixed'
-  });
-  const extraOpts = {
-    modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
-  };
 
   let isLoading = false;
   let showChatSettings = false;
@@ -61,6 +51,17 @@
    */
   $: hasMessages = messages.filter(isNotSystemMessage).length > 0;
   $: enableRegenerateMessage = !isLoading && messages.length > 2;
+
+  /**
+   * Chat options popover
+   */
+  const [popperRef, popperContent] = createPopperActions({
+    placement: 'top-start',
+    strategy: 'fixed'
+  });
+  const extraOpts = {
+    modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
+  };
 
   const openApiKeyModal = () => {
     open(ApiKeyModal, {});
@@ -466,14 +467,10 @@
           <!-- Chat settings -->
           {#if showChatSettings}
             <div
-              id="tooltip"
               use:popperContent={extraOpts}
+              id="tooltip"
             >
-              My tooltip
-              <div
-                id="arrow"
-                data-popper-arrow
-              />
+              <ChatSettingsPopover />
             </div>
           {/if}
 

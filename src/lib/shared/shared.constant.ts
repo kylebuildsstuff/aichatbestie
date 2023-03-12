@@ -9,7 +9,7 @@ export const USER_ICON_THUMBNAIL_BG_CDN_LINK = `https://keylayapps.nyc3.cdn.digi
 export const PRIVACY_POLICY_LINK = `https://aichatbestie.notion.site/Privacy-policy-2dad1adbd8c045e7a431070456647ef7`;
 
 export const EMAIL_LINK = `mailto:aichatbestie@gmail.com`;
-export const DISCORD_LINK = `https://discord.gg/xDWFE3n6dc`;
+export const DISCORD_LINK = `https://discord.gg/vrkZWz8hpv`;
 export const YOUTUBE_LINK = `https://www.youtube.com/@aichatbestie`;
 export const TWITTER_LINK = `https://twitter.com/@kylebuildsstuff`;
 
@@ -71,3 +71,198 @@ export const NOVELIST_PROMPT = `I want you to act as a novelist. You will come u
 export const SCREENWRITER_PROMPT = `I want you to act as a screenwriter. You will develop an engaging and creative script for either a feature length film, or a Web Series that can captivate its viewers. Start with coming up with interesting characters, the setting of the story, dialogues between the characters etc. Once your character development is complete - create an exciting storyline filled with twists and turns that keeps the viewers in suspense until the end. My first request is "I need to write a romantic drama movie set in Paris."`;
 export const DEBATE_COACH_PROMPT = `I want you to act as a debate coach. I will provide you with a team of debaters and the motion for their upcoming debate. Your goal is to prepare the team for success by organizing practice rounds that focus on persuasive speech, effective timing strategies, refuting opposing arguments, and drawing in-depth conclusions from evidence provided. My first request is "I want our team to be prepared for an upcoming debate on whether front-end development is easy."`;
 export const COMPOSER_PROMPT = `I want you to act as a composer. I will provide the lyrics to a song and you will create music for it. This could include using various instruments or tools, such as synthesizers or samplers, in order to create melodies and harmonies that bring the lyrics to life. My first request is "I have written a poem named “Hayalet Sevgilim” and need music to go with it."`;
+
+export const PROMPT_OPTIONS = [
+  {
+    promptId: 'storyteller',
+    promptLabel: 'Act as a Storyteller',
+    prompt: STORYTELLER_PROMPT,
+    characterCount: STORYTELLER_PROMPT.length
+  },
+  {
+    promptId: 'STORYTELLER_PROMPT',
+    promptLabel: 'Storyteller',
+    prompt: STORYTELLER_PROMPT,
+    characterCount: STORYTELLER_PROMPT.length
+  },
+  {
+    promptId: 'CHARACTER_FROM_ANYTHING_PROMPT',
+    promptLabel: 'Character from anything',
+    prompt: CHARACTER_FROM_ANYTHING_PROMPT,
+    characterCount: CHARACTER_FROM_ANYTHING_PROMPT.length
+  },
+  {
+    promptId: 'MIDJOURNEY_PROMPT_GENERATOR_PROMPT',
+    promptLabel: 'Midjourney prompt generator',
+    prompt: MIDJOURNEY_PROMPT_GENERATOR_PROMPT,
+    characterCount: MIDJOURNEY_PROMPT_GENERATOR_PROMPT.length
+  },
+  {
+    promptId: 'POSITION_INTERVIEWER_PROMPT',
+    promptLabel: 'Position interviewer',
+    prompt: POSITION_INTERVIEWER_PROMPT,
+    characterCount: POSITION_INTERVIEWER_PROMPT.length
+  },
+  {
+    promptId: 'MENTAL_HEALTH_ADVISER_PROMPT',
+    promptLabel: 'Mental health adviser',
+    prompt: MENTAL_HEALTH_ADVISER_PROMPT,
+    characterCount: MENTAL_HEALTH_ADVISER_PROMPT.length
+  },
+  {
+    promptId: 'RELATIONSHIP_COACH_PROMPT',
+    promptLabel: 'Relationship_coach',
+    prompt: RELATIONSHIP_COACH_PROMPT,
+    characterCount: RELATIONSHIP_COACH_PROMPT.length
+  },
+  {
+    promptId: 'DEBATER_PROMPT',
+    promptLabel: 'Debater',
+    prompt: DEBATER_PROMPT,
+    characterCount: DEBATER_PROMPT.length
+  },
+  {
+    promptId: 'MOTIVATIONAL_COACH_PROMPT',
+    promptLabel: 'Motivational coach',
+    prompt: MOTIVATIONAL_COACH_PROMPT,
+    characterCount: MOTIVATIONAL_COACH_PROMPT.length
+  },
+  {
+    promptId: 'CAREER_COUNSELOR_PROMPT',
+    promptLabel: 'Career counselor',
+    prompt: CAREER_COUNSELOR_PROMPT,
+    characterCount: CAREER_COUNSELOR_PROMPT.length
+  },
+  {
+    promptId: 'PHILOSOPHER_PROMPT',
+    promptLabel: 'Philosopher',
+    prompt: PHILOSOPHER_PROMPT,
+    characterCount: PHILOSOPHER_PROMPT.length
+  },
+  {
+    promptId: 'TRAVEL_GUIDE_PROMPT',
+    promptLabel: 'Travel guide',
+    prompt: TRAVEL_GUIDE_PROMPT,
+    characterCount: TRAVEL_GUIDE_PROMPT.length
+  },
+  {
+    promptId: 'EXCEL_SHEET_PROMPT',
+    promptLabel: 'Excel sheet',
+    prompt: EXCEL_SHEET_PROMPT,
+    characterCount: EXCEL_SHEET_PROMPT.length
+  },
+  {
+    promptId: 'STACKOVERFLOW_POST_PROMPT',
+    promptLabel: 'Stackoverflow post',
+    prompt: STACKOVERFLOW_POST_PROMPT,
+    characterCount: STACKOVERFLOW_POST_PROMPT.length
+  },
+  {
+    promptId: 'STARTUP_IDEA_GENERATOR_PROMPT',
+    promptLabel: 'Startup idea generator',
+    prompt: STARTUP_IDEA_GENERATOR_PROMPT,
+    characterCount: STARTUP_IDEA_GENERATOR_PROMPT.length
+  },
+  {
+    promptId: 'ENGLISH_TRANSLATOR_AND_IMPROVER_PROMPT',
+    promptLabel: 'English translator and improver',
+    prompt: ENGLISH_TRANSLATOR_AND_IMPROVER_PROMPT,
+    characterCount: ENGLISH_TRANSLATOR_AND_IMPROVER_PROMPT.length
+  },
+  {
+    promptId: 'ADVERTISTER_PROMPT',
+    promptLabel: 'Advertister',
+    prompt: ADVERTISTER_PROMPT,
+    characterCount: ADVERTISTER_PROMPT.length
+  },
+  {
+    promptId: 'DREAM_INTERPRETER_PROMPT',
+    promptLabel: 'Dream interpreter',
+    prompt: DREAM_INTERPRETER_PROMPT,
+    characterCount: DREAM_INTERPRETER_PROMPT.length
+  },
+  {
+    promptId: 'APHORISM_BOOK_PROMPT',
+    promptLabel: 'Aphorism book',
+    prompt: APHORISM_BOOK_PROMPT,
+    characterCount: APHORISM_BOOK_PROMPT.length
+  },
+  {
+    promptId: 'SELF_HELP_BOOK_PROMPT',
+    promptLabel: 'Self help book',
+    prompt: SELF_HELP_BOOK_PROMPT,
+    characterCount: SELF_HELP_BOOK_PROMPT.length
+  },
+  {
+    promptId: 'AI_ASSISTED_DOCTOR_PROMPT',
+    promptLabel: 'AI assisted doctor',
+    prompt: AI_ASSISTED_DOCTOR_PROMPT,
+    characterCount: AI_ASSISTED_DOCTOR_PROMPT.length
+  },
+  {
+    promptId: 'STAND_UP_COMEDIAN_PROMPT',
+    promptLabel: 'Stand up comedian',
+    prompt: STAND_UP_COMEDIAN_PROMPT,
+    characterCount: STAND_UP_COMEDIAN_PROMPT.length
+  },
+  {
+    promptId: 'LOGISTICIAN_PROMPT',
+    promptLabel: 'Logistician',
+    prompt: LOGISTICIAN_PROMPT,
+    characterCount: LOGISTICIAN_PROMPT.length
+  },
+  {
+    promptId: 'BUDDHA_PROMPT',
+    promptLabel: 'Buddha',
+    prompt: BUDDHA_PROMPT,
+    characterCount: BUDDHA_PROMPT.length
+  },
+  {
+    promptId: 'PERSONAL_TRAINER_PROMPT',
+    promptLabel: 'Personal trainer',
+    prompt: PERSONAL_TRAINER_PROMPT,
+    characterCount: PERSONAL_TRAINER_PROMPT.length
+  },
+  {
+    promptId: 'RECRUITER_PROMPT',
+    promptLabel: 'Recruiter',
+    prompt: RECRUITER_PROMPT,
+    characterCount: RECRUITER_PROMPT.length
+  },
+  {
+    promptId: 'MOTIVATIONAL_SPEAKER_PROMPT',
+    promptLabel: 'Motivational speaker',
+    prompt: MOTIVATIONAL_SPEAKER_PROMPT,
+    characterCount: MOTIVATIONAL_SPEAKER_PROMPT.length
+  },
+  {
+    promptId: 'MOVIE_CRITIC_PROMPT',
+    promptLabel: 'Movie critic',
+    prompt: MOVIE_CRITIC_PROMPT,
+    characterCount: MOVIE_CRITIC_PROMPT.length
+  },
+  {
+    promptId: 'NOVELIST_PROMPT',
+    promptLabel: 'Novelist',
+    prompt: NOVELIST_PROMPT,
+    characterCount: NOVELIST_PROMPT.length
+  },
+  {
+    promptId: 'SCREENWRITER_PROMPT',
+    promptLabel: 'Screenwriter',
+    prompt: SCREENWRITER_PROMPT,
+    characterCount: SCREENWRITER_PROMPT.length
+  },
+  {
+    promptId: 'DEBATE_COACH_PROMPT',
+    promptLabel: 'Debate coach',
+    prompt: DEBATE_COACH_PROMPT,
+    characterCount: DEBATE_COACH_PROMPT.length
+  },
+  {
+    promptId: 'COMPOSER_PROMPT',
+    promptLabel: 'Composer',
+    prompt: COMPOSER_PROMPT,
+    characterCount: COMPOSER_PROMPT.length
+  }
+];

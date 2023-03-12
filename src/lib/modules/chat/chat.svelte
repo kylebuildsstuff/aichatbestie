@@ -92,12 +92,16 @@
     messages = updatedMessages;
   };
 
+  const applyPrompt = (prompt: string) => {
+    inputMessage = prompt;
+  };
+
   const openApiKeyModal = () => {
     open(ApiKeyModal, {});
   };
 
   const openPromptsModal = () => {
-    open(PromptsModal, {});
+    open(PromptsModal, { updateSystemMessage, applyPrompt });
   };
 
   const openSystemMessageModal = () => {

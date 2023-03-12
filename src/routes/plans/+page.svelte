@@ -165,6 +165,23 @@
                       clip-rule="evenodd"
                     />
                   </svg>
+
+                  Device syncing
+                </li>
+
+                <li class="flex gap-x-3">
+                  <svg
+                    class="h-6 w-5 flex-none text-indigo-600"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
                   Dark mode
                 </li>
 
@@ -183,13 +200,29 @@
                   </svg>
                   Custom themes
                 </li>
+
+                <li class="flex gap-x-3">
+                  <svg
+                    class="h-6 w-5 flex-none text-indigo-600"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  ...And more!
+                </li>
               </ul>
             </div>
             <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
               <div
                 class="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16"
               >
-                <div class="mx-auto max-w-xs px-8">
+                <div class="mx-auto w-full max-w-xs px-8">
                   {#if $isUpgraded$}
                     <p class="text-base font-semibold text-gray-600">
                       Thank you for your support
@@ -256,7 +289,10 @@
 
                   {#if !$isUpgraded$}
                     <p class="mt-6 text-xs leading-5 text-gray-600">
-                      Invoices and receipts available for easy company reimbursement
+                      Got questions? Try our <a
+                        href="/faqs"
+                        class="underline">FAQs</a
+                      >.
                     </p>
                   {/if}
                 </div>

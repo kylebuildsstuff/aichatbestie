@@ -561,7 +561,7 @@
         >
           AI Chat Bestie
         </a>
-        - an enhanced UI wrapper for ChatGPT
+        - get more out of ChatGPT
       </div>
     </form>
   </div>

@@ -44,7 +44,7 @@
     />
 
     <p class="mt-1 text-sm text-gray-400">
-      The system prompt (or message) sets the context and helps guide responses.
+      The system message sets the context of the chat and helps guide responses.
     </p>
   </div>
 

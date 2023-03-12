@@ -36,8 +36,7 @@
   import ChatMessage from './chat-message.svelte';
   import ChatSettingsPopover from './chat-settings-popover.svelte';
   import PromptsModal from './prompts-modal.svelte';
-  import CharactersModal from './characters-modal.svelte';
-  import SystemPromptModal from './system-prompt-modal.svelte';
+  import SystemMessageModal from './system-message-modal.svelte';
 
   const { open } = getContext('simple-modal') as any;
 
@@ -97,18 +96,12 @@
     open(ApiKeyModal, {});
   };
 
-  // Recipes add templated user message to messages
   const openPromptsModal = () => {
     open(PromptsModal, {});
   };
 
-  // Characters alter the system message
-  const openCharactersModal = () => {
-    open(CharactersModal, {});
-  };
-
-  const openSystemPromptModal = () => {
-    open(SystemPromptModal, {
+  const openSystemMessageModal = () => {
+    open(SystemMessageModal, {
       systemMessageContent: systemMessage?.content || '',
       updateSystemMessage
     });
@@ -116,8 +109,7 @@
 
   setContext('chat', {
     openPromptsModal,
-    openCharactersModal,
-    openSystemPromptModal,
+    openSystemMessageModal,
     openApiKeyModal,
     showChatSettings$
   });

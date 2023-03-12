@@ -1,11 +1,18 @@
 <script lang="ts">
   import { resizeTextarea } from '$lib/shared/shared-utils';
-  import { getContext } from 'svelte';
+  import { getContext, onMount } from 'svelte';
 
   const { close } = getContext('simple-modal') as any;
 
   export let systemMessageContent = '';
   export let updateSystemMessage;
+
+  let textareaRef;
+
+  onMount(() => {
+    textareaRef.style.height = 'auto';
+    textareaRef.style.height = `${textareaRef.scrollHeight}px`;
+  });
 
   const handleCta = () => {
     updateSystemMessage(systemMessageContent);
@@ -15,7 +22,7 @@
 
 <div class="bg-white rounded-lg border-gray-200 divide-y">
   <div class="bg-white px-3 py-2">
-    <h3 class="text-lg leading-6 font-medium text-gray-900">System prompt</h3>
+    <h3 class="text-lg leading-6 font-medium text-gray-900">System message</h3>
   </div>
 
   <div class="px-4 py-5 sm:p-6">
@@ -24,9 +31,10 @@
       for="name"
       class="block text-sm font-medium text-gray-700"
     >
-      System prompt
+      System message
     </label>
     <textarea
+      bind:this={textareaRef}
       bind:value={systemMessageContent}
       on:input={resizeTextarea}
       rows={1}

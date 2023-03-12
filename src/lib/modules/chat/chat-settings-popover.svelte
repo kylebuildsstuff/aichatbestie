@@ -3,17 +3,11 @@
 
   import { onClickOutside } from '$lib/shared/shared-utils';
   import BookOpenIcon from '$lib/shared/icons/book-open-icon.svelte';
-  import UsersIcon from '$lib/shared/icons/users-icon.svelte';
   import WrenchIcon from '$lib/shared/icons/wrench-icon.svelte';
   import KeyIcon from '$lib/shared/icons/key-icon.svelte';
 
-  let {
-    openPromptsModal,
-    openCharactersModal,
-    openSystemPromptModal,
-    openApiKeyModal,
-    showChatSettings$
-  } = getContext('chat') as any;
+  let { openPromptsModal, openSystemMessageModal, openApiKeyModal, showChatSettings$ } =
+    getContext('chat') as any;
 </script>
 
 <div
@@ -38,28 +32,18 @@
       class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-md"
     >
       <BookOpenIcon overrideClasses={`w-4 h-4 text-gray-500`} />
-      Prompts
-    </button>
-    <button
-      on:click={() => {
-        openCharactersModal();
-        showChatSettings$.set(false);
-      }}
-      class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-md"
-    >
-      <UsersIcon overrideClasses={`w-4 h-4 text-gray-500`} />
-      Characters
+      Prompt library
     </button>
 
     <button
       on:click={() => {
-        openSystemPromptModal();
+        openSystemMessageModal();
         showChatSettings$.set(false);
       }}
       class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-md"
     >
       <WrenchIcon overrideClasses={`w-4 h-4 text-gray-500`} />
-      System prompt
+      System message
     </button>
 
     <button

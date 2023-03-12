@@ -2,6 +2,10 @@
   import { getContext } from 'svelte';
 
   import { onClickOutside } from '$lib/shared/shared-utils';
+  import BookOpenIcon from '$lib/shared/icons/book-open-icon.svelte';
+  import UsersIcon from '$lib/shared/icons/users-icon.svelte';
+  import WrenchIcon from '$lib/shared/icons/wrench-icon.svelte';
+  import KeyIcon from '$lib/shared/icons/key-icon.svelte';
 
   let {
     openPromptsModal,
@@ -31,8 +35,9 @@
         openPromptsModal();
         showChatSettings$.set(false);
       }}
-      class="w-full p-2 text-start hover:bg-gray-100 rounded-md"
+      class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-md"
     >
+      <BookOpenIcon overrideClasses={`w-4 h-4 text-gray-500`} />
       Prompts
     </button>
     <button
@@ -40,8 +45,9 @@
         openCharactersModal();
         showChatSettings$.set(false);
       }}
-      class="w-full p-2 text-start hover:bg-gray-100 rounded-md"
+      class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-md"
     >
+      <UsersIcon overrideClasses={`w-4 h-4 text-gray-500`} />
       Characters
     </button>
 
@@ -50,8 +56,9 @@
         openSystemPromptModal();
         showChatSettings$.set(false);
       }}
-      class="w-full p-2 text-start hover:bg-gray-100 rounded-md"
+      class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-md"
     >
+      <WrenchIcon overrideClasses={`w-4 h-4 text-gray-500`} />
       System prompt
     </button>
 
@@ -60,8 +67,9 @@
         openApiKeyModal();
         showChatSettings$.set(false);
       }}
-      class="w-full p-2 text-start hover:bg-gray-100 rounded-b-md"
+      class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-b-md"
     >
+      <KeyIcon overrideClasses={`w-4 h-4 text-gray-500`} />
       Change API key
     </button>
   </div>

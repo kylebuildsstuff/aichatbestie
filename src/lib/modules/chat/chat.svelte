@@ -75,6 +75,24 @@
     modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
   };
 
+  // This actually works! References somehow get preserved when passed into modal and it updates cleanly.
+  const updateSystemMessage = (systemMessageContent: string) => {
+    const systemMessageIndex = messages.findIndex(
+      (message) => message.role === MESSAGE_ROLE.SYSTEM
+    );
+    const updatedMessages = messages.map((message, index) => {
+      if (index === systemMessageIndex) {
+        return {
+          role: MESSAGE_ROLE.SYSTEM,
+          content: systemMessageContent
+        };
+      }
+      return message;
+    });
+
+    messages = updatedMessages;
+  };
+
   const openApiKeyModal = () => {
     open(ApiKeyModal, {});
   };
@@ -92,12 +110,8 @@
   const openSystemPromptModal = () => {
     open(SystemPromptModal, {
       systemMessageContent: systemMessage?.content || '',
-      updateMessages
+      updateSystemMessage
     });
-  };
-
-  const updateMessages = (msgs) => {
-    messages = msgs;
   };
 
   setContext('chat', {

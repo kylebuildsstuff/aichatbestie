@@ -5,15 +5,11 @@
   const { close } = getContext('simple-modal') as any;
 
   export let systemMessageContent = '';
-  export let updateMessages;
-
-  console.log('systemMessageContent: ', systemMessageContent);
+  export let updateSystemMessage;
 
   const handleCta = () => {
-    updateMessages({
-      role: 'system',
-      content: 'hoohah'
-    });
+    updateSystemMessage(systemMessageContent);
+    close();
   };
 </script>
 

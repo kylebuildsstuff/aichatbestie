@@ -3,7 +3,6 @@
   import { getContext, tick } from 'svelte';
   import { browser } from '$app/environment';
   import { afterNavigate, goto } from '$app/navigation';
-  import { Popover, PopoverButton, PopoverPanel } from '@rgossiaux/svelte-headlessui';
   import { createPopperActions } from 'svelte-popperjs';
 
   import LoadingButtonSpinnerIcon from '$lib/shared/icons/loading-button-spinner-icon.svelte';
@@ -12,7 +11,8 @@
     chatCompletion,
     createNewChat,
     createNewChatListItem,
-    isNotSystemMessage
+    isNotSystemMessage,
+    onClickOutside
   } from '$lib/shared/shared-utils';
   import { banners$, chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
   import {
@@ -38,12 +38,9 @@
 
   export let chatId = '';
 
-  let isLoading = false;
-  let textareaRef;
-  let inputMessage = '';
-  let messages =
-    chatId && $chats$?.[chatId] ? $chats$?.[chatId]?.messages : ([] as any);
-
+  /**
+   * Chat options popover
+   */
   const [popperRef, popperContent] = createPopperActions({
     placement: 'top',
     strategy: 'fixed'
@@ -52,8 +49,16 @@
     modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
   };
 
-  let showTooltip = false;
+  let isLoading = false;
+  let showChatSettings = false;
+  let textareaRef;
+  let inputMessage = '';
+  let messages =
+    chatId && $chats$?.[chatId] ? $chats$?.[chatId]?.messages : ([] as any);
 
+  /**
+   * Messages
+   */
   $: hasMessages = messages.filter(isNotSystemMessage).length > 0;
   $: enableRegenerateMessage = !isLoading && messages.length > 2;
 
@@ -61,6 +66,9 @@
     open(ApiKeyModal, {});
   };
 
+  /**
+   * Scroll to the bottom
+   */
   afterNavigate(async () => {
     if (browser) {
       // The tick is needed for some reason, if not here then below
@@ -456,8 +464,7 @@
           {/if}
 
           <!-- Chat settings -->
-
-          {#if showTooltip}
+          {#if showChatSettings}
             <div
               id="tooltip"
               use:popperContent={extraOpts}
@@ -469,10 +476,12 @@
               />
             </div>
           {/if}
+
           <button
             use:popperRef
-            on:mouseenter={() => (showTooltip = true)}
-            on:mouseleave={() => (showTooltip = false)}
+            use:onClickOutside
+            on:click={() => (showChatSettings = !showChatSettings)}
+            on:clickoutside={() => (showChatSettings = false)}
             type="button"
             title="Chat settings"
           >
@@ -480,28 +489,6 @@
               overrideClasses={'text-gray-400 hover:text-gray-600 flex-shrink-0 h-6 w-6 rounded-md'}
             />
           </button>
-
-          <!-- <Popover style="position: relative;">
-            <PopoverButton class="flex self-center items-center justify-center">
-              <button
-                type="button"
-                title="Chat settings"
-              >
-                <CogIcon
-                  overrideClasses={'text-gray-400 hover:text-gray-600 flex-shrink-0 h-6 w-6 rounded-md'}
-                />
-              </button>
-            </PopoverButton>
-
-            <PopoverPanel style="position: absolute; z-index: 10;">
-              <div class="panel-contents">
-                <a href="/analytics">Analytics</a>
-                <a href="/engagement">Engagement</a>
-                <a href="/security">Security</a>
-                <a href="/integrations">Integrations</a>
-              </div>
-            </PopoverPanel>
-          </Popover> -->
 
           <!-- Textarea -->
           <textarea

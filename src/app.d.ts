@@ -18,5 +18,3 @@ declare namespace svelte.JSX {
     onclickoutside?: (event: any) => any;
   }
 }
-
-export {};

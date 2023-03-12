@@ -98,7 +98,7 @@
   <Modal
     closeButton={true}
     unstyled={false}
-    styleWindow={{ width: '80%' }}
+    styleWindow={{ width: '90%' }}
   >
     <slot />
   </Modal>

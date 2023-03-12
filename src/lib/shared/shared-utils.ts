@@ -1,9 +1,5 @@
 import { isEmpty, isNil } from 'ramda';
-import {
-  CHAT_COMPLETION_ENDPOINT,
-  DEFAULT_SYSTEM_MESSAGE,
-  DEFAULT_SYSTEM_MESSAGE_CONTENT
-} from './shared.constant';
+import { CHAT_COMPLETION_ENDPOINT, DEFAULT_SYSTEM_MESSAGE } from './shared.constant';
 import { user$, userSettings$ } from './shared.store';
 import {
   MESSAGE_ROLE,
@@ -171,15 +167,11 @@ export const createNewChatListItem = (
 
 export const createNewChat = (
   chatId: string,
-  config = {
-    systemMessage: DEFAULT_SYSTEM_MESSAGE_CONTENT,
-    messages: [DEFAULT_SYSTEM_MESSAGE]
-  }
+  messages = [DEFAULT_SYSTEM_MESSAGE]
 ): Chat => {
   return {
     chatId,
-    systemMessage: config?.systemMessage,
-    messages: config?.messages
+    messages
   };
 };
 
@@ -196,3 +188,8 @@ export const clearUserData = () => {
   user$.set({} as any);
   userSettings$.set({} as any);
 };
+
+export function resizeTextarea(event) {
+  event.target.style.height = 'auto';
+  event.target.style.height = event.target.scrollHeight + 'px';
+}

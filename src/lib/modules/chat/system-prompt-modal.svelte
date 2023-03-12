@@ -1,7 +1,12 @@
 <script lang="ts">
+  import { resizeTextarea } from '$lib/shared/shared-utils';
   import { getContext } from 'svelte';
 
   const { close } = getContext('simple-modal') as any;
+
+  export let systemMessageContent = '';
+
+  console.log('systemMessageContent: ', systemMessageContent);
 
   const handleCta = () => {};
 </script>
@@ -12,19 +17,25 @@
   </div>
 
   <div class="px-4 py-5 sm:p-6">
-    <!-- API key -->
+    <!-- System prompt -->
     <label
       for="name"
       class="block text-sm font-medium text-gray-700"
     >
-      API key
+      System prompt
     </label>
-    <input
-      id="open-ai-key"
-      name="open-ai-key"
-      type="text"
+    <textarea
+      bind:value={systemMessageContent}
+      on:input={resizeTextarea}
+      rows={1}
+      id="system-prompt"
+      name="system-prompt"
       class={`block w-full text-sm mt-1 pl-3 pr-10 py-2 rounded border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 flex-1`}
     />
+
+    <p class="mt-1 text-sm text-gray-400">
+      The system prompt (or message) sets the context and helps guide responses.
+    </p>
   </div>
 
   <div class="pt-5">

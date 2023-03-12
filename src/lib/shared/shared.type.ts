@@ -74,7 +74,6 @@ export type ChatListItem = {
 
 export type Chat = {
   chatId: string;
-  systemMessage: string;
   messages: Message[];
 };
 

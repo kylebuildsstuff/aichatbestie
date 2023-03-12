@@ -13,7 +13,7 @@
     createNewChat,
     createNewChatListItem,
     isNotSystemMessage,
-    
+    resizeTextarea
   } from '$lib/shared/shared-utils';
   import { banners$, chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
   import {
@@ -23,10 +23,7 @@
     MESSAGE_ROLE,
     type Message
   } from '$lib/shared/shared.type';
-  import {
-    CHAT_LABELLING_PROMPT,
-    DEFAULT_SYSTEM_MESSAGE_CONTENT
-  } from '$lib/shared/shared.constant';
+  import { CHAT_LABELLING_PROMPT } from '$lib/shared/shared.constant';
   import ArrowPathIcon from '$lib/shared/icons/arrow-path-icon.svelte';
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
   import Hero from '$lib/shared/components/hero.svelte';
@@ -52,8 +49,13 @@
   /**
    * Messages
    */
-  $: hasMessages = messages.filter(isNotSystemMessage).length > 0;
+  $: systemMessage = messages.find((message) => message.role === MESSAGE_ROLE.SYSTEM);
+  $: hasChatMessages = messages.filter(isNotSystemMessage).length > 0;
   $: enableRegenerateMessage = !isLoading && messages.length > 2;
+
+  $: {
+    console.log('messages: ', messages);
+  }
 
   /**
    * Chat options popover
@@ -83,7 +85,9 @@
   };
 
   const openSystemPromptModal = () => {
-    open(SystemPromptModal, {});
+    open(SystemPromptModal, {
+      systemMessageContent: systemMessage?.content || ''
+    });
   };
 
   setContext('chat', {
@@ -111,11 +115,6 @@
   /**
    * Resize textarea
    */
-  function resizeTextarea(event) {
-    event.target.style.height = 'auto';
-    event.target.style.height = event.target.scrollHeight + 'px';
-  }
-
   const resetTextareaHeight = () => {
     textareaRef.style.height = 'auto';
   };
@@ -157,7 +156,7 @@
   /**
    * Insert new chat (For the root route)
    */
-  const insertNewChat = (msgs, systemMessage) => {
+  const insertNewChat = (msgs) => {
     // https://zelark.github.io/nano-id-cc/
     const newChatId = nanoid(8);
     chatId = newChatId;
@@ -167,10 +166,7 @@
       return chatList;
     });
     chats$.update((chats) => {
-      chats[newChatId] = createNewChat(newChatId, {
-        systemMessage,
-        messages: msgs
-      });
+      chats[newChatId] = createNewChat(newChatId, msgs);
       return chats;
     });
 
@@ -213,13 +209,9 @@
     }
   };
 
-  const upsertChat = (
-    chatId: string,
-    msgs: Message[],
-    systemMessageContent: string
-  ) => {
+  const upsertChat = (chatId: string, msgs: Message[]) => {
     if (!chatId) {
-      insertNewChat(msgs, systemMessageContent);
+      insertNewChat(msgs);
     } else {
       updateChat(chatId, msgs);
     }
@@ -266,7 +258,7 @@
     messages = messages.filter((_, i: number) => i !== messages.length - 1);
     const _inputMessage = messages[messages.length - 1].content;
 
-    upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
+    upsertChat(chatId, messages);
 
     if (browser) {
       await tick();
@@ -304,7 +296,7 @@
     }
 
     messages = messages.concat(data);
-    upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
+    upsertChat(chatId, messages);
     isLoading = false;
 
     if (browser) {
@@ -339,7 +331,7 @@
     };
 
     messages = messages.concat([userMessage]);
-    upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
+    upsertChat(chatId, messages);
 
     if (browser) {
       await tick();
@@ -380,7 +372,7 @@
     }
 
     messages = messages.concat(data);
-    upsertChat(chatId, messages, DEFAULT_SYSTEM_MESSAGE_CONTENT);
+    upsertChat(chatId, messages);
     isLoading = false;
 
     // Create and set title for chat
@@ -424,7 +416,7 @@
   };
 </script>
 
-{#if !hasMessages}
+{#if !hasChatMessages}
   <Hero />
 {/if}
 
@@ -479,7 +471,7 @@
           class="relative w-full flex gap-3 justify-center items-center max-w-md lg:max-w-2xl xl:max-w-4xl"
         >
           <!-- New chat -->
-          {#if $openAiApiKey$ && hasMessages}
+          {#if $openAiApiKey$ && hasChatMessages}
             <button
               on:click={handleCreateNewChat}
               type="button"

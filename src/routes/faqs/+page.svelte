@@ -42,13 +42,13 @@
     {
       question: 'Which features are free to use?',
       answer:
-        "Chat messages to and from OpenAI's API, local storage of your data, seaching chat history, and certain prompt customizations are free to use."
+        "Chat messages to and from OpenAI's API, local storage of your data, seaching chat history, and some prompt customizations are free to use."
     },
     // What are the benefits of purchasing?
     {
       question: 'What are the benefits of purchasing a Besties Forever membership?',
       answer:
-        'Purchasing a one-time Besties Forever membership gives you full access to all current and future premium features. Upcoming features include access to prompt customizations, saved prompt profiles, custom UI changes, and more.'
+        'Purchasing a one-time Besties Forever membership gives you full access to all current and future premium features. Upcoming features include access to the prompt library, more prompt customizations, saved prompt profiles, device syncing, custom UI changes, and more.'
     },
     // How many chats can I have?
     {

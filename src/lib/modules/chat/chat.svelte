@@ -15,7 +15,13 @@
     isNotSystemMessage,
     resizeTextarea
   } from '$lib/shared/shared-utils';
-  import { banners$, chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
+  import {
+    banners$,
+    chatList$,
+    chats$,
+    openAiApiKey$,
+    user$
+  } from '$lib/shared/shared.store';
   import {
     BANNER_TYPE,
     ERROR,
@@ -56,10 +62,6 @@
   $: systemMessage = messages.find((message) => message.role === MESSAGE_ROLE.SYSTEM);
   $: hasChatMessages = messages.filter(isNotSystemMessage).length > 0;
   $: enableRegenerateMessage = !isLoading && messages.length > 2;
-
-  $: {
-    console.log('messages: ', messages);
-  }
 
   /**
    * Chat options popover

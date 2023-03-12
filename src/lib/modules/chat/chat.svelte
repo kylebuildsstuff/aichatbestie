@@ -1,6 +1,7 @@
 <script lang="ts">
   import { nanoid } from 'nanoid';
-  import { getContext, tick } from 'svelte';
+  import { getContext, setContext, tick } from 'svelte';
+  import { writable } from 'svelte/store';
   import { browser } from '$app/environment';
   import { afterNavigate, goto } from '$app/navigation';
   import { createPopperActions } from 'svelte-popperjs';
@@ -40,7 +41,6 @@
   export let chatId = '';
 
   let isLoading = false;
-  let showChatSettings = false;
   let textareaRef;
   let inputMessage = '';
   let messages =
@@ -55,6 +55,8 @@
   /**
    * Chat options popover
    */
+  let showChatSettings$ = writable(false);
+
   const [popperRef, popperContent] = createPopperActions({
     placement: 'top-start',
     strategy: 'fixed'
@@ -66,6 +68,11 @@
   const openApiKeyModal = () => {
     open(ApiKeyModal, {});
   };
+
+  setContext('chat', {
+    openApiKeyModal,
+    showChatSettings$
+  });
 
   /**
    * Scroll to the bottom
@@ -465,7 +472,7 @@
           {/if}
 
           <!-- Chat settings -->
-          {#if showChatSettings}
+          {#if $showChatSettings$}
             <div
               use:popperContent={extraOpts}
               id="tooltip"
@@ -476,9 +483,7 @@
 
           <button
             use:popperRef
-            use:onClickOutside
-            on:click={() => (showChatSettings = !showChatSettings)}
-            on:clickoutside={() => (showChatSettings = false)}
+            on:click={() => showChatSettings$.set(!$showChatSettings$)}
             type="button"
             title="Chat settings"
           >

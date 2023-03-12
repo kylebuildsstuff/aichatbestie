@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { DateTime } from 'luxon';
-  import { getNotificationsContext } from 'svelte-notifications';
+  // import { onMount } from 'svelte';
+  // import { DateTime } from 'luxon';
+  // import { getNotificationsContext } from 'svelte-notifications';
 
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
   import { banners$, isSignedIn$, isUpgraded$ } from '$lib/shared/shared.store';
@@ -11,7 +11,7 @@
   import { goto } from '$app/navigation';
   import Confetti from '$lib/shared/components/confetti.svelte';
 
-  const { addNotification } = getNotificationsContext();
+  // const { addNotification } = getNotificationsContext();
 
   let showConfetti = false;
 
@@ -19,16 +19,16 @@
    * Early bird countdown
    */
   // early bird pricing ends March 16th, 2023 8pm EST
-  const earlyBirdEnds = DateTime.fromISO('2023-03-26T20:00:00.000Z');
-  $: countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
-  $: formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
+  // const earlyBirdEnds = DateTime.fromISO('2023-03-26T20:00:00.000Z');
+  // $: countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
+  // $: formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
 
-  onMount(() => {
-    setInterval(() => {
-      countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
-      formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
-    }, 1000);
-  });
+  // onMount(() => {
+  //   setInterval(() => {
+  //     countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
+  //     formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
+  //   }, 1000);
+  // });
 
   /**
    * Confetti
@@ -214,11 +214,11 @@
                       </span>
                     </p>
                     <p class="mt-2 text-xs font-semibold text-gray-600">
-                      Early bird price ends in
+                      Early bird launch price
                     </p>
-                    <p class="mt-2 text-sm font-semibold text-gray-600">
+                    <!-- <p class="mt-2 text-sm font-semibold text-gray-600">
                       {formattedCountdownString}
-                    </p>
+                    </p> -->
                   {/if}
 
                   {#if $isUpgraded$}

@@ -13,7 +13,7 @@
     createNewChat,
     createNewChatListItem,
     isNotSystemMessage,
-    onClickOutside
+    
   } from '$lib/shared/shared-utils';
   import { banners$, chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
   import {
@@ -35,6 +35,9 @@
 
   import ChatMessage from './chat-message.svelte';
   import ChatSettingsPopover from './chat-settings-popover.svelte';
+  import PromptsModal from './prompts-modal.svelte';
+  import CharactersModal from './characters-modal.svelte';
+  import SystemPromptModal from './system-prompt-modal.svelte';
 
   const { open } = getContext('simple-modal') as any;
 
@@ -69,7 +72,24 @@
     open(ApiKeyModal, {});
   };
 
+  // Recipes add templated user message to messages
+  const openPromptsModal = () => {
+    open(PromptsModal, {});
+  };
+
+  // Characters alter the system message
+  const openCharactersModal = () => {
+    open(CharactersModal, {});
+  };
+
+  const openSystemPromptModal = () => {
+    open(SystemPromptModal, {});
+  };
+
   setContext('chat', {
+    openPromptsModal,
+    openCharactersModal,
+    openSystemPromptModal,
     openApiKeyModal,
     showChatSettings$
   });
@@ -483,7 +503,9 @@
 
           <button
             use:popperRef
-            on:click={() => showChatSettings$.set(!$showChatSettings$)}
+            on:click={() => {
+              showChatSettings$.update((showChatSettings) => !showChatSettings);
+            }}
             type="button"
             title="Chat settings"
           >

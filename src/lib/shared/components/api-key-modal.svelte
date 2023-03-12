@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, getContext } from 'svelte';
+  import { getContext } from 'svelte';
   import { getNotificationsContext } from 'svelte-notifications';
 
   import { NOTIFICATION_SETTINGS } from '../shared.constant';
@@ -13,28 +13,6 @@
 
   let openAiApiKey = $openAiApiKey$;
   let errorMessage = '';
-
-  onMount(() => {
-    const unsubscribe = openAiApiKey$.subscribe((value) => {
-      try {
-        localStorage.setItem(LOCAL_STORAGE_KEY.OPEN_AI_API_KEY, value);
-      } catch (e: any) {
-        banners$.update((banners) => {
-          banners.push({
-            id: ERROR.LOCAL_STORAGE_SET_ITEM,
-            bannerType: BANNER_TYPE.ERROR,
-            title: 'Access to browser storage failed',
-            description: e?.message || e?.name || ''
-          });
-          return banners;
-        });
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  });
 
   const closeModal = () => {
     close();
@@ -53,6 +31,22 @@
 
     openAiApiKey$.set(openAiApiKey);
 
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY.OPEN_AI_API_KEY, openAiApiKey);
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+      closeModal();
+      return;
+    }
+
     addNotification({
       ...NOTIFICATION_SETTINGS,
       text: 'API key set'
@@ -63,7 +57,7 @@
 
 <div class="bg-white rounded-lg border-gray-200 divide-y">
   <div class="bg-white px-3 py-2">
-    <h3 class="text-lg leading-6 font-medium text-gray-900">Set OpenAI API key</h3>
+    <h3 class="text-lg leading-6 font-medium text-gray-900">OpenAI API key</h3>
   </div>
 
   <div class="px-4 py-5 sm:p-6">

@@ -3,7 +3,13 @@
 
   import { onClickOutside } from '$lib/shared/shared-utils';
 
-  let { showChatSettings$ } = getContext('chat') as any;
+  let {
+    openPromptsModal,
+    openCharactersModal,
+    openSystemPromptModal,
+    openApiKeyModal,
+    showChatSettings$
+  } = getContext('chat') as any;
 </script>
 
 <div
@@ -21,30 +27,42 @@
     </h3>
 
     <button
-      on:click={() => {}}
-      class="w-full p-2 text-start hover:bg-gray-100 rounded-b-md"
+      on:click={() => {
+        openPromptsModal();
+        showChatSettings$.set(false);
+      }}
+      class="w-full p-2 text-start hover:bg-gray-100 rounded-md"
     >
-      Change API key
+      Prompts
+    </button>
+    <button
+      on:click={() => {
+        openCharactersModal();
+        showChatSettings$.set(false);
+      }}
+      class="w-full p-2 text-start hover:bg-gray-100 rounded-md"
+    >
+      Characters
     </button>
 
     <button
-      on:click={() => {}}
+      on:click={() => {
+        openSystemPromptModal();
+        showChatSettings$.set(false);
+      }}
       class="w-full p-2 text-start hover:bg-gray-100 rounded-md"
     >
       System prompt
     </button>
 
     <button
-      on:click={() => {}}
-      class="w-full p-2 text-start hover:bg-gray-100 rounded-md"
+      on:click={() => {
+        openApiKeyModal();
+        showChatSettings$.set(false);
+      }}
+      class="w-full p-2 text-start hover:bg-gray-100 rounded-b-md"
     >
-      Characters
-    </button>
-    <button
-      on:click={() => {}}
-      class="w-full p-2 text-start hover:bg-gray-100 rounded-md"
-    >
-      Prompt recipes
+      Change API key
     </button>
   </div>
 </div>

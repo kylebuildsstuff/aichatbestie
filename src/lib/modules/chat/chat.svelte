@@ -23,7 +23,10 @@
     MESSAGE_ROLE,
     type Message
   } from '$lib/shared/shared.type';
-  import { CHAT_LABELLING_PROMPT } from '$lib/shared/shared.constant';
+  import {
+    CHAT_LABELLING_PROMPT,
+    DEFAULT_SYSTEM_MESSAGE
+  } from '$lib/shared/shared.constant';
   import ArrowPathIcon from '$lib/shared/icons/arrow-path-icon.svelte';
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
   import Hero from '$lib/shared/components/hero.svelte';
@@ -44,7 +47,9 @@
   let textareaRef;
   let inputMessage = '';
   let messages =
-    chatId && $chats$?.[chatId] ? $chats$?.[chatId]?.messages : ([] as any);
+    chatId && $chats$?.[chatId]
+      ? $chats$?.[chatId]?.messages
+      : [DEFAULT_SYSTEM_MESSAGE];
 
   /**
    * Messages
@@ -86,8 +91,13 @@
 
   const openSystemPromptModal = () => {
     open(SystemPromptModal, {
-      systemMessageContent: systemMessage?.content || ''
+      systemMessageContent: systemMessage?.content || '',
+      updateMessages
     });
+  };
+
+  const updateMessages = (msgs) => {
+    messages = msgs;
   };
 
   setContext('chat', {

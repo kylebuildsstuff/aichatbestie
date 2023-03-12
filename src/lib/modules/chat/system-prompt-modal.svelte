@@ -5,10 +5,16 @@
   const { close } = getContext('simple-modal') as any;
 
   export let systemMessageContent = '';
+  export let updateMessages;
 
   console.log('systemMessageContent: ', systemMessageContent);
 
-  const handleCta = () => {};
+  const handleCta = () => {
+    updateMessages({
+      role: 'system',
+      content: 'hoohah'
+    });
+  };
 </script>
 
 <div class="bg-white rounded-lg border-gray-200 divide-y">

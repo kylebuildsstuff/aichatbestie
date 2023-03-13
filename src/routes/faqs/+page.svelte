@@ -9,6 +9,12 @@
       answer:
         'AI Chat Bestie is an enhanced UI over the ChatGPT API. It builds on top of ChatGPT by providing a more customizable experience, faster response times, and guaranteed availability of your chat history.'
     },
+    // How does this app work?
+    {
+      question: 'How does this app work?',
+      answer:
+        "The app is essntially a static website. It uses HTML, CSS, and JavaScript to run in your browser. Any data stored or messages sent are strictly between you, your browser, and OpenAI's API. Only registered app accounts and premium features make use of AI Chat Bestie's servers, and even then the core messaging and storage features remain isolated to your browser and OpenAI's API."
+    },
     // Is the app free?
     {
       question: 'Is the app free?',
@@ -20,6 +26,12 @@
       question: 'How do I get a OpenAI API key?',
       answer:
         'You can get a OpenAI API key by creating an OpenAI account and registering an app. You can get started at https://platform.openai.com/.'
+    },
+    // What are the benefits of purchasing?
+    {
+      question: 'What are the benefits of purchasing a Besties Forever membership?',
+      answer:
+        'Purchasing a one-time Besties Forever membership gives you full access to all current and future premium features. Upcoming features include access to the prompt library, more prompt customizations, saved prompt profiles, device syncing, custom UI changes, and more.'
     },
     // What are the differences between ChatGPT and AI Chat Bestie?
     {
@@ -38,23 +50,11 @@
       answer:
         "AI Chat Bestie stores your keys, chats, and histories directly in your browser. This means no intermediary servers or databases are used, and your data will remain available to you for as long as you don't clear your browser's Local Storage."
     },
-    // How does this app work?
-    {
-      question: 'How does this app work?',
-      answer:
-        "The app is essntially a static website. It uses HTML, CSS, and JavaScript to run in your browser. Any data stored or messages sent are strictly between you, your browser, and OpenAI's API. Only registered app accounts and premium features make use of AI Chat Bestie's servers, and even then the core messaging and storage features remain isolated to your browser and OpenAI's API."
-    },
     // What features are free to use?
     {
       question: 'Which features are free to use?',
       answer:
         "Chat messages to and from OpenAI's API, local storage of your data, seaching chat history, and some prompt customizations are free to use."
-    },
-    // What are the benefits of purchasing?
-    {
-      question: 'What are the benefits of purchasing a Besties Forever membership?',
-      answer:
-        'Purchasing a one-time Besties Forever membership gives you full access to all current and future premium features. Upcoming features include access to the prompt library, more prompt customizations, saved prompt profiles, device syncing, custom UI changes, and more.'
     },
     // How many chats can I have?
     {
@@ -71,7 +71,8 @@
     // Do I need to pay for a ChatGPT API Key?
     {
       question: 'Do I need to pay for a ChatGPT API Key?',
-      answer: 'No, creating both an OpenAI account and API key are free.'
+      answer:
+        'Creating both an OpenAI account and API key are free, using the API key costs $0.002 / 1K tokens.'
     },
     // Do I need to pay for ChatGPT Plus?
     {

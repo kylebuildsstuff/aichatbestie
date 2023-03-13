@@ -6,8 +6,12 @@
 
   import MagnifyingGlassIcon from '$lib/shared/icons/magnifying-glass-icon.svelte';
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
-  import { banners$, chatList$, chats$ } from '$lib/shared/shared.store';
-  import { createNewChat, createNewChatListItem } from '$lib/shared/shared-utils';
+  import { banners$, chatFolders$, chatList$, chats$ } from '$lib/shared/shared.store';
+  import {
+    createNewChat,
+    createNewChatFolder,
+    createNewChatListItem
+  } from '$lib/shared/shared-utils';
   import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
 
   import SidebarChatItem from './sidebar-chat-item.svelte';
@@ -80,6 +84,35 @@
     goto(`/chat/${newChatId}`);
     handleCloseMobileSidebar();
   };
+
+  /**
+   * Create new folder
+   */
+  const handleCreateNewFolder = () => {
+    const newFolderId = nanoid(4);
+
+    chatFolders$.update((chatFolders) => {
+      chatFolders.unshift(createNewChatFolder(newFolderId));
+      return chatFolders;
+    });
+
+    try {
+      localStorage.setItem(
+        LOCAL_STORAGE_KEY.CHAT_FOLDERS,
+        JSON.stringify($chatFolders$)
+      );
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
+  };
 </script>
 
 <!-- <svelte:window on:keydown={handleKeydown} /> -->
@@ -109,9 +142,11 @@
         name="search"
         class="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
       />
-      <FolderPlusIcon
-        overrideClasses={`h-8 w-8 text-gray-400 hover:cursor-pointer hover:text-gray-200`}
-      />
+      <button on:click={handleCreateNewFolder}>
+        <FolderPlusIcon
+          overrideClasses={`h-6 w-6 text-gray-400 hover:cursor-pointer hover:text-gray-200`}
+        />
+      </button>
     </div>
 
     {#each chatList as { chatId: cId, title }}

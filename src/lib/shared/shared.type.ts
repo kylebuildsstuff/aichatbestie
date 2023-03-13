@@ -32,9 +32,8 @@ export enum APP_SUBSCRIPTION_TYPE {
 
 export enum LOCAL_STORAGE_KEY {
   OPEN_AI_API_KEY = 'openAiApiKey',
-  CHAT_LIST = 'bChatList'
-  // e.g. bChat-123456789
-  // CHAT_PREFIX = 'bChat'
+  CHAT_LIST = 'bChatList',
+  CHAT_FOLDERS = 'bChatFolders'
 }
 
 export enum MESSAGE_ROLE {
@@ -61,20 +60,38 @@ export enum ERROR {
   CHECKOUT_SESSION_CREATE = 'CHECKOUT_SESSION_CREATE'
 }
 
+// Message sent to OpenAI API
 export type Message = {
   role: MESSAGE_ROLE;
   content: string;
 };
 
+// List of chats stored in local storage
 export type ChatListItem = {
   chatId: string;
   title: string;
   description: string;
 };
 
+// Chat stored in local storage
 export type Chat = {
   chatId: string;
   messages: Message[];
+};
+
+// Chat folder stored in local storage
+export type ChatFolder = {
+  folderId: string;
+  folderName: string;
+  chatIds: string[];
+};
+
+// Reference only
+type LocalStorage = {
+  [LOCAL_STORAGE_KEY.OPEN_AI_API_KEY]: string;
+  [LOCAL_STORAGE_KEY.CHAT_LIST]: ChatListItem[];
+  [LOCAL_STORAGE_KEY.CHAT_FOLDERS]: ChatFolder[];
+  // [chatId: string]: Chat;
 };
 
 /**

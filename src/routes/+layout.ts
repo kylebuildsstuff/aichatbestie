@@ -1,6 +1,11 @@
 import { browser } from '$app/environment';
 
-import { chats$, chatList$, openAiApiKey$ } from '$lib/shared/shared.store';
+import {
+  chats$,
+  chatList$,
+  openAiApiKey$,
+  chatFolders$
+} from '$lib/shared/shared.store';
 import { LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
 
 export const load = async () => {
@@ -10,10 +15,17 @@ export const load = async () => {
   if (browser) {
     const openAiApiKey = localStorage.getItem(LOCAL_STORAGE_KEY.OPEN_AI_API_KEY);
     const chatList = localStorage.getItem(LOCAL_STORAGE_KEY.CHAT_LIST);
+    const chatFolders = localStorage.getItem(LOCAL_STORAGE_KEY.CHAT_FOLDERS);
 
     // API key
     if (openAiApiKey) {
       openAiApiKey$.set(openAiApiKey);
+    }
+
+    // Chat folders
+    if (chatFolders) {
+      const parsedChatFolders = JSON.parse(chatFolders);
+      chatFolders$.set(parsedChatFolders);
     }
 
     // Chat list

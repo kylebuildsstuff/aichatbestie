@@ -4,6 +4,7 @@ import { user$, userSettings$ } from './shared.store';
 import {
   MESSAGE_ROLE,
   type Chat,
+  type ChatFolder,
   type ChatListItem,
   type Message
 } from './shared.type';
@@ -172,6 +173,14 @@ export const createNewChat = (
   return {
     chatId,
     messages
+  };
+};
+
+export const createNewChatFolder = (folderId: string): ChatFolder => {
+  return {
+    folderId,
+    folderName: 'New folder',
+    chatIds: []
   };
 };
 

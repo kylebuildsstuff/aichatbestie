@@ -11,7 +11,14 @@
   import LinkedinIcon from '$lib/shared/icons/linkedin-icon.svelte';
   import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
   import CogIcon from '$lib/shared/icons/cog-icon.svelte';
-  import { PRIVACY_POLICY_LINK } from '$lib/shared/shared.constant';
+  import {
+    DISCORD_LINK,
+    EMAIL_LINK,
+    LINKEDIN_LINK,
+    PRIVACY_POLICY_LINK,
+    TWITTER_LINK,
+    YOUTUBE_LINK
+  } from '$lib/shared/shared.constant';
 
   const { handleCloseMobileSidebar } = getContext('sidebar') as any;
   const { open } = getContext('simple-modal') as any;
@@ -78,11 +85,42 @@
 <!-- Socials & terms -->
 <div class="flex flex-col gap-3 py-3 justify-center items-center bg-gray-800">
   <div class="flex flex-row gap-5 justify-center items-center text-gray-400 text-sm">
-    <DiscordIcon />
-    <YoutubeIcon />
-    <TwitterIcon />
-    <LinkedinIcon />
-    <EnvelopeIcon />
+    <a
+      href={DISCORD_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <DiscordIcon />
+    </a>
+    <a
+      href={YOUTUBE_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <YoutubeIcon />
+    </a>
+    <a
+      href={TWITTER_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <TwitterIcon />
+    </a>
+    <a
+      href={LINKEDIN_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <LinkedinIcon />
+    </a>
+    <a
+      href={EMAIL_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="sr-only">Email</span>
+      <EnvelopeIcon />
+    </a>
   </div>
 
   <div class="flex gap-1">

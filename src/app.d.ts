@@ -1,15 +1,14 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-declare global {
-  namespace App {
-    // interface Error {}
-    interface Locals {
-      user: any;
-      hasuraJwt: string;
-    }
-    // interface PageData {}
-    // interface Platform {}
+
+declare namespace App {
+  // interface Error {}
+  interface Locals {
+    user: any;
+    hasuraJwt: string;
   }
+  // interface PageData {}
+  // interface Platform {}
 }
 
 declare namespace svelte.JSX {

@@ -2,6 +2,7 @@
   import { nanoid } from 'nanoid';
   import { getContext, setContext, tick } from 'svelte';
   import { writable } from 'svelte/store';
+  import { page as page$ } from '$app/stores';
   import { browser } from '$app/environment';
   import { afterNavigate, goto } from '$app/navigation';
   import { createPopperActions } from 'svelte-popperjs';
@@ -15,13 +16,7 @@
     isNotSystemMessage,
     resizeTextarea
   } from '$lib/shared/shared-utils';
-  import {
-    banners$,
-    chatList$,
-    chats$,
-    openAiApiKey$,
-    user$
-  } from '$lib/shared/shared.store';
+  import { banners$, chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
   import {
     BANNER_TYPE,
     ERROR,
@@ -124,7 +119,9 @@
    * Scroll to the bottom
    */
   afterNavigate(async () => {
-    if (browser) {
+    const isRootPage = $page$.route.id === '/';
+
+    if (browser && !isRootPage) {
       // The tick is needed for some reason, if not here then below
       await tick();
       window.scrollTo({

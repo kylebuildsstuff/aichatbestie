@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@nhost/nhost-js": "^2.0.7",
-    "@sveltejs/kit": "^1.11.0",
+    "@sveltejs/kit": "1.10.0",
     "felte": "^1.2.7",
     "fuse.js": "^6.6.2",
     "jsonwebtoken": "^9.0.0",

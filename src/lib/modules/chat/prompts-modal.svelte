@@ -75,7 +75,9 @@
               isSelected ? `ring-1 ring-indigo-500 border-indigo-500 z-10` : ''
             }`}
           >
-            <p class="mt-2 flex gap-1 items-center text-sm font-medium text-gray-900">
+            <p
+              class="mt-2 text-left flex gap-1 items-center text-sm font-medium text-gray-900"
+            >
               {label}
             </p>
             <p

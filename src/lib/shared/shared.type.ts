@@ -77,6 +77,14 @@ export type Chat = {
   messages: Message[];
 };
 
+// Reference only
+// type LocalStorage = {
+//   [LOCAL_STORAGE_KEY.OPEN_AI_API_KEY]: string;
+//   [LOCAL_STORAGE_KEY.CHAT_LIST]: ChatListItem[];
+//   [LOCAL_STORAGE_KEY.CHAT_FOLDERS]: ChatFolder[];
+//   // [chatId: string]: Chat;
+// };
+
 /**
  * Bound to stripe products, appears in completed-checkout webhook
  */

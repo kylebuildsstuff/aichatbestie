@@ -71,7 +71,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     if (Array.isArray(sessionToken) && sessionToken.length === 2) {
       sessionToken = sessionToken[1];
     } else {
-      throw new Error('Invalid api request');
+      throw new Error('Invalid API request (session token)');
     }
 
     // Decode session token
@@ -82,14 +82,14 @@ export const handle: Handle = async ({ event, resolve }) => {
         ignoreNotBefore: true
       });
     } catch (error) {
-      throw new Error('Invalid api request');
+      throw new Error('Invalid API request (decoded token)');
     }
 
     const userId =
       decodedToken?.['https://hasura.io/jwt/claims']?.['x-hasura-user-id'] || '';
 
     if (!userId) {
-      throw new Error('Invalid api request');
+      throw new Error('Invalid API request (userId)');
     }
 
     // Fetch user

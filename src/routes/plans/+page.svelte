@@ -198,7 +198,7 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                  Custom themes
+                  Chat folders
                 </li>
 
                 <li class="flex gap-x-3">

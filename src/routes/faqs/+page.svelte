@@ -3,6 +3,12 @@
   import Faq from './faq.svelte';
 
   const faqs = [
+    // What is AI Chat Bestie?
+    {
+      question: 'What is AI Chat Bestie?',
+      answer:
+        'AI Chat Bestie is an enhanced UI over the ChatGPT API. It builds on top of ChatGPT by providing a more customizable experience, faster response times, and guaranteed availability of your chat history.'
+    },
     // Is the app free?
     {
       question: 'Is the app free?',

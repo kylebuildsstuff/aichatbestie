@@ -11,6 +11,7 @@
   import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
 
   import SidebarChatItem from './sidebar-chat-item.svelte';
+  import FolderPlusIcon from '$lib/shared/icons/folder-plus-icon.svelte';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 
@@ -26,8 +27,6 @@
     keys: ['messages.content']
   };
 
-  let searchInput;
-  let isSearchInputFocused = false;
   let searchQuery = '';
 
   $: chatListFuse = new Fuse($chatList$, chatListFuseOptions);
@@ -46,35 +45,6 @@
   $: chatList = searchQuery
     ? $chatList$.filter((chat) => matchedChatIds.includes(chat.chatId))
     : $chatList$;
-
-  /**
-   * Search
-   *
-   * Too many conflicts with actual usage of "/"
-   */
-  // const handleKeydown = (event) => {
-  //   const key = event.key;
-  //   // keyCode is deprecated and not specific enough, and event.code
-  //   // const keyCode = event.keyCode;
-
-  //   if (
-  //     (event.code === 'Slash' || key === '/') &&
-  //     !event.shiftKey &&
-  //     !isSearchInputFocused
-  //   ) {
-  //     event.stopPropagation();
-  //     event.preventDefault();
-  //     searchInput?.focus?.();
-  //   }
-  // };
-
-  const handleSearchFocus = () => {
-    isSearchInputFocused = true;
-  };
-
-  const handleSearchBlur = () => {
-    isSearchInputFocused = false;
-  };
 
   /**
    * Create new chat
@@ -128,26 +98,20 @@
     </button>
 
     <!-- Search -->
-    <div class="relative flex flex-grow">
+    <div class="relative flex gap-2 flex-grow items-center">
       <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
         <MagnifyingGlassIcon overrideClasses={`h-5 w-5 text-gray-400`} />
       </div>
       <input
         bind:value={searchQuery}
-        bind:this={searchInput}
-        on:focus={handleSearchFocus}
-        on:blur={handleSearchBlur}
         placeholder="Search"
         type="text"
         name="search"
         class="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
       />
-      <!-- <div class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
-        <kbd
-          class="inline-flex items-center rounded border border-gray-200 px-2 font-sans text-xs text-gray-400"
-          >/</kbd
-        >
-      </div> -->
+      <FolderPlusIcon
+        overrideClasses={`h-8 w-8 text-gray-400 hover:cursor-pointer hover:text-gray-200`}
+      />
     </div>
 
     {#each chatList as { chatId: cId, title }}

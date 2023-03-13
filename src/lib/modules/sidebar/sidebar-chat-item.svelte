@@ -22,26 +22,8 @@
   let titleInput = title;
 
   /**
-   * Hover
-   */
-  const handleMouseEnter = () => {
-    isHovering = true;
-  };
-
-  const handleMouseLeave = () => {
-    isHovering = false;
-  };
-
-  /**
    * Title edits
    */
-  const handleTitleEditClick = () => {
-    isEditing = true;
-  };
-
-  const handleCancelTitleEditClick = () => {
-    isEditing = false;
-  };
   const handleSaveTitleEditClick = () => {
     chatList$.update((chatList) => {
       chatList = chatList.map((chat) => {
@@ -111,8 +93,12 @@
     goto(`/chat/${chatId}`);
     handleCloseMobileSidebar();
   }}
-  on:mouseenter={handleMouseEnter}
-  on:mouseleave={handleMouseLeave}
+  on:mouseenter={() => {
+    isHovering = true;
+  }}
+  on:mouseleave={() => {
+    isHovering = false;
+  }}
   type="button"
   class={`relative w-full text-gray-300 hover:bg-gray-700 group flex items-center px-2 py-3 text-sm font-medium rounded-md ${
     chatId === $page$?.params?.chatId ? ` bg-gray-600` : ''
@@ -147,13 +133,13 @@
       <button on:click={() => handleSaveTitleEditClick()}>
         <CheckIcon overrideClasses={`text-gray-400 hover:text-gray-300 h-3.5 w-3.5`} />
       </button>
-      <button on:click={() => handleCancelTitleEditClick()}>
+      <button on:click={() => (isEditing = false)}>
         <XMarkIcon overrideClasses={`text-gray-400 hover:text-gray-300 h-3.5 w-3.5`} />
       </button>
     </div>
   {:else if isHovering}
     <div class="flex gap-2">
-      <button on:click={() => handleTitleEditClick()}>
+      <button on:click={() => (isEditing = true)}>
         <PencilSquareIcon
           overrideClasses={`text-gray-400 hover:text-gray-300 h-3.5 w-3.5`}
         />

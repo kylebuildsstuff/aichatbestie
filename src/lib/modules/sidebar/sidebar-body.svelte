@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { nanoid } from 'nanoid';
   import { getContext } from 'svelte';
+  import { dndzone } from 'svelte-dnd-action';
+  import { flip } from 'svelte/animate';
+  import { nanoid } from 'nanoid';
   import Fuse from 'fuse.js';
   import { goto } from '$app/navigation';
 
@@ -19,6 +21,7 @@
   import SidebarChatFolder from './sidebar-chat-folder.svelte';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
+  const flipDurationMs = 200;
 
   const chatListFuseOptions = {
     // Lower threshold = closer match
@@ -50,6 +53,32 @@
   $: chatList = searchQuery
     ? $chatList$.filter((chat) => matchedChatIds.includes(chat.chatId))
     : $chatList$;
+  $: dndChatList = chatList.map((chat) => {
+    return {
+      ...chat,
+      id: chat.chatId
+    };
+  });
+
+  /**
+   * Drag 'n Drop
+   */
+  $: {
+    console.log('chatList plain: ', $chatList$);
+  }
+
+  const handleDndConsider = (e) => {
+    console.log('handleDndConsider');
+    const items = e.detail.items;
+    console.log('items: ', items);
+  };
+
+  const handleDndFinalize = (e) => {
+    console.log('handleDndFinalize');
+    const items = e.detail.items;
+    console.log('items: ', items);
+    chatList$.set(items);
+  };
 
   /**
    * Create new chat
@@ -160,12 +189,24 @@
     {/each}
 
     <!-- Chats -->
-    {#each chatList as { chatId: cId, title }, index (cId)}
-      <SidebarChatItem
-        chatId={cId}
-        {title}
-      />
-    {/each}
+    <section
+      use:dndzone={{
+        // type: 'no-folder',
+        items: dndChatList,
+        flipDurationMs
+      }}
+      on:consider={handleDndConsider}
+      on:finalize={handleDndFinalize}
+    >
+      {#each dndChatList as { id: dndId, chatId: cId, title }, index (dndId)}
+        <div animate:flip={{ duration: flipDurationMs }}>
+          <SidebarChatItem
+            chatId={cId}
+            {title}
+          />
+        </div>
+      {/each}
+    </section>
 
     <!-- Empty state -->
     {#if !chatList.length || chatList.length === 0}

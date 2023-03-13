@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { banners$, chatFolders$ } from '$lib/shared/shared.store';
+  import { dndzone } from 'svelte-dnd-action';
+  import { flip } from 'svelte/animate';
+
+  import { banners$, chatFolders$, chatList$ } from '$lib/shared/shared.store';
   import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
   import ChevronRightIcon from '$lib/shared/icons/chevron-right-icon.svelte';
   import ChevronDownIcon from '$lib/shared/icons/chevron-down-icon.svelte';
@@ -8,6 +11,9 @@
   import XMarkIcon from '$lib/shared/icons/x-mark-icon.svelte';
   import PencilSquareIcon from '$lib/shared/icons/pencil-square-icon.svelte';
   import TrashIcon from '$lib/shared/icons/trash-icon.svelte';
+  import SidebarChatItem from './sidebar-chat-item.svelte';
+
+  const flipDurationMs = 200;
 
   export let folderId;
   export let folderName;
@@ -138,3 +144,11 @@
     </div>
   {/if}
 </button>
+
+{#each chatIds as chatId}
+  {@const title = $chatList$.find((i) => i.chatId === chatId)?.title}
+  <SidebarChatItem
+    chatId
+    {title}
+  />
+{/each}

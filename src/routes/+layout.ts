@@ -25,7 +25,6 @@ export const load = async () => {
     // Chat folders
     if (chatFolders) {
       const parsedChatFolders = JSON.parse(chatFolders);
-      console.log('parsedChatFolders: ', parsedChatFolders);
       chatFolders$.set(parsedChatFolders);
     }
 

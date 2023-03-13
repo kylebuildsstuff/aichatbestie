@@ -13,9 +13,10 @@
     createNewChatListItem
   } from '$lib/shared/shared-utils';
   import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
+  import FolderPlusIcon from '$lib/shared/icons/folder-plus-icon.svelte';
 
   import SidebarChatItem from './sidebar-chat-item.svelte';
-  import FolderPlusIcon from '$lib/shared/icons/folder-plus-icon.svelte';
+  import SidebarChatFolder from './sidebar-chat-folder.svelte';
 
   let { handleCloseMobileSidebar } = getContext('sidebar') as any;
 
@@ -149,7 +150,17 @@
       </button>
     </div>
 
-    {#each chatList as { chatId: cId, title }}
+    <!-- Folders -->
+    {#each $chatFolders$ as { folderId, folderName, chatIds }, index (folderId)}
+      <SidebarChatFolder
+        {folderId}
+        {folderName}
+        {chatIds}
+      />
+    {/each}
+
+    <!-- Chats -->
+    {#each chatList as { chatId: cId, title }, index (cId)}
       <SidebarChatItem
         chatId={cId}
         {title}

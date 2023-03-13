@@ -2,7 +2,7 @@
   import { getContext } from 'svelte';
   import { getNotificationsContext } from 'svelte-notifications';
 
-  import { NOTIFICATION_SETTINGS } from '../shared.constant';
+  import { HOW_TO_GET_API_KEY_LINK, NOTIFICATION_SETTINGS } from '../shared.constant';
   import { banners$, openAiApiKey$ } from '../shared.store';
   import { autofocus, chatCompletion } from '../shared-utils';
 
@@ -83,7 +83,7 @@
 
     <p class="mt-1 text-sm text-gray-600">
       <a
-        href="https://beta.openai.com/docs/developer-quickstart"
+        href={HOW_TO_GET_API_KEY_LINK}
         class="text-gray-400 hover:underline hover:text-blue-400"
         target="_blank"
         rel="noopener noreferrer"

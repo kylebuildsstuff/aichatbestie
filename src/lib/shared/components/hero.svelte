@@ -12,6 +12,7 @@
 
   import ApiKeyModal from './api-key-modal.svelte';
   import HeroFeature from './hero-feature.svelte';
+    import { HOW_TO_GET_API_KEY_LINK } from '../shared.constant';
 
   const { open } = getContext('simple-modal') as any;
 
@@ -68,7 +69,9 @@
             Bestie
           </span>
         </a>
-        <p class="mt-3 text-lg leading-8 text-gray-600">Get more out of ChatGPT</p>
+        <p class="mt-3 text-lg leading-8 text-gray-600">
+          Supercharge ChatGPT with an enhanced UI
+        </p>
       </div>
 
       <!-- Features -->
@@ -103,7 +106,7 @@
     <!-- Help text to get key -->
     <p class="mt-2 text-xs text-gray-600">
       <a
-        href="https://beta.openai.com/docs/developer-quickstart"
+        href={HOW_TO_GET_API_KEY_LINK}
         class="text-gray-400 hover:underline hover:text-blue-400"
         target="_blank"
         rel="noopener noreferrer"

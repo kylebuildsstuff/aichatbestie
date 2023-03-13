@@ -56,7 +56,7 @@
    */
   $: systemMessage = messages.find((message) => message.role === MESSAGE_ROLE.SYSTEM);
   $: hasChatMessages = messages.filter(isNotSystemMessage).length > 0;
-  $: enableRegenerateMessage = !isLoading && messages.length > 2;
+  $: enableRegenerateMessage = !isLoading && $openAiApiKey$ && messages.length > 2;
 
   /**
    * Chat options popover
@@ -564,7 +564,7 @@
         >
           AI Chat Bestie
         </a>
-        - get more out of ChatGPT
+        - Enhanced UI for ChatGPT
       </div>
     </form>
   </div>

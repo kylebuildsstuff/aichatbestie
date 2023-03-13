@@ -7,6 +7,7 @@ export const LOGO_THUMBNAIL_CDN_LINK_BG = `https://keylayapps.nyc3.cdn.digitaloc
 export const USER_ICON_THUMBNAIL_BG_CDN_LINK = `https://keylayapps.nyc3.cdn.digitaloceanspaces.com/ai-chat-bestie%2Fuser-icon-thumbnail-bg.png`;
 
 export const PRIVACY_POLICY_LINK = `https://aichatbestie.notion.site/Privacy-policy-2dad1adbd8c045e7a431070456647ef7`;
+export const HOW_TO_GET_API_KEY_LINK = `https://youtu.be/lnQsO-2MwXM`;
 
 export const EMAIL_LINK = `mailto:aichatbestie@gmail.com`;
 export const DISCORD_LINK = `https://discord.gg/vrkZWz8hpv`;
@@ -74,12 +75,6 @@ export const DEBATE_COACH_PROMPT = `I want you to act as a debate coach. I will 
 export const COMPOSER_PROMPT = `I want you to act as a composer. I will provide the lyrics to a song and you will create music for it. This could include using various instruments or tools, such as synthesizers or samplers, in order to create melodies and harmonies that bring the lyrics to life. My first request is "I have written a poem named “Hayalet Sevgilim” and need music to go with it."`;
 
 export const PROMPT_OPTIONS = [
-  {
-    promptId: 'storyteller',
-    promptLabel: 'Act as a Storyteller',
-    prompt: STORYTELLER_PROMPT,
-    characterCount: STORYTELLER_PROMPT.length
-  },
   {
     promptId: 'STORYTELLER_PROMPT',
     promptLabel: 'Storyteller',

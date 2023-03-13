@@ -87,10 +87,10 @@
 </script>
 
 <svelte:head>
-  <title>Get more out of ChatGPT - AI Chat Bestie</title>
+  <title>Supercharge ChatGPT with our enhanced UI - AI Chat Bestie</title>
   <meta
     name="description"
-    content={'Use ChatGPT with faster responses, always available histories, searchable chats, and persistent connectivity. Browser-only storage for privacy and reliability.'}
+    content={'Enhanced UI for ChatGPT with faster responses, always available histories, searchable chats, and persistent connectivity. Browser-only storage for privacy and reliability.'}
   />
 </svelte:head>
 

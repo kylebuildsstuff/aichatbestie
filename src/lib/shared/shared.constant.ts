@@ -14,6 +14,7 @@ export const DISCORD_LINK = `https://discord.gg/vrkZWz8hpv`;
 export const YOUTUBE_LINK = `https://www.youtube.com/@aibesties`;
 export const LINKEDIN_LINK = `https://www.linkedin.com/company/ai-chat-bestie`;
 export const TWITTER_LINK = `https://twitter.com/@aichatbestie`;
+export const GITHUB_LINK = `https://github.com/KTruong008/aichatbestie`;
 
 export const DEFAULT_SYSTEM_MESSAGE_CONTENT = `You are ChatGPT, a large language model trained by OpenAI.`;
 export const CHAT_LABELLING_PROMPT = `What would be a short and relevant title for this chat? You must strictly answer with only the title. No other text is allowed.`;

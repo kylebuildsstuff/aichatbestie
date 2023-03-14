@@ -14,11 +14,13 @@
   import {
     DISCORD_LINK,
     EMAIL_LINK,
+    GITHUB_LINK,
     LINKEDIN_LINK,
     PRIVACY_POLICY_LINK,
     TWITTER_LINK,
     YOUTUBE_LINK
   } from '$lib/shared/shared.constant';
+  import GithubIcon from '$lib/shared/icons/github-icon.svelte';
 
   const { handleCloseMobileSidebar } = getContext('sidebar') as any;
   const { open } = getContext('simple-modal') as any;
@@ -120,6 +122,14 @@
     >
       <span class="sr-only">Email</span>
       <EnvelopeIcon />
+    </a>
+    <a
+      href={GITHUB_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="sr-only">Github</span>
+      <GithubIcon />
     </a>
   </div>
 

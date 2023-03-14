@@ -12,7 +12,7 @@
 
   import ApiKeyModal from './api-key-modal.svelte';
   import HeroFeature from './hero-feature.svelte';
-    import { HOW_TO_GET_API_KEY_LINK } from '../shared.constant';
+  import { HOW_TO_GET_API_KEY_LINK } from '../shared.constant';
 
   const { open } = getContext('simple-modal') as any;
 
@@ -70,7 +70,7 @@
           </span>
         </a>
         <p class="mt-3 text-lg leading-8 text-gray-600">
-          Supercharge ChatGPT with an enhanced UI
+          Supercharge ChatGPT with our enhanced UI
         </p>
       </div>
 

@@ -19,7 +19,7 @@
     {
       question: 'How do I get a OpenAI API key?',
       answer:
-        'You can get a OpenAI API key by creating an OpenAI account and registering an app. You can get started at https://platform.openai.com/.'
+        'You can get a OpenAI API key by creating an OpenAI account and registering an app. We made a short tutorial at https://youtu.be/lnQsO-2MwXM.'
     },
     // Do I need to pay for a ChatGPT API Key?
     {

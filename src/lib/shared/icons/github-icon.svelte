@@ -1,7 +1,9 @@
 <script lang="ts">
   export let overrideClasses = '';
 
-  const classes = overrideClasses ? overrideClasses : 'w-6 h-6 text-gray-50';
+  const classes = overrideClasses
+    ? overrideClasses
+    : 'h-4 w-4 text-gray-400 hover:text-gray-500 hover:cursor-pointer';
 </script>
 
 <svg

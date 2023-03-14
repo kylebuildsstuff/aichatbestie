@@ -52,21 +52,9 @@ Supplied by Mailhog, usually at `localhost:8025`
 
 ## Deployment checklist
 
-- Update & switch `.env` (dev to prod)
-- Build & push Docker images (dependencies & server)
-- Update K8s files
+- Update environment variables (netlify)
 - Deploy `nhost` branch (if needed)
-- Deploy K8s updates
-
-## Deployment commands
-
-Make sure to switch to the appropriate `Dockerfile` code, using `dependencies.Dockerfile` and `production.Dockerfile`, when running the build commands.
-
-`docker build -t ktruong008/aichatbestie-dependencies:2.0.0 .`
-`docker build -t ktruong008/aichatbestie:2.0.0 .`
-`docker push ktruong008/aichatbestie-dependencies:2.0.0`
-
-See `keylay-apps-infrastructure` `README` for `k8s` deployment instructions
+- Push production branch `netlify-production`
 
 ## nhost quirks/undocumented
 
@@ -95,14 +83,13 @@ user_vars: {"x-hasura-role":"public"}
 
 ```
 
-- "If the function does not export a default request/response handler it should not be served as a http endpoint." – Johan Eliasson
+##### nhost Auth
 
-## Felte quirks
-
-- InitialValues do not get re-initialized.
-- If the html disappears so does the field data
-- Something funky going on with FieldArrays and `unsetField`
-  https://github.com/pablo-abc/felte/issues/114
+- Only way to reliably gain isAuthenticated status is via `isAuthenticatedAsync` (other methods fail due to race/timing conditions)
+- `isAuthenticatedAsync` clogs shit up for 15 seconds if nhost server is down, halting everything else in the process.
+- App MUST go on with or without hasura, hasura is only enhancement, not a requirement.
+- therefore use hacky `onAuthStateChanged` and `isAuthenticated` (sync) to get around this, along with svelte stores to fetch and update user data
+- this also means `invalidateAll` won't affect db state.
 
 ## Stripe checkout and friends
 
@@ -128,14 +115,6 @@ https://stripe.com/docs/billing/subscriptions/overview#subscription-events
 4242424242424242 - Successful payment
 4000000000009995 - Failed payment
 4000002500003155 - Requires authentication
-
-## nhost and auth
-
-- Only way to reliably gain isAuthenticated status is via `isAuthenticatedAsync` (other methods fail due to race/timing conditions)
-- `isAuthenticatedAsync` clogs shit up for 15 seconds if nhost server is down, halting everything else in the process.
-- App MUST go on with or without hasura, hasura is only enhancement, not a requirement.
-- therefore use hacky onAuthStateChanged to get around this, along with svelte stores to fetch and update user data
-- this means `invalidateAll` won't affect db state.
 
 ## License
 

@@ -1,6 +1,23 @@
 # AI Chat Bestie
 
-Enhanced UI wrapper for ChatGPT
+AI Chat Bestie is an unofficial ChatGPT app.
+
+By connecting directly to the API it can provide faster responses, a more customizable UI, and many more features and integrations.
+
+Hosted version available at https://aichatbestie.com.
+
+## Features
+
+- Faster response times
+- Searchable chat history
+- Customizable system message
+- Prompt library
+- Regenerate messages
+- Bring your own key
+
+## Self-hosting
+
+The app uses `sveltekit` and can run directly in the terminal with `npm run dev`. `nhost` is only needed for account-related features and the app will run just fine without it.
 
 ## Terminals
 

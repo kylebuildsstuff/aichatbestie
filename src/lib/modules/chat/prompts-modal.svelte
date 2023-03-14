@@ -31,7 +31,7 @@
 
 <div class="bg-white rounded-lg border-gray-200 divide-y">
   <div class="bg-white px-3 py-2">
-    <h3 class="text-lg leading-6 font-medium text-gray-900">Prompts</h3>
+    <h3 class="text-lg leading-6 font-medium text-gray-900">Prompt library</h3>
     <!-- Upgrade banner -->
     {#if !$isUpgraded$}
       <div class={`w-full rounded-md bg-blue-50 p-4 my-2`}>

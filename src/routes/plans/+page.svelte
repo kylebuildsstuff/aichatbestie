@@ -1,8 +1,4 @@
 <script lang="ts">
-  // import { onMount } from 'svelte';
-  // import { DateTime } from 'luxon';
-  // import { getNotificationsContext } from 'svelte-notifications';
-
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
   import { banners$, isSignedIn$, isUpgraded$ } from '$lib/shared/shared.store';
   import { nhost } from '$lib/core/nhost/nhost';
@@ -11,24 +7,7 @@
   import { goto } from '$app/navigation';
   import Confetti from '$lib/shared/components/confetti.svelte';
 
-  // const { addNotification } = getNotificationsContext();
-
   let showConfetti = false;
-
-  /**
-   * Early bird countdown
-   */
-  // early bird pricing ends March 16th, 2023 8pm EST
-  // const earlyBirdEnds = DateTime.fromISO('2023-03-26T20:00:00.000Z');
-  // $: countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
-  // $: formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
-
-  // onMount(() => {
-  //   setInterval(() => {
-  //     countdown = earlyBirdEnds.diffNow(['days', 'hours', 'minutes', 'seconds']);
-  //     formattedCountdownString = countdown.toFormat("d'd' h'h' m'm' s's'");
-  //   }, 1000);
-  // });
 
   /**
    * Confetti
@@ -236,22 +215,11 @@
                     </p>
                     <p class="mt-6 flex items-baseline justify-center gap-x-2">
                       <span
-                        class="mt-2 text-3xl font-medium text-gray-500 line-through"
-                      >
-                        $29
-                      </span>
-                      <span
                         class="text-5xl font-bold tracking-tight text-gray-900 bg-gradient-to-r from-cyan-400 to-emerald-400 text-transparent bg-clip-text"
                       >
                         $19
                       </span>
                     </p>
-                    <p class="mt-2 text-xs font-semibold text-gray-600">
-                      Early bird launch price
-                    </p>
-                    <!-- <p class="mt-2 text-sm font-semibold text-gray-600">
-                      {formattedCountdownString}
-                    </p> -->
                   {/if}
 
                   {#if $isUpgraded$}

@@ -128,7 +128,7 @@
                     />
                   </svg>
 
-                  Saved profiles
+                  Saved prompts
                 </li>
 
                 <li class="flex gap-x-3">

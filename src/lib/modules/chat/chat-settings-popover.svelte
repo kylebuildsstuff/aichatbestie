@@ -5,9 +5,15 @@
   import BookOpenIcon from '$lib/shared/icons/book-open-icon.svelte';
   import WrenchIcon from '$lib/shared/icons/wrench-icon.svelte';
   import KeyIcon from '$lib/shared/icons/key-icon.svelte';
+  import BookmarkIcon from '$lib/shared/icons/bookmark-icon.svelte';
 
-  let { openPromptsModal, openSystemMessageModal, openApiKeyModal, showChatSettings$ } =
-    getContext('chat') as any;
+  let {
+    openPromptsModal,
+    openSavePromptModal,
+    openSystemMessageModal,
+    openApiKeyModal,
+    showChatSettings$
+  } = getContext('chat') as any;
 </script>
 
 <div
@@ -33,6 +39,13 @@
     >
       <BookOpenIcon overrideClasses={`w-4 h-4 text-gray-500`} />
       Prompt library
+    </button>
+    <button
+      on:click={openSavePromptModal}
+      class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-md"
+    >
+      <BookmarkIcon overrideClasses={`w-4 h-4 text-gray-500`} />
+      Save prompt
     </button>
 
     <button

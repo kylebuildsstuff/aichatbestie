@@ -4,7 +4,8 @@
   import { PROMPT_OPTIONS } from '$lib/shared/shared.constant';
   import { resizeTextarea } from '$lib/shared/shared-utils';
   import ExclamationCircle from '$lib/shared/icons/exclamation-circle.svelte';
-  import { isUpgraded$ } from '$lib/shared/shared.store';
+  import { banners$, isUpgraded$, savedPrompts$ } from '$lib/shared/shared.store';
+  import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
 
   const { close } = getContext('simple-modal') as any;
 
@@ -14,6 +15,43 @@
   let promptId;
   let promptPreview = '';
   let promptPreviewRef;
+
+  $: promptOptions = PROMPT_OPTIONS.map((prompt) => ({
+    ...prompt,
+    isCustom: false
+  })).concat(
+    $savedPrompts$.map((saved) => ({
+      promptId: saved.title,
+      promptLabel: saved.title,
+      prompt: saved.prompt,
+      characterCount: saved.prompt.length,
+      isCustom: true
+    }))
+  );
+
+  const deletePrompt = (promptId) => {
+    console.log('deletePrompt: ', promptId);
+    savedPrompts$.update((prompts) => {
+      return prompts.filter((prompt) => prompt.title !== promptId);
+    });
+
+    try {
+      localStorage.setItem(
+        LOCAL_STORAGE_KEY.SAVED_PROMPTS,
+        JSON.stringify($savedPrompts$)
+      );
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
+  };
 
   const selectPrompt = (pId, prompt) => {
     promptId = pId;
@@ -59,7 +97,7 @@
       class="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-x-4 xl:gap-x-8"
     >
       <!-- Prompt options -->
-      {#each PROMPT_OPTIONS as { promptId: pId, promptLabel: label, prompt, characterCount }}
+      {#each promptOptions as { promptId: pId, promptLabel: label, prompt, characterCount, isCustom }}
         {@const isSelected = pId === promptId}
         <li class={`relative flex gap-0.5 items-center`}>
           <button
@@ -87,6 +125,30 @@
               {characterCount} characters
             </p>
           </button>
+
+          <!-- Delete icon at the corner -->
+          {#if isCustom}
+            <button
+              on:click={() => deletePrompt(pId)}
+              class="absolute z-20 top-0 right-0 p-1 hover:bg-gray-100 rounded"
+            >
+              <svg
+                class="h-4 w-4 text-gray-400 hover:text-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          {/if}
         </li>
       {/each}
     </ul>

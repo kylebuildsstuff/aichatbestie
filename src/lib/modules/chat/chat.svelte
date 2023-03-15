@@ -13,10 +13,17 @@
     chatCompletion,
     createNewChat,
     createNewChatListItem,
+    createSavedPrompt,
     isNotSystemMessage,
     resizeTextarea
   } from '$lib/shared/shared-utils';
-  import { banners$, chatList$, chats$, openAiApiKey$ } from '$lib/shared/shared.store';
+  import {
+    banners$,
+    chatList$,
+    chats$,
+    openAiApiKey$,
+    savedPrompts$
+  } from '$lib/shared/shared.store';
   import {
     BANNER_TYPE,
     ERROR,
@@ -38,6 +45,7 @@
   import ChatSettingsPopover from './chat-settings-popover.svelte';
   import PromptsModal from './prompts-modal.svelte';
   import SystemMessageModal from './system-message-modal.svelte';
+  import SavePromptModal from './save-prompt-modal.svelte';
 
   const { open } = getContext('simple-modal') as any;
 
@@ -89,12 +97,41 @@
     messages = updatedMessages;
   };
 
+  const savePrompt = (prompt: string, title: string) => {
+    const newPrompt = createSavedPrompt(prompt, title);
+    savedPrompts$.update((prompts) => {
+      prompts.push(newPrompt);
+      return prompts;
+    });
+
+    try {
+      localStorage.setItem(
+        LOCAL_STORAGE_KEY.SAVED_PROMPTS,
+        JSON.stringify($savedPrompts$)
+      );
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
+  };
+
   const applyPrompt = (prompt: string) => {
     inputMessage = prompt;
   };
 
   const openApiKeyModal = () => {
     open(ApiKeyModal, {});
+  };
+
+  const openSavePromptModal = () => {
+    open(SavePromptModal, { savePrompt, inputMessage });
   };
 
   const openPromptsModal = () => {
@@ -110,6 +147,7 @@
 
   setContext('chat', {
     openPromptsModal,
+    openSavePromptModal,
     openSystemMessageModal,
     openApiKeyModal,
     showChatSettings$

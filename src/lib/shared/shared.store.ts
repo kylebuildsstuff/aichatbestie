@@ -1,6 +1,12 @@
 import { derived, writable } from 'svelte/store';
 
-import type { Chat, ChatListItem, User, UserSettings } from './shared.type';
+import type {
+  Chat,
+  ChatListItem,
+  SavedPrompt,
+  User,
+  UserSettings
+} from './shared.type';
 
 /**
  * Banners
@@ -17,6 +23,7 @@ export const hasBanners$ = derived(banners$, (banners) => {
 export const openAiApiKey$ = writable('');
 export const chatList$ = writable([] as ChatListItem[]);
 export const chats$ = writable({} as Record<string, Chat>);
+export const savedPrompts$ = writable([] as SavedPrompt[]);
 
 /**
  * User settings

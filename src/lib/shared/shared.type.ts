@@ -32,7 +32,8 @@ export enum APP_SUBSCRIPTION_TYPE {
 
 export enum LOCAL_STORAGE_KEY {
   OPEN_AI_API_KEY = 'openAiApiKey',
-  CHAT_LIST = 'bChatList'
+  CHAT_LIST = 'bChatList',
+  SAVED_PROMPTS = 'bSavedPrompts'
   // e.g. bChat-123456789
   // CHAT_PREFIX = 'bChat'
 }
@@ -75,6 +76,11 @@ export type ChatListItem = {
 export type Chat = {
   chatId: string;
   messages: Message[];
+};
+
+export type SavedPrompt = {
+  title: string;
+  prompt: string;
 };
 
 // Reference only

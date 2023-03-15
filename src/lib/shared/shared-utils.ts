@@ -5,7 +5,8 @@ import {
   MESSAGE_ROLE,
   type Chat,
   type ChatListItem,
-  type Message
+  type Message,
+  type SavedPrompt
 } from './shared.type';
 
 export const throwIfHttpError = (response: any) => {
@@ -193,3 +194,10 @@ export function resizeTextarea(event) {
   event.target.style.height = 'auto';
   event.target.style.height = event.target.scrollHeight + 'px';
 }
+
+export const createSavedPrompt = (prompt: string, title = ''): SavedPrompt => {
+  return {
+    title,
+    prompt
+  };
+};

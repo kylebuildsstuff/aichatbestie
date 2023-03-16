@@ -2,6 +2,7 @@ import { isEmpty, isNil } from 'ramda';
 import { CHAT_COMPLETION_ENDPOINT, DEFAULT_SYSTEM_MESSAGE } from './shared.constant';
 import { user$, userSettings$ } from './shared.store';
 import {
+  GPT_MODEL,
   MESSAGE_ROLE,
   type Chat,
   type ChatListItem,
@@ -67,7 +68,8 @@ export function onClickOutside(node: any) {
 export const chatCompletion = async (
   input: string,
   messageHistory: Record<string, string>[],
-  openAiKey: string
+  openAiKey: string,
+  model = GPT_MODEL.GPT_3_5_TURBO
 ) => {
   const completionHeaders = {
     'Content-Type': 'application/json',
@@ -83,7 +85,7 @@ export const chatCompletion = async (
   ];
 
   const completionBody = {
-    model: 'gpt-3.5-turbo',
+    model,
     messages
   };
 

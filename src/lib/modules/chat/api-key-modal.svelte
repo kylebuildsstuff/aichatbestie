@@ -6,7 +6,7 @@
     HOW_TO_GET_API_KEY_LINK,
     NOTIFICATION_SETTINGS
   } from '$lib/shared/shared.constant';
-  import { banners$, openAiApiKey$ } from '$lib/shared/shared.store';
+  import { banners$, gptModelVerified$, openAiApiKey$ } from '$lib/shared/shared.store';
   import { autofocus, chatCompletion } from '$lib/shared/shared-utils';
 
   import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
@@ -23,7 +23,12 @@
 
   const setApiKey = async () => {
     if (openAiApiKey) {
-      const { error } = await chatCompletion('Hi', [], openAiApiKey);
+      const { error } = await chatCompletion(
+        'Hi',
+        [],
+        openAiApiKey,
+        $gptModelVerified$
+      );
 
       if (error) {
         errorMessage =

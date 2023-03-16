@@ -21,6 +21,7 @@
     banners$,
     chatList$,
     chats$,
+    gptModelVerified$,
     openAiApiKey$,
     savedPrompts$
   } from '$lib/shared/shared.store';
@@ -287,7 +288,8 @@
     const { data, error } = await chatCompletion(
       CHAT_LABELLING_PROMPT,
       msgs,
-      $openAiApiKey$
+      $openAiApiKey$,
+      $gptModelVerified$
     );
 
     if (error) {
@@ -334,7 +336,8 @@
     const { data, error } = await chatCompletion(
       _inputMessage,
       messages,
-      $openAiApiKey$
+      $openAiApiKey$,
+      $gptModelVerified$
     );
 
     if (error) {
@@ -407,7 +410,8 @@
     const { data, error } = (await chatCompletion(
       _inputMessage,
       messages,
-      $openAiApiKey$
+      $openAiApiKey$,
+      $gptModelVerified$
     ).catch((err) => {
       console.error(err);
       return err;

@@ -2,13 +2,18 @@
   import { getContext } from 'svelte';
   import { browser } from '$app/environment';
 
-  import { MODEL_OPTIONS, PROMPT_OPTIONS } from '$lib/shared/shared.constant';
-  import { banners$, savedPrompts$ } from '$lib/shared/shared.store';
-  import { LOCAL_STORAGE_KEY, type GPT_MODEL } from '$lib/shared/shared.type';
+  import { MODEL_OPTIONS } from '$lib/shared/shared.constant';
+  import { banners$, gptModel$, gptModelVerified$ } from '$lib/shared/shared.store';
+  import {
+    BANNER_TYPE,
+    ERROR,
+    LOCAL_STORAGE_KEY,
+    type GPT_MODEL
+  } from '$lib/shared/shared.type';
 
   const { close } = getContext('simple-modal') as any;
 
-  let modelId;
+  let modelId = $gptModelVerified$;
 
   const selectModel = (model: GPT_MODEL) => {
     modelId = model;
@@ -17,9 +22,18 @@
   const applyModel = (model: GPT_MODEL) => {
     if (browser && model) {
       try {
-        localStorage.setItem(LOCAL_STORAGE_KEY.GPT_MODEL, model);
-      } catch (error) {
-        console.error(error);
+        gptModel$.set(model);
+        localStorage.setItem(LOCAL_STORAGE_KEY.GPT_MODEL, $gptModelVerified$);
+      } catch (e: any) {
+        banners$.update((banners) => {
+          banners.push({
+            id: ERROR.LOCAL_STORAGE_SET_ITEM,
+            bannerType: BANNER_TYPE.ERROR,
+            title: 'Access to browser storage failed',
+            description: e?.message || e?.name || ''
+          });
+          return banners;
+        });
       }
     }
   };

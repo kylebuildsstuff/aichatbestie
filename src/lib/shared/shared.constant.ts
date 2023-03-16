@@ -10,7 +10,7 @@ export const PRIVACY_POLICY_LINK = `https://aichatbestie.notion.site/Privacy-pol
 export const HOW_TO_GET_API_KEY_LINK = `https://youtu.be/lnQsO-2MwXM`;
 
 export const EMAIL_LINK = `mailto:aichatbestie@gmail.com`;
-export const DISCORD_LINK = `https://discord.gg/vrkZWz8hpv`;
+export const DISCORD_LINK = `https://discord.gg/BhCFrYjZM5`;
 export const YOUTUBE_LINK = `https://www.youtube.com/@aibesties`;
 export const LINKEDIN_LINK = `https://www.linkedin.com/company/ai-chat-bestie`;
 export const TWITTER_LINK = `https://twitter.com/@aichatbestie`;

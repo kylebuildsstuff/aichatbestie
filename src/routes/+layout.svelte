@@ -6,7 +6,7 @@
   import Toast from '$lib/modules/toast/toast.svelte';
   import { nhost } from '$lib/core/nhost/nhost';
   import { BANNER_TYPE, ERROR, NHOST_AUTH_STATE } from '$lib/shared/shared.type';
-  import { userDataQuery } from '$lib/shared/shared.graphql';
+  import { USER_DATA } from '$lib/shared/shared.graphql';
   import {
     banners$,
     savedChats$,
@@ -29,7 +29,7 @@
 
       if (isSignedIn && userId) {
         isInitializing = true;
-        const { data, error } = await nhost.graphql.request(userDataQuery, {
+        const { data, error } = await nhost.graphql.request(USER_DATA, {
           userId
         });
 
@@ -68,7 +68,7 @@
 
       isInitializing = true;
 
-      const { data, error } = await nhost.graphql.request(userDataQuery, {
+      const { data, error } = await nhost.graphql.request(USER_DATA, {
         userId
       });
 

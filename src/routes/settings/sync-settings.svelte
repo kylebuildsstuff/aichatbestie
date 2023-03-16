@@ -6,13 +6,36 @@
   import { clearUserData } from '$lib/shared/shared-utils';
   import { goto } from '$app/navigation';
   import { NOTIFICATION_SETTINGS } from '$lib/shared/shared.constant';
-
-  import ChangePasswordModal from './change-password-modal.svelte';
+  import { SAVE_USER_SAVED_CHATS } from '$lib/shared/shared.graphql';
+  import { banners$, chatsWithTitles$, userId$ } from '$lib/shared/shared.store';
+  import { BANNER_TYPE, ERROR, type Banner } from '$lib/shared/shared.type';
 
   const { open } = getContext('simple-modal') as any;
   const { addNotification } = getNotificationsContext();
 
-  const handleSaveClick = async () => {};
+  const handleSaveClick = async () => {
+    const { error } = (await nhost.graphql.request(SAVE_USER_SAVED_CHATS, {
+      userId: $userId$,
+      chats: $chatsWithTitles$
+    })) as any;
+
+    if (!error) {
+      addNotification({
+        ...NOTIFICATION_SETTINGS,
+        text: 'Chats saved'
+      });
+    } else {
+      banners$.update((state) => [
+        ...state.filter((banner: Banner) => banner.bannerId !== ERROR.DATA_SYNC_SAVE),
+        {
+          bannerId: ERROR.DATA_SYNC_IMPORT,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'An error occurred while saving your chats',
+          description: ''
+        }
+      ]);
+    }
+  };
 
   const handleImportClick = async () => {};
 

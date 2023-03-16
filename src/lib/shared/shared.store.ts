@@ -33,6 +33,10 @@ export const userSettings$ = writable({} as UserSettings);
 // Store only one savedChat per user for now
 export const savedChats$ = writable([] as Chat[]);
 
+export const userId$ = derived(user$, (user) => {
+  return user?.id;
+});
+
 export const isSignedIn$ = derived(user$, (user) => {
   return !!user?.id;
 });
@@ -55,4 +59,16 @@ export const userData$ = derived([user$, userSettings$], ([user, userSettings]) 
     emailVerified,
     isUpgraded
   };
+});
+
+// [ { chatId: string, messages: Message[] title: string } ]
+export const chatsWithTitles$ = derived([chats$, chatList$], ([chats, chatList]) => {
+  return Object.values(chats).map((chat) => {
+    const chatListItem = chatList.find((item) => item.chatId === chat.chatId);
+
+    return {
+      ...chat,
+      title: chatListItem?.title || 'New chat'
+    };
+  });
 });

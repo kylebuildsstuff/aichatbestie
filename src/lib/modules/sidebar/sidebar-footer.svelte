@@ -88,11 +88,11 @@
 <div class="flex flex-col gap-3 py-3 justify-center items-center bg-gray-800">
   <div class="flex flex-row gap-5 justify-center items-center text-gray-400 text-sm">
     <a
-      href={DISCORD_LINK}
+      href={LINKEDIN_LINK}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <DiscordIcon />
+      <LinkedinIcon />
     </a>
     <a
       href={YOUTUBE_LINK}
@@ -100,20 +100,6 @@
       rel="noopener noreferrer"
     >
       <YoutubeIcon />
-    </a>
-    <a
-      href={TWITTER_LINK}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <TwitterIcon />
-    </a>
-    <a
-      href={LINKEDIN_LINK}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <LinkedinIcon />
     </a>
     <a
       href={EMAIL_LINK}
@@ -130,6 +116,20 @@
     >
       <span class="sr-only">Github</span>
       <GithubIcon />
+    </a>
+    <a
+      href={TWITTER_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <TwitterIcon />
+    </a>
+    <a
+      href={DISCORD_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <DiscordIcon />
     </a>
   </div>
 

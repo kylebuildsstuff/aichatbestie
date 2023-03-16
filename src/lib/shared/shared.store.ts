@@ -26,10 +26,12 @@ export const chats$ = writable({} as Record<string, Chat>);
 export const savedPrompts$ = writable([] as SavedPrompt[]);
 
 /**
- * User settings
+ * User data
  */
 export const user$ = writable({} as User);
 export const userSettings$ = writable({} as UserSettings);
+// Store only one savedChat per user for now
+export const savedChats$ = writable([] as Chat[]);
 
 export const isSignedIn$ = derived(user$, (user) => {
   return !!user?.id;

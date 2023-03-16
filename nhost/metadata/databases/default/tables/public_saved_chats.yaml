@@ -1,6 +1,31 @@
 table:
   name: saved_chats
   schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    updated_at:
+      custom_name: updatedAt
+    user_id:
+      custom_name: userId
+  custom_column_names:
+    created_at: createdAt
+    updated_at: updatedAt
+    user_id: userId
+  custom_name: savedChats
+  custom_root_fields:
+    delete: deleteSavedChats
+    delete_by_pk: deleteSavedChatsByPk
+    insert: insertSavedChats
+    insert_one: insertSavedChatsOne
+    select: savedChats
+    select_aggregate: savedChatsAggregate
+    select_by_pk: savedChatsByPk
+    select_stream: savedChatsStream
+    update: updateSavedChats
+    update_by_pk: updateSavedChatsByPk
+    update_many: updateSavedChatsMany
 insert_permissions:
   - role: user
     permission:

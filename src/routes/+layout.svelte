@@ -7,7 +7,12 @@
   import { nhost } from '$lib/core/nhost/nhost';
   import { BANNER_TYPE, ERROR, NHOST_AUTH_STATE } from '$lib/shared/shared.type';
   import { userDataQuery } from '$lib/shared/shared.graphql';
-  import { banners$, user$, userSettings$ } from '$lib/shared/shared.store';
+  import {
+    banners$,
+    savedChats$,
+    user$,
+    userSettings$
+  } from '$lib/shared/shared.store';
 
   import '../app.css';
 
@@ -41,8 +46,10 @@
         }
 
         if (data) {
-          user$.set(data.user || {});
-          userSettings$.set(data.userSettingsByPk || {});
+          user$.set(data?.user || {});
+          userSettings$.set(data?.userSettingsByPk || {});
+          savedChats$.set(data?.savedChats?.chats || []);
+
           isInitialized = true;
         }
         isInitializing = false;
@@ -58,6 +65,7 @@
       if (!isAuthenticated || !userId) {
         return;
       }
+
       isInitializing = true;
 
       const { data, error } = await nhost.graphql.request(userDataQuery, {
@@ -79,6 +87,7 @@
       if (data) {
         user$.set(data.user || {});
         userSettings$.set(data.userSettingsByPk || {});
+        savedChats$.set(data?.savedChats?.chats || []);
         isInitialized = true;
       }
       isInitializing = false;

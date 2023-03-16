@@ -11,6 +11,13 @@ export const userSettingsFields = `
 userId
 isUpgraded`;
 
+export const savedChatsFields = `
+id
+userId
+chats
+createdAt
+updatedAt`;
+
 /**
  * //////////////////////////////////////////////////////////
  * QUERIES ==================================================
@@ -26,6 +33,12 @@ export const userDataQuery = `
 
     userSettingsByPk(userId: $userId) {
       ${userSettingsFields}
+    }
+
+    savedChats(where: {
+      userId: {_eq: $userId}
+    }) {
+      ${savedChatsFields}
     }
   }
 `;

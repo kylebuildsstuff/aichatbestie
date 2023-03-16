@@ -85,7 +85,6 @@ export type Message = {
 export type ChatListItem = {
   chatId: string;
   title: string;
-  description: string;
 };
 
 export type Chat = {

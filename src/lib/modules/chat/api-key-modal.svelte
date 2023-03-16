@@ -2,11 +2,14 @@
   import { getContext } from 'svelte';
   import { getNotificationsContext } from 'svelte-notifications';
 
-  import { HOW_TO_GET_API_KEY_LINK, NOTIFICATION_SETTINGS } from '../shared.constant';
-  import { banners$, openAiApiKey$ } from '../shared.store';
-  import { autofocus, chatCompletion } from '../shared-utils';
+  import {
+    HOW_TO_GET_API_KEY_LINK,
+    NOTIFICATION_SETTINGS
+  } from '$lib/shared/shared.constant';
+  import { banners$, openAiApiKey$ } from '$lib/shared/shared.store';
+  import { autofocus, chatCompletion } from '$lib/shared/shared-utils';
 
-  import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '../shared.type';
+  import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
 
   const { close } = getContext('simple-modal') as any;
   const { addNotification } = getNotificationsContext();

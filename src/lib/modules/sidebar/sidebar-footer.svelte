@@ -9,7 +9,7 @@
   import TwitterIcon from '$lib/shared/icons/twitter-icon.svelte';
   import EnvelopeIcon from '$lib/shared/icons/envelope-icon.svelte';
   import LinkedinIcon from '$lib/shared/icons/linkedin-icon.svelte';
-  import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
+  import ApiKeyModal from '$lib/modules/chat/api-key-modal.svelte';
   import CogIcon from '$lib/shared/icons/cog-icon.svelte';
   import {
     DISCORD_LINK,

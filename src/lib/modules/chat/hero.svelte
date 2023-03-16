@@ -9,10 +9,10 @@
   import WifiIcon from '$lib/shared/icons/wifi-icon.svelte';
   import { truncateStringInMiddle } from '$lib/shared/shared-utils';
   import { openAiApiKey$ } from '$lib/shared/shared.store';
+  import HeroFeature from '$lib/modules/chat/hero-feature.svelte';
+  import { HOW_TO_GET_API_KEY_LINK } from '$lib/shared/shared.constant';
 
   import ApiKeyModal from './api-key-modal.svelte';
-  import HeroFeature from './hero-feature.svelte';
-  import { HOW_TO_GET_API_KEY_LINK } from '../shared.constant';
 
   const { open } = getContext('simple-modal') as any;
 

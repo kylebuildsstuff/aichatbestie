@@ -37,9 +37,9 @@
   } from '$lib/shared/shared.constant';
   import ArrowPathIcon from '$lib/shared/icons/arrow-path-icon.svelte';
   import PlusIcon from '$lib/shared/icons/plus-icon.svelte';
-  import Hero from '$lib/shared/components/hero.svelte';
+  import Hero from '$lib/modules/chat/hero.svelte';
   import CogIcon from '$lib/shared/icons/cog-icon.svelte';
-  import ApiKeyModal from '$lib/shared/components/api-key-modal.svelte';
+  import ApiKeyModal from '$lib/modules/chat/api-key-modal.svelte';
 
   import ChatMessage from './chat-message.svelte';
   import ChatSettingsPopover from './chat-settings-popover.svelte';

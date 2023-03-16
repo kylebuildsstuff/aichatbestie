@@ -236,9 +236,14 @@ export type UserSettings = {
   isUpgraded: boolean;
 };
 
-export type PromptProfile = {
-  profileId: string;
+export type SavedChats = {
+  id: string;
   userId: string;
+
+  chats: Chat[];
+
+  createdAt: string;
+  updatedAt: string;
 };
 
 // In-memory only

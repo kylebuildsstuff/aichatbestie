@@ -5,7 +5,7 @@
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
 
   import ProfileSettings from './profile-settings.svelte';
-  import SyncSettings from './sync-settings.svelte';
+  import SyncSettings from './data-syncing/sync-settings.svelte';
 
   const { open } = getContext('simple-modal') as any;
   const { addNotification } = getNotificationsContext();

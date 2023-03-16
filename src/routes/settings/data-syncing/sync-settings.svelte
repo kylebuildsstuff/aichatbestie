@@ -1,6 +1,5 @@
 <script lang="ts">
   import { getNotificationsContext } from 'svelte-notifications';
-  import { onMount } from 'svelte';
 
   import { nhost } from '$lib/core/nhost/nhost';
   import { NOTIFICATION_SETTINGS } from '$lib/shared/shared.constant';
@@ -9,20 +8,41 @@
   import {
     banners$,
     chatsWithTitles$,
+    hasHitSavedChatsLimit$,
     savedChats$,
     userId$
   } from '$lib/shared/shared.store';
   import { BANNER_TYPE, ERROR, type Banner } from '$lib/shared/shared.type';
 
+  import SavedChat from './saved-chat.svelte';
+
   const { addNotification } = getNotificationsContext();
 
   const handleSaveClick = async () => {
-    const { error } = (await nhost.graphql.request(SAVE_USER_CHATS, {
+    if ($hasHitSavedChatsLimit$) {
+      banners$.update((state) => [
+        ...state.filter(
+          (banner: Banner) => banner.bannerId !== ERROR.DATA_SYNC_SAVE_LIMIT
+        ),
+        {
+          bannerId: ERROR.DATA_SYNC_SAVE_LIMIT,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Max number of saved chats reached',
+          description: ''
+        }
+      ]);
+      return;
+    }
+
+    const { data, error } = (await nhost.graphql.request(SAVE_USER_CHATS, {
       userId: $userId$,
       chats: $chatsWithTitles$
     })) as any;
 
     if (!error) {
+      const savedChat = data?.insertSavedChatsOne;
+      savedChats$.update((state) => [...state, savedChat]);
+
       addNotification({
         ...NOTIFICATION_SETTINGS,
         text: 'Chats saved'
@@ -31,7 +51,7 @@
       banners$.update((state) => [
         ...state.filter((banner: Banner) => banner.bannerId !== ERROR.DATA_SYNC_SAVE),
         {
-          bannerId: ERROR.DATA_SYNC_IMPORT,
+          bannerId: ERROR.DATA_SYNC_SAVE,
           bannerType: BANNER_TYPE.ERROR,
           title: 'An error occurred while saving your chats',
           description: ''
@@ -39,8 +59,6 @@
       ]);
     }
   };
-
-  const handleImportClick = async () => {};
 
   // addNotification({
   //   ...NOTIFICATION_SETTINGS,
@@ -70,20 +88,13 @@
 
   <div class="mt-6">
     <!-- Saved chats -->
-    <dl class="divide-y divide-gray-200">
-      <div class="flex items-center justify-between py-4 sm:py-5">
-        <dt class="text-sm font-medium text-gray-500">Chat history</dt>
-
-        <dd class="flex gap-2 text-sm text-gray-900">
-          <button
-            type="button"
-            class="inline-flex items-center bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            on:click={handleImportClick}
-          >
-            Import
-          </button>
-        </dd>
-      </div>
-    </dl>
+    {#each $savedChats$ as { label, createdAt, updatedAt, chats }, index}
+      <SavedChat
+        {label}
+        {createdAt}
+        {updatedAt}
+        {chats}
+      />
+    {/each}
   </div>
 </div>

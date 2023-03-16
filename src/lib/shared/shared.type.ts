@@ -61,6 +61,7 @@ export enum ERROR {
   PASSWORD_CHANGE = 'PASSWORD_CHANGE',
   CHECKOUT_SESSION_CREATE = 'CHECKOUT_SESSION_CREATE',
   DATA_SYNC_SAVE = 'CHAT_SYNC_SAVE',
+  DATA_SYNC_SAVE_LIMIT = 'CHAT_SYNC_SAVE_LIMIT',
   DATA_SYNC_IMPORT = 'CHAT_SYNC_IMPORT'
 }
 
@@ -237,11 +238,18 @@ export type UserSettings = {
   isUpgraded: boolean;
 };
 
+type SavedChat = {
+  id: string;
+  title: string;
+  messages: Message[];
+};
+
 export type SavedChats = {
   id: string;
   userId: string;
 
-  chats: Chat[];
+  label: string;
+  chats: SavedChat[];
 
   createdAt: string;
   updatedAt: string;

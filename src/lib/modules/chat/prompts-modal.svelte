@@ -1,22 +1,34 @@
 <script lang="ts">
   import { getContext, onMount } from 'svelte';
+  import Fuse from 'fuse.js';
 
   import { PROMPT_OPTIONS } from '$lib/shared/shared.constant';
   import { resizeTextarea } from '$lib/shared/shared-utils';
   import ExclamationCircle from '$lib/shared/icons/exclamation-circle.svelte';
   import { banners$, isUpgraded$, savedPrompts$ } from '$lib/shared/shared.store';
-  import { BANNER_TYPE, ERROR, LOCAL_STORAGE_KEY } from '$lib/shared/shared.type';
+  import {
+    BANNER_TYPE,
+    ERROR,
+    LOCAL_STORAGE_KEY,
+    PROMPT_TAG
+  } from '$lib/shared/shared.type';
 
   const { close } = getContext('simple-modal') as any;
 
   export let updateSystemMessage;
   export let applyPrompt;
 
+  const fuseOptions = {
+    threshold: 0.4,
+    keys: ['promptLabel', 'tags', 'prompt']
+  };
+
   let promptId;
   let promptPreview = '';
   let promptPreviewRef;
+  let searchQuery = '';
 
-  $: promptOptions = PROMPT_OPTIONS.map((prompt) => ({
+  $: _promptOptions = PROMPT_OPTIONS.map((prompt) => ({
     ...prompt,
     isCustom: false
   })).concat(
@@ -25,12 +37,17 @@
       promptLabel: saved.title,
       prompt: saved.prompt,
       characterCount: saved.prompt.length,
-      isCustom: true
+      isCustom: true,
+      tags: [PROMPT_TAG.CUSTOM]
     }))
   );
+  $: fuse = new Fuse(_promptOptions, fuseOptions);
+
+  $: promptOptions = searchQuery
+    ? fuse.search(searchQuery).map((result) => result.item)
+    : _promptOptions;
 
   const deletePrompt = (promptId) => {
-    console.log('deletePrompt: ', promptId);
     savedPrompts$.update((prompts) => {
       return prompts.filter((prompt) => prompt.title !== promptId);
     });
@@ -92,13 +109,38 @@
     {/if}
   </div>
 
+  <div class="flex flex-wrap md:flex-nowrap gap-5 w-full px-4 py-5 sm:p-6">
+    <!-- Search -->
+    <div class="w-1/2">
+      <label
+        for="search"
+        class="block text-sm font-medium text-gray-700"
+      >
+        Search
+      </label>
+      <div class="md:flex md:items-center">
+        <div class="relative">
+          <input
+            bind:value={searchQuery}
+            id="search"
+            name="search"
+            class={`block w-full text-sm mt-1 pl-3 pr-10 py-2 rounded border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 flex-1`}
+            type="search"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prompt options -->
   <div class="grid grid-cols-1 gap-x-2 gap-y-8 px-4 py-5 sm:p-6 overflow-auto">
     <ul
       class="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-x-4 xl:gap-x-8"
     >
       <!-- Prompt options -->
-      {#each promptOptions as { promptId: pId, promptLabel: label, prompt, characterCount, isCustom }}
+      {#each promptOptions as { promptId: pId, promptLabel: label, prompt, characterCount, tags = [], isCustom }}
         {@const isSelected = pId === promptId}
+        {@const primaryTag = tags[0] || ''}
         <li class={`relative flex gap-0.5 items-center`}>
           <button
             on:click={() => selectPrompt(pId, prompt)}
@@ -109,7 +151,7 @@
             disabled={!$isUpgraded$}
             class={`${
               $isUpgraded$ ? '' : `opacity-50`
-            } relative w-full hover:cursor-pointer hover:bg-gray-100 rounded p-1 pl-2 ${
+            } relative w-full flex flex-col items-start gap-1 hover:cursor-pointer hover:bg-gray-100 rounded p-1 pl-2 ${
               isSelected ? `ring-1 ring-indigo-500 border-indigo-500 z-10` : ''
             }`}
           >
@@ -117,7 +159,17 @@
               class="mt-2 text-left flex gap-1 items-center text-sm font-medium text-gray-900"
             >
               {label}
+
+              {#if primaryTag}
+                <button
+                  type="button"
+                  class="rounded-full bg-white px-1.5 text-xs font-thin text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                  {primaryTag}
+                </button>
+              {/if}
             </p>
+
             <p
               class="block text-left text-sm font-medium text-gray-500"
               title="Character count"

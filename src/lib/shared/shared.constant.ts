@@ -1,4 +1,4 @@
-import { MESSAGE_ROLE } from './shared.type';
+import { MESSAGE_ROLE, PROMPT_TAG } from './shared.type';
 
 export const LOGO_CDN_LINK =
   'https://keylayapps.nyc3.cdn.digitaloceanspaces.com/ai-chat-bestie%2Flogo%2Fai-chat-bestie-logo.png';
@@ -80,37 +80,43 @@ export const PROMPT_OPTIONS = [
     promptId: 'STORYTELLER_PROMPT',
     promptLabel: 'Storyteller',
     prompt: STORYTELLER_PROMPT,
-    characterCount: STORYTELLER_PROMPT.length
+    characterCount: STORYTELLER_PROMPT.length,
+    tags: [PROMPT_TAG.STORY]
   },
   {
     promptId: 'CHARACTER_FROM_ANYTHING_PROMPT',
     promptLabel: 'Character from anything',
     prompt: CHARACTER_FROM_ANYTHING_PROMPT,
-    characterCount: CHARACTER_FROM_ANYTHING_PROMPT.length
+    characterCount: CHARACTER_FROM_ANYTHING_PROMPT.length,
+    tags: [PROMPT_TAG.STORY]
   },
   {
     promptId: 'MIDJOURNEY_PROMPT_GENERATOR_PROMPT',
     promptLabel: 'Midjourney prompt generator',
     prompt: MIDJOURNEY_PROMPT_GENERATOR_PROMPT,
-    characterCount: MIDJOURNEY_PROMPT_GENERATOR_PROMPT.length
+    characterCount: MIDJOURNEY_PROMPT_GENERATOR_PROMPT.length,
+    tags: [PROMPT_TAG.AI]
   },
   {
     promptId: 'POSITION_INTERVIEWER_PROMPT',
     promptLabel: 'Position interviewer',
     prompt: POSITION_INTERVIEWER_PROMPT,
-    characterCount: POSITION_INTERVIEWER_PROMPT.length
+    characterCount: POSITION_INTERVIEWER_PROMPT.length,
+    tags: [PROMPT_TAG.CAREER]
   },
   {
     promptId: 'MENTAL_HEALTH_ADVISER_PROMPT',
     promptLabel: 'Mental health adviser',
     prompt: MENTAL_HEALTH_ADVISER_PROMPT,
-    characterCount: MENTAL_HEALTH_ADVISER_PROMPT.length
+    characterCount: MENTAL_HEALTH_ADVISER_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'RELATIONSHIP_COACH_PROMPT',
     promptLabel: 'Relationship_coach',
     prompt: RELATIONSHIP_COACH_PROMPT,
-    characterCount: RELATIONSHIP_COACH_PROMPT.length
+    characterCount: RELATIONSHIP_COACH_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'DEBATER_PROMPT',
@@ -122,25 +128,29 @@ export const PROMPT_OPTIONS = [
     promptId: 'MOTIVATIONAL_COACH_PROMPT',
     promptLabel: 'Motivational coach',
     prompt: MOTIVATIONAL_COACH_PROMPT,
-    characterCount: MOTIVATIONAL_COACH_PROMPT.length
+    characterCount: MOTIVATIONAL_COACH_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'CAREER_COUNSELOR_PROMPT',
     promptLabel: 'Career counselor',
     prompt: CAREER_COUNSELOR_PROMPT,
-    characterCount: CAREER_COUNSELOR_PROMPT.length
+    characterCount: CAREER_COUNSELOR_PROMPT.length,
+    tags: [PROMPT_TAG.CAREER]
   },
   {
     promptId: 'PHILOSOPHER_PROMPT',
     promptLabel: 'Philosopher',
     prompt: PHILOSOPHER_PROMPT,
-    characterCount: PHILOSOPHER_PROMPT.length
+    characterCount: PHILOSOPHER_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'TRAVEL_GUIDE_PROMPT',
     promptLabel: 'Travel guide',
     prompt: TRAVEL_GUIDE_PROMPT,
-    characterCount: TRAVEL_GUIDE_PROMPT.length
+    characterCount: TRAVEL_GUIDE_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'EXCEL_SHEET_PROMPT',
@@ -152,43 +162,50 @@ export const PROMPT_OPTIONS = [
     promptId: 'STACKOVERFLOW_POST_PROMPT',
     promptLabel: 'Stackoverflow post',
     prompt: STACKOVERFLOW_POST_PROMPT,
-    characterCount: STACKOVERFLOW_POST_PROMPT.length
+    characterCount: STACKOVERFLOW_POST_PROMPT.length,
+    tags: [PROMPT_TAG.DEVELOPER]
   },
   {
     promptId: 'STARTUP_IDEA_GENERATOR_PROMPT',
     promptLabel: 'Startup idea generator',
     prompt: STARTUP_IDEA_GENERATOR_PROMPT,
-    characterCount: STARTUP_IDEA_GENERATOR_PROMPT.length
+    characterCount: STARTUP_IDEA_GENERATOR_PROMPT.length,
+    tags: [PROMPT_TAG.BUSINESS]
   },
   {
     promptId: 'ENGLISH_TRANSLATOR_AND_IMPROVER_PROMPT',
     promptLabel: 'English translator and improver',
     prompt: ENGLISH_TRANSLATOR_AND_IMPROVER_PROMPT,
-    characterCount: ENGLISH_TRANSLATOR_AND_IMPROVER_PROMPT.length
+    characterCount: ENGLISH_TRANSLATOR_AND_IMPROVER_PROMPT.length,
+    tags: [PROMPT_TAG.LANGUAGE]
   },
   {
     promptId: 'ADVERTISTER_PROMPT',
     promptLabel: 'Advertister',
     prompt: ADVERTISTER_PROMPT,
-    characterCount: ADVERTISTER_PROMPT.length
+    characterCount: ADVERTISTER_PROMPT.length,
+    tags: [PROMPT_TAG.MARKETING]
   },
   {
     promptId: 'DREAM_INTERPRETER_PROMPT',
     promptLabel: 'Dream interpreter',
     prompt: DREAM_INTERPRETER_PROMPT,
-    characterCount: DREAM_INTERPRETER_PROMPT.length
+    characterCount: DREAM_INTERPRETER_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'APHORISM_BOOK_PROMPT',
     promptLabel: 'Aphorism book',
     prompt: APHORISM_BOOK_PROMPT,
-    characterCount: APHORISM_BOOK_PROMPT.length
+    characterCount: APHORISM_BOOK_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'SELF_HELP_BOOK_PROMPT',
     promptLabel: 'Self help book',
     prompt: SELF_HELP_BOOK_PROMPT,
-    characterCount: SELF_HELP_BOOK_PROMPT.length
+    characterCount: SELF_HELP_BOOK_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'AI_ASSISTED_DOCTOR_PROMPT',
@@ -218,19 +235,22 @@ export const PROMPT_OPTIONS = [
     promptId: 'PERSONAL_TRAINER_PROMPT',
     promptLabel: 'Personal trainer',
     prompt: PERSONAL_TRAINER_PROMPT,
-    characterCount: PERSONAL_TRAINER_PROMPT.length
+    characterCount: PERSONAL_TRAINER_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'RECRUITER_PROMPT',
     promptLabel: 'Recruiter',
     prompt: RECRUITER_PROMPT,
-    characterCount: RECRUITER_PROMPT.length
+    characterCount: RECRUITER_PROMPT.length,
+    tags: [PROMPT_TAG.CAREER]
   },
   {
     promptId: 'MOTIVATIONAL_SPEAKER_PROMPT',
     promptLabel: 'Motivational speaker',
     prompt: MOTIVATIONAL_SPEAKER_PROMPT,
-    characterCount: MOTIVATIONAL_SPEAKER_PROMPT.length
+    characterCount: MOTIVATIONAL_SPEAKER_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'MOVIE_CRITIC_PROMPT',
@@ -242,19 +262,22 @@ export const PROMPT_OPTIONS = [
     promptId: 'NOVELIST_PROMPT',
     promptLabel: 'Novelist',
     prompt: NOVELIST_PROMPT,
-    characterCount: NOVELIST_PROMPT.length
+    characterCount: NOVELIST_PROMPT.length,
+    tags: [PROMPT_TAG.WRITING]
   },
   {
     promptId: 'SCREENWRITER_PROMPT',
     promptLabel: 'Screenwriter',
     prompt: SCREENWRITER_PROMPT,
-    characterCount: SCREENWRITER_PROMPT.length
+    characterCount: SCREENWRITER_PROMPT.length,
+    tags: [PROMPT_TAG.WRITING]
   },
   {
     promptId: 'DEBATE_COACH_PROMPT',
     promptLabel: 'Debate coach',
     prompt: DEBATE_COACH_PROMPT,
-    characterCount: DEBATE_COACH_PROMPT.length
+    characterCount: DEBATE_COACH_PROMPT.length,
+    tags: [PROMPT_TAG.PERSONAL]
   },
   {
     promptId: 'COMPOSER_PROMPT',

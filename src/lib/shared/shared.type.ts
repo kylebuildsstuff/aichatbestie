@@ -62,6 +62,21 @@ export enum ERROR {
   CHECKOUT_SESSION_CREATE = 'CHECKOUT_SESSION_CREATE'
 }
 
+export enum PROMPT_TAG {
+  CUSTOM = 'Custom',
+  STORY = 'Story',
+  BUSINESS = 'Business',
+  DEVELOPER = 'Developer',
+  LANGUAGE = 'Language',
+  MARKETING = 'Marketing',
+  WRITING = 'Writing',
+  TECH = 'Tech',
+  CAREER = 'Career',
+  PERSONAL = 'Personal',
+  AI = 'AI',
+  MISCALLANEOUS = 'Miscellaneous'
+}
+
 export type Message = {
   role: MESSAGE_ROLE;
   content: string;

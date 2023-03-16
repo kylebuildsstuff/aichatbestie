@@ -13,6 +13,7 @@
     openSavePromptModal,
     openSystemMessageModal,
     openApiKeyModal,
+    openModelModal,
     showChatSettings$
   } = getContext('chat') as any;
 </script>
@@ -62,7 +63,7 @@
 
     <button
       on:click={() => {
-        openApiKeyModal();
+        openModelModal();
         showChatSettings$.set(false);
       }}
       class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-b-md"

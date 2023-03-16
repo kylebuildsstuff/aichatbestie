@@ -46,6 +46,7 @@
   import PromptsModal from './prompts-modal.svelte';
   import SystemMessageModal from './system-message-modal.svelte';
   import SavePromptModal from './save-prompt-modal.svelte';
+  import ModelModal from './model-modal.svelte';
 
   const { open } = getContext('simple-modal') as any;
 
@@ -145,11 +146,16 @@
     });
   };
 
+  const openModelModal = () => {
+    open(ModelModal, {});
+  };
+
   setContext('chat', {
     openPromptsModal,
     openSavePromptModal,
     openSystemMessageModal,
     openApiKeyModal,
+    openModelModal,
     showChatSettings$
   });
 

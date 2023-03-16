@@ -1,4 +1,4 @@
-import { MESSAGE_ROLE, PROMPT_TAG } from './shared.type';
+import { GPT_MODEL, MESSAGE_ROLE, PROMPT_TAG } from './shared.type';
 
 export const LOGO_CDN_LINK =
   'https://keylayapps.nyc3.cdn.digitaloceanspaces.com/ai-chat-bestie%2Flogo%2Fai-chat-bestie-logo.png';
@@ -29,6 +29,52 @@ export const CHAT_COMPLETION_ENDPOINT = `https://api.openai.com/v1/chat/completi
 export const NOTIFICATION_SETTINGS = {
   position: 'bottom-center',
   removeAfter: 2500
+};
+
+export const MODEL_OPTIONS = {
+  [GPT_MODEL.GPT_3_5_TURBO]: {
+    model: GPT_MODEL.GPT_3_5_TURBO,
+    label: 'gpt-3.5-turbo',
+    description: `Most capable GPT-3.5 model and optimized for chat at 1/10th the cost of text-davinci-003. Will be updated with our latest model iteration`,
+    maxTokens: 4096,
+    trainingData: 'Up to Sep 2021'
+  },
+  [GPT_MODEL.GPT_3_5_TURBO_0301]: {
+    model: GPT_MODEL.GPT_3_5_TURBO_0301,
+    label: 'gpt-3.5-turbo-0301',
+    description:
+      'Snapshot of gpt-3.5-turbo from March 1st 2023. Unlike gpt-3.5-turbo, this model will not receive updates, and will only be supported for a three month period ending on June 1st 2023.',
+    maxTokens: 4096,
+    trainingData: 'Up to Sep 2021'
+  },
+  [GPT_MODEL.GPT_4]: {
+    model: GPT_MODEL.GPT_4,
+    label: 'gpt-4',
+    description: `More capable than any GPT-3.5 model, able to do more complex tasks, and optimized for chat. Will be updated with our latest model iteration.`,
+    maxTokens: 8192,
+    trainingData: 'Up to Sep 2021'
+  },
+  [GPT_MODEL.GPT_4_0314]: {
+    model: GPT_MODEL.GPT_4_0314,
+    label: 'gpt-4-0314',
+    description: `Snapshot of gpt-4 from March 14th 2023. Unlike gpt-4, this model will not receive updates, and will only be supported for a three month period ending on June 14th 2023.`,
+    maxTokens: 8192,
+    trainingData: 'Up to Sep 2021'
+  },
+  [GPT_MODEL.GPT_4_32k]: {
+    model: GPT_MODEL.GPT_4_32k,
+    label: 'gpt-4-32k',
+    description: `Same capabilities as the base gpt-4 mode but with 4x the context length. Will be updated with our latest model iteration.`,
+    maxTokens: 32768,
+    trainingData: 'Up to Sep 2021'
+  },
+  [GPT_MODEL.GPT_4_32k_0314]: {
+    model: GPT_MODEL.GPT_4_32k_0314,
+    label: 'gpt-4-32k-0314',
+    description: `Snapshot of gpt-4-32 from March 14th 2023. Unlike gpt-4-32k, this model will not receive updates, and will only be supported for a three month period ending on June 14th 2023.`,
+    maxTokens: 32768,
+    trainingData: 'Up to Sep 2021'
+  }
 };
 
 // export const PRICING_CONFIG = {

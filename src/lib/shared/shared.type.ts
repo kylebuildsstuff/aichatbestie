@@ -33,7 +33,9 @@ export enum APP_SUBSCRIPTION_TYPE {
 export enum LOCAL_STORAGE_KEY {
   OPEN_AI_API_KEY = 'openAiApiKey',
   CHAT_LIST = 'bChatList',
-  SAVED_PROMPTS = 'bSavedPrompts'
+  SAVED_PROMPTS = 'bSavedPrompts',
+  GPT_MODEL = 'bGptModel'
+
   // e.g. bChat-123456789
   // CHAT_PREFIX = 'bChat'
 }
@@ -78,6 +80,21 @@ export enum PROMPT_TAG {
   PERSONAL = 'Personal',
   AI = 'AI',
   MISCALLANEOUS = 'Miscellaneous'
+}
+
+// https://platform.openai.com/docs/models/gpt-4
+export enum GPT_MODEL {
+  GPT_3_5_TURBO = 'gpt-3.5-turbo',
+  GPT_3_5_TURBO_0301 = 'gpt-3.5-turbo-0301',
+
+  // Vanilla
+  GPT_4 = 'gpt-4',
+  // gpt-4 from March 14th 2023
+  GPT_4_0314 = 'gpt-4-0314',
+  // gpt-4 but with 4x context length
+  GPT_4_32k = 'gpt-4-32k',
+  // gpt-4-32k from March 14th 2023
+  GPT_4_32k_0314 = 'gpt-4-32k-0314'
 }
 
 export type Message = {

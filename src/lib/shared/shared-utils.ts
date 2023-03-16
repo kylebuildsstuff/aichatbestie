@@ -155,14 +155,10 @@ export const truncateStringInMiddle = (str: string, cutLength = 4) => {
   return `${cutStart}...${cutEnd}`;
 };
 
-export const createNewChatListItem = (
-  chatId: string,
-  description = ''
-): ChatListItem => {
+export const createNewChatListItem = (chatId: string): ChatListItem => {
   return {
     chatId,
-    title: 'New chat',
-    description
+    title: 'New chat'
   };
 };
 

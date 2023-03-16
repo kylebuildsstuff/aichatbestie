@@ -10,7 +10,7 @@
   import { BANNER_TYPE, ERROR, type Banner } from '$lib/shared/shared.type';
   import TextInput from '$lib/shared/form/text-input.svelte';
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
-  import { CREATE_USER_SETTINGS } from '$lib/shared/shared.graphql';
+  import { createUserSettingsQuery } from '$lib/shared/shared.graphql';
 
   import { validateRegisterForm } from './register-validators';
   import { registerFormConfig } from './register.constant';
@@ -51,7 +51,7 @@
 
         // Create UserSettings
         const { error: userSettingsError } = (await nhost.graphql.request(
-          CREATE_USER_SETTINGS,
+          createUserSettingsQuery,
           {
             userId
           }

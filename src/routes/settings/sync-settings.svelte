@@ -12,34 +12,14 @@
   const { open } = getContext('simple-modal') as any;
   const { addNotification } = getNotificationsContext();
 
-  let isEditing = false;
+  const handleSaveClick = async () => {};
 
-  const handleEditClick = () => {
-    isEditing = true;
-  };
+  const handleImportClick = async () => {};
 
-  const handleCancelEditClick = () => {
-    isEditing = false;
-  };
-
-  // const handleSaveEditClick = () => {
-  //   isEditing = false;
-  // };
-
-  const handleEditPasswordClick = () => {
-    open(ChangePasswordModal, {});
-  };
-
-  const handleSignout = async () => {
-    await nhost.auth.signOut();
-
-    clearUserData();
-    addNotification({
-      ...NOTIFICATION_SETTINGS,
-      text: 'Signed out'
-    });
-    goto('/');
-  };
+  // addNotification({
+  //   ...NOTIFICATION_SETTINGS,
+  //   text: 'Signed out'
+  // });
 </script>
 
 <div class="divide-y divide-gray-200">
@@ -61,7 +41,7 @@
           <button
             type="button"
             class="inline-flex items-center bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            on:click={handleEditClick}
+            on:click={handleSaveClick}
           >
             Save
           </button>
@@ -69,7 +49,7 @@
           <button
             type="button"
             class="inline-flex items-center py-2 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            on:click={handleEditClick}
+            on:click={handleImportClick}
           >
             Import
           </button>

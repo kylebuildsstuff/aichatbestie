@@ -43,12 +43,24 @@ export const userDataQuery = `
   }
 `;
 
+export const fetchSavedChats = `
+  query FetchUserChats (
+    $userId: uuid!
+  ) {
+    savedChats(
+      where: {
+        userId: {_eq: $userId}
+      }
+    ) {
+      ${savedChatsFields}
+    }
+  }`;
+
 /**
  * //////////////////////////////////////////////////////////
  * MUTATIONS ================================================
  * //////////////////////////////////////////////////////////
  */
-
 export const createUserSettingsQuery = `
   mutation CreateUserSettings (
     $userId: uuid!
@@ -64,3 +76,31 @@ export const createUserSettingsQuery = `
     }
   }
 `;
+
+export const saveUserSavedChats = `
+  mutation SaveChats (
+    $userId: uuid!,
+    $chats: jsonb!
+  ) {
+    insertSavedChatsOne(
+      object: {
+        userId: $userId,
+        chats: $chats
+      }
+    ) {
+      ${savedChatsFields}
+    }
+  }`;
+
+export const updateUserSavedChats = `
+mutation UpdateUserSavedChats (
+  $savedChatId: uuid!,
+  $chats: jsonb!
+) {
+  updateSavedChatsByPk(
+    pk_columns: {id: $savedChatId},
+    _set: {chats: $chats}
+  ) {
+    ${savedChatsFields}
+  }
+}`;

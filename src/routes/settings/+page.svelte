@@ -5,6 +5,7 @@
   import PageContainer from '$lib/modules/page-container/page-container.svelte';
 
   import ProfileSettings from './profile-settings.svelte';
+  import SyncSettings from './sync-settings.svelte';
 
   const { open } = getContext('simple-modal') as any;
   const { addNotification } = getNotificationsContext();
@@ -19,8 +20,13 @@
         <h1 class="text-3xl font-bold tracking-tight text-gray-900">Settings</h1>
       </div>
 
-      <!-- Profile settings (password) -->
-      <ProfileSettings />
+      <div class="flex flex-col gap-16">
+        <!-- Sync settings -->
+        <SyncSettings />
+
+        <!-- Profile settings (password) -->
+        <ProfileSettings />
+      </div>
     </div>
   </svelte:fragment>
 </PageContainer>

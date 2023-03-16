@@ -4,8 +4,7 @@
 
   import { PROMPT_OPTIONS } from '$lib/shared/shared.constant';
   import { resizeTextarea } from '$lib/shared/shared-utils';
-  import ExclamationCircle from '$lib/shared/icons/exclamation-circle.svelte';
-  import { banners$, isUpgraded$, savedPrompts$ } from '$lib/shared/shared.store';
+  import { banners$, savedPrompts$ } from '$lib/shared/shared.store';
   import {
     BANNER_TYPE,
     ERROR,
@@ -87,26 +86,6 @@
 <div class="bg-white rounded-lg border-gray-200 divide-y">
   <div class="bg-white px-3 py-2">
     <h3 class="text-lg leading-6 font-medium text-gray-900">Prompt library</h3>
-    <!-- Upgrade banner -->
-    {#if !$isUpgraded$}
-      <div class={`w-full rounded-md bg-blue-50 p-4 my-2`}>
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <ExclamationCircle overrideClasses={`w-6 h-6 text-blue-400`} />
-          </div>
-          <div class="ml-3 z-10">
-            <h3 class={`text-sm font-medium text-blue-800`}>
-              Please upgrade to gain access to the prompt library
-            </h3>
-            <!-- <div class={`mt-2 text-sm text-blue-700`}>
-              <p class="space-y-1">
-                <span></span>
-              </p>
-            </div> -->
-          </div>
-        </div>
-      </div>
-    {/if}
   </div>
 
   <div class="flex flex-wrap md:flex-nowrap gap-5 w-full px-4 py-5 sm:p-6">
@@ -148,10 +127,7 @@
               applyPrompt(promptPreview);
               close();
             }}
-            disabled={!$isUpgraded$}
-            class={`${
-              $isUpgraded$ ? '' : `opacity-50`
-            } relative w-full flex flex-col items-start gap-1 hover:cursor-pointer hover:bg-gray-100 rounded p-1 pl-2 ${
+            class={`relative w-full flex flex-col items-start gap-1 hover:cursor-pointer hover:bg-gray-100 rounded p-1 pl-2 ${
               isSelected ? `ring-1 ring-indigo-500 border-indigo-500 z-10` : ''
             }`}
           >
@@ -241,7 +217,6 @@
             updateSystemMessage(promptPreview);
             close();
           }}
-          disabled={!$isUpgraded$}
           type="button"
           class="bg-white py-1.5 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
@@ -253,7 +228,6 @@
             close();
           }}
           type="submit"
-          disabled={!$isUpgraded$}
           class="disabled:opacity-50 inline-flex justify-center py-1.5 px-2.5 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Apply prompt

@@ -81,10 +81,11 @@
       <p class="mt-2 text-sm text-red-600">{errorMessage}</p>
     {/if}
 
-    <p class="mt-1 text-sm text-gray-600">
+    <p class="mt-1 text-sm text-gray-400">
+      Your API Key will be stored locally on your browser.
       <a
         href={HOW_TO_GET_API_KEY_LINK}
-        class="text-gray-400 hover:underline hover:text-blue-400"
+        class="text-blue-400 hover:underline hover:text-blue-400"
         target="_blank"
         rel="noopener noreferrer"
       >

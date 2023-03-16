@@ -14,6 +14,7 @@ isUpgraded`;
 export const savedChatsFields = `
 id
 userId
+label
 chats
 createdAt
 updatedAt`;

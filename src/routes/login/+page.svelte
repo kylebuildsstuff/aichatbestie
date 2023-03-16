@@ -66,11 +66,11 @@
       });
 
       if (session) {
+        goto('/');
         addNotification({
           ...NOTIFICATION_SETTINGS,
           text: 'Sign in successful'
         });
-        goto('/');
       }
 
       if (error) {

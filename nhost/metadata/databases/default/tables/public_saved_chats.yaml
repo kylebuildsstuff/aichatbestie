@@ -38,11 +38,13 @@ insert_permissions:
         - chats
         - created_at
         - updated_at
+        - label
 select_permissions:
   - role: hasura
     permission:
       columns:
         - chats
+        - label
         - created_at
         - updated_at
         - id
@@ -52,11 +54,12 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - id
-        - user_id
         - chats
         - created_at
+        - id
+        - label
         - updated_at
+        - user_id
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -64,11 +67,12 @@ update_permissions:
   - role: user
     permission:
       columns:
-        - id
-        - user_id
         - chats
         - created_at
+        - id
+        - label
         - updated_at
+        - user_id
       filter:
         user_id:
           _eq: X-Hasura-User-Id

@@ -48,7 +48,7 @@
         if (data) {
           user$.set(data?.user || {});
           userSettings$.set(data?.userSettingsByPk || {});
-          savedChats$.set(data?.savedChats?.chats || []);
+          savedChats$.set(data?.savedChats || []);
 
           isInitialized = true;
         }
@@ -87,7 +87,7 @@
       if (data) {
         user$.set(data.user || {});
         userSettings$.set(data.userSettingsByPk || {});
-        savedChats$.set(data?.savedChats?.chats || []);
+        savedChats$.set(data?.savedChats || []);
         isInitialized = true;
       }
       isInitializing = false;

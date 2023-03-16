@@ -6,7 +6,7 @@ import { createJwt, createJwtClaims } from '$lib/modules/jwt/jwt-utils';
 import { HASURA_ROLE } from '$lib/shared/shared.type';
 import { nhost } from '$lib/core/nhost/nhost';
 import { hasuraGraphqlRequest } from '$lib/shared/shared-utils';
-import { userDataQuery } from '$lib/shared/shared.graphql';
+import { USER_DATA } from '$lib/shared/shared.graphql';
 
 export const handle: Handle = async ({ event, resolve }) => {
   /**
@@ -101,7 +101,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     // event.locals persists to API endpoints like +server.ts while loaders do not
     event.locals = await hasuraGraphqlRequest(
-      userDataQuery,
+      USER_DATA,
       { userId },
       graphqlEndpoint,
       hasuraJwt

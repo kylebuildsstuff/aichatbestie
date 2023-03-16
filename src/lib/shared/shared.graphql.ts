@@ -23,7 +23,7 @@ updatedAt`;
  * QUERIES ==================================================
  * //////////////////////////////////////////////////////////
  */
-export const userDataQuery = `
+export const USER_DATA = `
   query FetchUserSettings (
     $userId: uuid!
   ) {
@@ -43,7 +43,7 @@ export const userDataQuery = `
   }
 `;
 
-export const fetchSavedChats = `
+export const FETCH_SAVED_CHATS = `
   query FetchUserChats (
     $userId: uuid!
   ) {
@@ -61,7 +61,7 @@ export const fetchSavedChats = `
  * MUTATIONS ================================================
  * //////////////////////////////////////////////////////////
  */
-export const createUserSettingsQuery = `
+export const CREATE_USER_SETTINGS = `
   mutation CreateUserSettings (
     $userId: uuid!
   ) {
@@ -77,7 +77,7 @@ export const createUserSettingsQuery = `
   }
 `;
 
-export const saveUserSavedChats = `
+export const SAVE_USER_CHATS = `
   mutation SaveChats (
     $userId: uuid!,
     $chats: jsonb!
@@ -92,7 +92,7 @@ export const saveUserSavedChats = `
     }
   }`;
 
-export const updateUserSavedChats = `
+export const UPDATE_USER_SAVED_CHATS = `
 mutation UpdateUserSavedChats (
   $savedChatId: uuid!,
   $chats: jsonb!

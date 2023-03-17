@@ -48,6 +48,8 @@
   import SystemMessageModal from './system-message-modal.svelte';
   import SavePromptModal from './save-prompt-modal.svelte';
   import ModelModal from './model-modal.svelte';
+  import MicrophoneIcon from '$lib/shared/icons/microphone-icon.svelte';
+  import VoiceRecorder from './voice-recorder.svelte';
 
   const { open } = getContext('simple-modal') as any;
 
@@ -572,6 +574,19 @@
               overrideClasses={'text-gray-400 hover:text-gray-600 flex-shrink-0 h-6 w-6 rounded-md'}
             />
           </button>
+
+          {#if $openAiApiKey$}
+            <button
+              type="button"
+              title="Create new chat"
+            >
+              <MicrophoneIcon
+                overrideClasses={'text-gray-400 hover:text-gray-600 flex-shrink-0 h-6 w-6 rounded-md'}
+              />
+
+              <VoiceRecorder />
+            </button>
+          {/if}
 
           <!-- Textarea -->
           <textarea

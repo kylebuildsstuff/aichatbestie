@@ -335,7 +335,7 @@
 
     const { data, error } = await chatCompletion(
       _inputMessage,
-      messages,
+      messages.slice(0, messages.length - 1),
       $openAiApiKey$,
       $gptModelVerified$
     );
@@ -409,7 +409,7 @@
 
     const { data, error } = (await chatCompletion(
       _inputMessage,
-      messages,
+      messages.slice(0, messages.length - 1),
       $openAiApiKey$,
       $gptModelVerified$
     ).catch((err) => {

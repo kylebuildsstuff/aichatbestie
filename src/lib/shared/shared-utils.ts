@@ -145,13 +145,13 @@ export const hasuraGraphqlRequest = async <T>(
     .then(throwIfGraphqlError);
 };
 
-export const truncateString = (str: string, cutLength = 18) => {
-  const truncated = str.substring(0, cutLength);
+export const truncateString = (str = '', cutLength = 18) => {
+  const truncated = str?.substring?.(0, cutLength);
 
   return truncated.length < str.length ? `${truncated}...` : truncated;
 };
 
-export const truncateStringInMiddle = (str: string, cutLength = 4) => {
+export const truncateStringInMiddle = (str = '', cutLength = 4) => {
   const cutStart = str.substring(0, cutLength);
   const cutEnd = str.substring(str.length - cutLength, str.length);
   return `${cutStart}...${cutEnd}`;

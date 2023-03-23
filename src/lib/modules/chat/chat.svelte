@@ -64,8 +64,10 @@
   /**
    * Messages
    */
-  $: systemMessage = messages.find((message) => message.role === MESSAGE_ROLE.SYSTEM);
-  $: hasChatMessages = messages.filter(isNotSystemMessage).length > 0;
+  $: systemMessage = messages?.find?.(
+    (message) => message?.role === MESSAGE_ROLE.SYSTEM
+  );
+  $: hasChatMessages = messages?.filter?.(isNotSystemMessage).length > 0;
   $: enableRegenerateMessage = !isLoading && $openAiApiKey$ && messages.length > 2;
 
   /**
@@ -84,7 +86,7 @@
   // This actually works! References somehow get preserved when passed into modal and it updates cleanly.
   const updateSystemMessage = (systemMessageContent: string) => {
     const systemMessageIndex = messages.findIndex(
-      (message) => message.role === MESSAGE_ROLE.SYSTEM
+      (message) => message?.role === MESSAGE_ROLE.SYSTEM
     );
     const updatedMessages = messages.map((message, index) => {
       if (index === systemMessageIndex) {

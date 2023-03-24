@@ -58,7 +58,7 @@
   let inputMessage = '';
   let messages =
     chatId && $chats$?.[chatId]
-      ? $chats$?.[chatId]?.messages
+      ? $chats$?.[chatId]?.messages?.filter?.(Boolean)
       : [DEFAULT_SYSTEM_MESSAGE];
 
   /**

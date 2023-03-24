@@ -91,8 +91,9 @@
 
   <div class="mt-6">
     <!-- Saved chats -->
-    {#each $savedChats$ as { label, createdAt, updatedAt, chats }, index}
+    {#each $savedChats$ as { id, label, createdAt, updatedAt, chats }, index}
       <SavedChat
+        {id}
         {label}
         {createdAt}
         {updatedAt}

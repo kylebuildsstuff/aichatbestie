@@ -105,3 +105,10 @@ mutation UpdateUserSavedChats (
     ${savedChatsFields}
   }
 }`;
+
+export const DELETE_USER_SAVED_CHAT = `
+mutation ($id: uuid!) {
+  deleteSavedChatsByPk(id: $id) {
+    ${savedChatsFields}
+  }
+}`;

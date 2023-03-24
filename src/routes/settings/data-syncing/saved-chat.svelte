@@ -23,6 +23,48 @@
 
   $: formattedLabel = label || formattedCreatedAt || 'Untitled';
 
+  /**
+   * Export chat
+   */
+  function downloadObjectAsJson(obj, fileName) {
+    // Convert the JS object to a JSON string
+    const jsonString = JSON.stringify(obj, null, 2);
+
+    // Create a Blob object with the JSON string and the correct MIME type
+    const blob = new Blob([jsonString], { type: 'application/json' });
+
+    // Create a URL from the Blob object
+    const url = URL.createObjectURL(blob);
+
+    // Create an anchor element with the `download` attribute
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = fileName;
+
+    // Append the link to the DOM, trigger a click, and remove it afterward
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
+    // Clean up the URL object
+    URL.revokeObjectURL(url);
+  }
+
+  const handleExportClick = () => {
+    const fileName = `export_chat_${id}.json`;
+    const objToExport = {
+      id,
+      label,
+      createdAt,
+      updatedAt,
+      chats
+    };
+    downloadObjectAsJson(objToExport, fileName);
+  };
+
+  /**
+   * Delete chat
+   */
   const handleDeleteSavedChat = async () => {
     const { data, error } = await nhost.graphql.request(DELETE_USER_SAVED_CHAT, {
       id
@@ -123,6 +165,14 @@
       on:click={handleDeleteSavedChat}
     >
       Delete
+    </button>
+
+    <button
+      type="button"
+      class="inline-flex items-center bg-white py-2 px-3 border border-green-300 rounded-md shadow-sm text-sm leading-4 font-medium text-green-700 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      on:click={handleExportClick}
+    >
+      Export
     </button>
 
     <button

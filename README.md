@@ -14,6 +14,9 @@ Hosted version available at https://aichatbestie.com.
 - Prompt library
 - Regenerate messages
 - Bring your own key
+- Chat forking
+- Accounts to sync chat history across devices
+- Importing/exporting chat histories
 
 ## Self-hosting
 

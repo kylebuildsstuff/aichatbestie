@@ -17,6 +17,7 @@ Hosted version available at https://aichatbestie.com.
 - Chat forking
 - Accounts to sync chat history across devices
 - Importing/exporting chat histories
+- GPT Model picker
 
 ## Self-hosting
 

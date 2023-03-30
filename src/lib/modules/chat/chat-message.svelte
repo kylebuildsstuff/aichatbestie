@@ -45,7 +45,10 @@
     </div>
 
     {#if isHovering}
-      <button on:click={() => handleForkChat(index)}>
+      <button
+        on:click={() => handleForkChat(index)}
+        title="Fork chat"
+      >
         <GitBranchIcon
           overrideClasses="absolute top-6 -right-10 w-4 h-4 text-gray-400 hover:text-gray-700 hover:cursor-pointer"
         />

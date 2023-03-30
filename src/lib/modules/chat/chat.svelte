@@ -48,6 +48,7 @@
   import SystemMessageModal from './system-message-modal.svelte';
   import SavePromptModal from './save-prompt-modal.svelte';
   import ModelModal from './model-modal.svelte';
+  import GitBranchIcon from '$lib/shared/icons/git-branch-icon.svelte';
 
   const { open } = getContext('simple-modal') as any;
 
@@ -183,6 +184,41 @@
    */
   const resetTextareaHeight = () => {
     textareaRef.style.height = 'auto';
+  };
+
+  /**
+   * Fork chat
+   */
+  const handleForkChat = (forkIndex: number) => {
+    const newChatId = nanoid(5);
+
+    chatList$.update((chatList) => {
+      chatList.unshift(createNewChatListItem(newChatId));
+      return chatList;
+    });
+    chats$.update((chats) => {
+      const forkedMessages = messages.slice(0, forkIndex + 1);
+
+      chats[newChatId] = createNewChat(newChatId, forkedMessages);
+      return chats;
+    });
+
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY.CHAT_LIST, JSON.stringify($chatList$));
+      localStorage.setItem(newChatId, JSON.stringify($chats$[newChatId]));
+    } catch (e: any) {
+      banners$.update((banners) => {
+        banners.push({
+          id: ERROR.LOCAL_STORAGE_SET_ITEM,
+          bannerType: BANNER_TYPE.ERROR,
+          title: 'Access to browser storage failed',
+          description: e?.message || e?.name || ''
+        });
+        return banners;
+      });
+    }
+
+    goto(`/chat/${newChatId}`);
   };
 
   /**
@@ -494,13 +530,14 @@
   <div class="w-full pb-16 mb-16 ">
     <ul class="divide-y divide-gray-200 mb-8">
       {#if messages.length > 0}
-        {#each messages?.filter?.(isNotSystemMessage) as { role, content }}
-          <div class:bg-gray-100={role === 'assistant'}>
-            <ChatMessage
-              {role}
-              {content}
-            />
-          </div>
+        {#each messages?.filter?.(isNotSystemMessage) as { role, content }, index}
+          {@const trueIndex = index + 1}
+          <ChatMessage
+            {role}
+            {content}
+            index={trueIndex}
+            {handleForkChat}
+          />
         {/each}
       {/if}
     </ul>

@@ -1,5 +1,4 @@
 import { derived, writable } from 'svelte/store';
-import type SavedChat from '../../routes/settings/data-syncing/saved-chat.svelte';
 
 import {
   GPT_MODEL,
@@ -38,8 +37,6 @@ export const gptModelVerified$ = derived(gptModel$, (gptModel) => {
  */
 export const user$ = writable({} as User);
 export const userSettings$ = writable({} as UserSettings);
-// Store only one savedChat per user for now
-export const savedChats$ = writable([] as SavedChat[]);
 
 export const userId$ = derived(user$, (user) => {
   return user?.id;
@@ -79,8 +76,4 @@ export const chatsWithTitles$ = derived([chats$, chatList$], ([chats, chatList])
       title: chatListItem?.title || 'New chat'
     };
   });
-});
-
-export const hasHitSavedChatsLimit$ = derived(savedChats$, (savedChats) => {
-  return savedChats.length >= 10;
 });

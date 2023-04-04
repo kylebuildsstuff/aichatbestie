@@ -7,6 +7,7 @@
   import KeyIcon from '$lib/shared/icons/key-icon.svelte';
   import BookmarkIcon from '$lib/shared/icons/bookmark-icon.svelte';
   import Cog_2Icon from '$lib/shared/icons/cog-2-icon.svelte';
+  import ArrowUpOnSquareIcon from '$lib/shared/icons/arrow-up-on-square-icon.svelte';
 
   let {
     openPromptsModal,
@@ -14,6 +15,7 @@
     openSystemMessageModal,
     openApiKeyModal,
     openModelModal,
+    handleExportClick,
     showChatSettings$
   } = getContext('chat') as any;
 </script>
@@ -71,6 +73,17 @@
       <Cog_2Icon overrideClasses={`w-4 h-4 text-gray-500`} />
       Model settings
     </button>
+    <button
+      on:click={() => {
+        handleExportClick();
+        showChatSettings$.set(false);
+      }}
+      class="flex items-center gap-2 w-full p-2 text-start hover:bg-gray-100 rounded-b-md"
+    >
+      <ArrowUpOnSquareIcon overrideClasses={`w-4 h-4 text-gray-500`} />
+      Export chat
+    </button>
+
     <button
       on:click={() => {
         openApiKeyModal();

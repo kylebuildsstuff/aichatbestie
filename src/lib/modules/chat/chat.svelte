@@ -48,7 +48,6 @@
   import SystemMessageModal from './system-message-modal.svelte';
   import SavePromptModal from './save-prompt-modal.svelte';
   import ModelModal from './model-modal.svelte';
-  import GitBranchIcon from '$lib/shared/icons/git-branch-icon.svelte';
 
   const { open } = getContext('simple-modal') as any;
 
@@ -127,6 +126,43 @@
     }
   };
 
+  /**
+   * Export chat
+   */
+  function downloadObjectAsJson(obj, fileName) {
+    // Convert the JS object to a JSON string
+    const jsonString = JSON.stringify(obj, null, 2);
+
+    // Create a Blob object with the JSON string and the correct MIME type
+    const blob = new Blob([jsonString], { type: 'application/json' });
+
+    // Create a URL from the Blob object
+    const url = URL.createObjectURL(blob);
+
+    // Create an anchor element with the `download` attribute
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = fileName;
+
+    // Append the link to the DOM, trigger a click, and remove it afterward
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
+    // Clean up the URL object
+    URL.revokeObjectURL(url);
+  }
+
+  const handleExportClick = () => {
+    const fileName = `export_chat_${chatId}.json`;
+    const objToExport = {
+      id: chatId,
+      messages
+    };
+
+    downloadObjectAsJson(objToExport, fileName);
+  };
+
   const applyPrompt = (prompt: string) => {
     inputMessage = prompt;
   };
@@ -160,6 +196,7 @@
     openSystemMessageModal,
     openApiKeyModal,
     openModelModal,
+    handleExportClick,
     showChatSettings$
   });
 

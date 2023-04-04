@@ -8,12 +8,6 @@ export enum HASURA_ROLE {
   HASURA = 'hasura'
 }
 
-export enum STRIPE_PAYMENT_MODE {
-  // one-time
-  PAYMENT = 'payment',
-  SUBSCRIPTION = 'subscription'
-}
-
 export enum PAYMENT_TYPE {
   LIFETIME = 'LIFETIME',
   MONTHLY = 'MONTHLY'

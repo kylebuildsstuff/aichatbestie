@@ -13,7 +13,7 @@
     {
       question: 'Is the app free?',
       answer:
-        "Yes, the app is free to use. It requires you to bring your own OpenAI API key but the base features are free. If you'd like more features then please consider purchasing our Besties Forever one-time upgrade."
+        'Yes, the app is free to use. It requires you to bring your own OpenAI API key but the base features are free.'
     },
     // How do I get a OpenAI API key?
     {
@@ -32,18 +32,6 @@
       question: 'How does this app work?',
       answer:
         "The app is essntially a static website. It uses HTML, CSS, and JavaScript to run in your browser. Any data stored or messages sent are strictly between you, your browser, and OpenAI's API. Only registered app accounts and premium features make use of AI Chat Bestie's servers, and even then the core messaging and storage features remain isolated to your browser and OpenAI's API."
-    },
-    // What are the benefits of purchasing?
-    {
-      question: 'What are the benefits of purchasing a Besties Forever membership?',
-      answer:
-        'Purchasing a one-time Besties Forever membership gives you full access to all current and future premium features. Upcoming features include access to the prompt library, more prompt customizations, saved prompt profiles, device syncing, custom UI changes, and more.'
-    },
-    // What features are free to use?
-    {
-      question: 'Which features are free to use?',
-      answer:
-        "Chat messages to and from OpenAI's API, local storage of your data, seaching chat history, and some prompt customizations are free to use."
     },
     // What are the differences between ChatGPT and AI Chat Bestie?
     {

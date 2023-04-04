@@ -1,8 +1,3 @@
-export enum NHOST_AUTH_STATE {
-  SIGNED_IN = 'SIGNED_IN',
-  SIGNED_OUT = 'SIGNED_OUT'
-}
-
 export enum HASURA_ROLE {
   USER = 'user',
   HASURA = 'hasura'

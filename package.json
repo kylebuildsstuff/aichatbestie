@@ -15,14 +15,12 @@
     "format": "prettier --plugin-search-dir . --write ."
   },
   "dependencies": {
-    "@nhost/nhost-js": "^2.0.7",
     "@sveltejs/kit": "1.10.0",
     "felte": "^1.2.7",
     "fuse.js": "^6.6.2",
     "jsonwebtoken": "^9.0.0",
     "luxon": "^3.3.0",
     "marked": "^4.2.12",
-    "stripe": "^11.13.0",
     "svelte-notifications": "^0.9.98",
     "svelte-popperjs": "^1.3.2",
     "svelte-simple-modal": "^1.5.2",

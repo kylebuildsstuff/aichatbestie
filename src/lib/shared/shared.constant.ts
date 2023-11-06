@@ -74,6 +74,13 @@ export const MODEL_OPTIONS = {
     description: `Snapshot of gpt-4-32 from March 14th 2023. Unlike gpt-4-32k, this model will not receive updates, and will only be supported for a three month period ending on June 14th 2023.`,
     maxTokens: 32768,
     trainingData: 'Up to Sep 2021'
+  },
+  [GPT_MODEL.GPT_4_1106]: {
+    model: GPT_MODEL.GPT_4_1106,
+    label: 'gpt-4-1106 (turbo)',
+    description: `The latest GPT-4 model with improved instruction following, JSON mode, reproducible outputs, parallel function calling, and more. Returns a maximum of 4,096 output tokens. This preview model is not yet suited for production traffic.`,
+    maxTokens: 128000,
+    trainingData: 'Up to Apr 2023'
   }
 };
 

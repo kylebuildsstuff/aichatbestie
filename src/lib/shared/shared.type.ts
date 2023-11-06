@@ -84,7 +84,9 @@ export enum GPT_MODEL {
   // gpt-4 but with 4x context length
   GPT_4_32k = 'gpt-4-32k',
   // gpt-4-32k from March 14th 2023
-  GPT_4_32k_0314 = 'gpt-4-32k-0314'
+  GPT_4_32k_0314 = 'gpt-4-32k-0314',
+  // gpt-4-1106-preview
+  GPT_4_1106 = 'gpt-4-1106'
 }
 
 export type Message = {

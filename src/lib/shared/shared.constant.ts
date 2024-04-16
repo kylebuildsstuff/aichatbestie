@@ -81,6 +81,14 @@ export const MODEL_OPTIONS = {
     description: `The latest GPT-4 model with improved instruction following, JSON mode, reproducible outputs, parallel function calling, and more. Returns a maximum of 4,096 output tokens. This preview model is not yet suited for production traffic.`,
     maxTokens: 128000,
     trainingData: 'Up to Apr 2023'
+  },
+  // GPT_4_TURBO
+  [GPT_MODEL.GPT_4_TURBO]: {
+    model: GPT_MODEL.GPT_4_TURBO,
+    label: 'gpt-4-turbo',
+    description: `The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling. Currently points to gpt-4-turbo-2024-04-09.`,
+    maxTokens: 128000,
+    trainingData: 'Up to Dec 2023'
   }
 };
 

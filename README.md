@@ -4,7 +4,7 @@ AI Chat Bestie is an unofficial ChatGPT app.
 
 By connecting directly to the API it can provide faster responses, a more customizable UI, and many more features and integrations.
 
-Hosted version available at https://aichatbestie.com.
+Hosted version available at [https://aichatbestie.com](https://stately-axolotl-af08c8.netlify.app/).
 
 ## Features
 

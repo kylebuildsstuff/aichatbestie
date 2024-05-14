@@ -25,7 +25,7 @@ export const openAiApiKey$ = writable('');
 export const chatList$ = writable([] as ChatListItem[]);
 export const chats$ = writable({} as Record<string, Chat>);
 export const savedPrompts$ = writable([] as SavedPrompt[]);
-export const gptModel$ = writable(GPT_MODEL.GPT_4_TURBO as GPT_MODEL);
+export const gptModel$ = writable(GPT_MODEL.GPT_4_O as GPT_MODEL);
 
 export const gptModelVerified$ = derived(gptModel$, (gptModel) => {
   const isValid = gptModel && Object.values(GPT_MODEL).includes(gptModel);

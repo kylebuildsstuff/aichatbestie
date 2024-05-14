@@ -88,7 +88,9 @@ export enum GPT_MODEL {
   // gpt-4-1106-preview
   GPT_4_1106 = 'gpt-4-1106-preview',
   // gpt-4-turbo 
-  GPT_4_TURBO = 'gpt-4-turbo'
+  GPT_4_TURBO = 'gpt-4-turbo',
+  // gpt-4o
+  GPT_4_O = 'gpt-4o'
 }
 
 export type Message = {

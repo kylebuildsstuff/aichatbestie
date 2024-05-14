@@ -89,6 +89,14 @@ export const MODEL_OPTIONS = {
     description: `The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling. Currently points to gpt-4-turbo-2024-04-09.`,
     maxTokens: 128000,
     trainingData: 'Up to Dec 2023'
+  },
+  // gpt-4o
+  [GPT_MODEL.GPT_4_O]: {
+    model: GPT_MODEL.GPT_4_O,
+    label: 'gpt-4o',
+    description: `Our most advanced, multimodal flagship model that’s cheaper and faster than GPT-4 Turbo. Currently points to gpt-4o-2024-05-13.`,
+    maxTokens: 128000,
+    trainingData: 'Up to Oct 2023'
   }
 };
 

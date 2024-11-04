@@ -97,6 +97,14 @@ export const MODEL_OPTIONS = {
     description: `Our most advanced, multimodal flagship model that’s cheaper and faster than GPT-4 Turbo. Currently points to gpt-4o-2024-05-13.`,
     maxTokens: 128000,
     trainingData: 'Up to Oct 2023'
+  },
+  // o1-preview
+  [GPT_MODEL.O1_PREVIEW]: {
+    model: GPT_MODEL.O1_PREVIEW,
+    label: 'o1-preview',
+    description: `The o1 series of large language models are trained with reinforcement learning to perform complex reasoning. o1 models think before they answer, producing a long internal chain of thought before responding to the user.`,
+    maxTokens: 128000,
+    trainingData: 'Up to Oct 2023'
   }
 };
 

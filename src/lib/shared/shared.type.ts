@@ -90,7 +90,9 @@ export enum GPT_MODEL {
   // gpt-4-turbo 
   GPT_4_TURBO = 'gpt-4-turbo',
   // gpt-4o
-  GPT_4_O = 'gpt-4o'
+  GPT_4_O = 'gpt-4o',
+  // o1-preview
+  O1_PREVIEW = 'o1-preview'
 }
 
 export type Message = {
